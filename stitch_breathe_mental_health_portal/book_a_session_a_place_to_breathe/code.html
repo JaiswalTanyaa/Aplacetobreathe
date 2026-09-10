@@ -1,0 +1,490 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Find a Therapist | A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "outline": "#737972",
+                    "surface-bright": "#fbf9f5",
+                    "outline-variant": "#c2c8c0",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424842",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2f1400",
+                    "primary-fixed": "#cceace",
+                    "surface-container-highest": "#e4e2de",
+                    "on-secondary-container": "#6b5f7b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f3ef",
+                    "on-primary-container": "#233d29",
+                    "tertiary-container": "#dd8f50",
+                    "secondary": "#655974",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0ceb2",
+                    "on-primary-fixed": "#07200f",
+                    "on-secondary-fixed": "#21172e",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "primary-container": "#8ba88e",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary": "#8e4e14",
+                    "surface-container-high": "#eae8e4",
+                    "background": "#fbf9f5",
+                    "primary": "#4a654e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#ecdcfd",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "surface": "#fbf9f5",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "secondary-fixed": "#ecdcfd",
+                    "on-primary-fixed-variant": "#334d38",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "surface-tint": "#4a654e",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "surface-dim": "#dbdad6",
+                    "surface-variant": "#e4e2de",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-padding-mobile": "40px",
+                    "container-max": "1120px",
+                    "section-padding-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Work Sans"],
+                    "crisis-link": ["Nunito Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .blob-bg {
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 168, 142, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #8BA88E;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.4s ease-out forwards;
+            }
+        </style></head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-[0_20px_20px_0_rgba(139,168,142,0.05)]">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary">A Place to Breathe</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Workshops</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">My Progress</a>
+</div>
+<div class="flex items-center gap-4">
+<a class="font-crisis-link text-crisis-link text-[#F4A261] hover:opacity-80 transition-opacity underline decoration-2 underline-offset-4" href="#">Crisis Support</a>
+<button class="md:hidden p-2 text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero / Header Section -->
+<main class="pt-32 pb-16 relative overflow-hidden">
+<!-- Background Blobs -->
+<div class="absolute top-[-10%] right-[-5%] w-96 h-96 bg-secondary-container rounded-full blob-bg"></div>
+<div class="absolute bottom-[20%] left-[-10%] w-80 h-80 bg-primary-container/30 rounded-full blob-bg"></div>
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-6">Find the light within you, with a guide.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-lg">
+                        Our verified therapists specialize in anxiety, trauma, and personal growth. Find someone who speaks your language—literally and emotionally.
+                    </p>
+<!-- Quiz Entry Point -->
+<div class="glass-card p-6 rounded-xl flex items-center gap-6 shadow-sm">
+<div class="bg-secondary-container p-4 rounded-full">
+<span class="material-symbols-outlined text-secondary text-3xl">psychology_alt</span>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Unsure where to start?</h3>
+<p class="text-on-surface-variant text-sm">Take our 2-minute "Do I need a session?" wellness quiz.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-full font-label-md hover:opacity-90 transition-all shadow-md active:scale-95">
+                            Take Quiz
+                        </button>
+</div>
+</div>
+<div class="hidden lg:block relative">
+<div class="w-full h-[400px] rounded-3xl overflow-hidden shadow-2xl relative z-10">
+<img class="w-full h-full object-cover" data-alt="A serene and tranquil overhead shot of a therapist's office. The space features a soft sage green velvet armchair, a minimalist wooden coffee table with a small ceramic bowl, and a large window through which soft afternoon sunlight filters in. The room is filled with several lush green indoor plants, creating an organic and safe atmosphere in a light-mode, high-end photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrK6aVqck5HFc66gTgERwIL50wJw1oUiouh6U6_Rq2EoMMyY3oOwkDyIEwzPgeWecfFJjTbm1kCNlVw5VFREluoqMUiBtI_ZDUXGX9zAKSaDvoPqFauspQU_i9QY9GMfdXRAfWgp0_D_OHCD5gJMQopGIHPF8BxlSFuIxXUCUThAyVoBSK4LdnYgLT4Syr9xbhtd8dMS5IPMKhuTwEeWDOvyUXmjjDE7I2U_Lk6yInFjfvDNNxTY3scg">
+</div>
+<!-- Decorative element -->
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary-fixed rounded-2xl -z-0 opacity-50"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Filter Bar -->
+<section class="sticky top-[72px] z-40 bg-surface-bright py-6 border-y border-outline-variant/30">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[200px] relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary-container text-body-md transition-all" placeholder="Search by name or specialty..." type="text">
+</div>
+<div class="flex flex-wrap gap-3">
+<select class="bg-surface-container-low border-none rounded-xl py-3 px-6 text-on-surface-variant font-label-md focus:ring-2 focus:ring-primary-container transition-all cursor-pointer">
+<option>Specialization</option>
+<option>Anxiety</option>
+<option>Trauma</option>
+<option>Grief</option>
+<option>Relationship</option>
+</select>
+<div class="flex items-center bg-surface-container-low rounded-xl p-1">
+<button class="px-4 py-2 rounded-lg bg-white shadow-sm text-primary font-label-md transition-all">All</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant font-label-md hover:bg-white/50 transition-all">Online</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant font-label-md hover:bg-white/50 transition-all">Offline</button>
+</div>
+<select class="bg-surface-container-low border-none rounded-xl py-3 px-6 text-on-surface-variant font-label-md focus:ring-2 focus:ring-primary-container transition-all cursor-pointer">
+<option>Language</option>
+<option>English</option>
+<option>Spanish</option>
+<option>French</option>
+</select>
+<button class="flex items-center gap-2 bg-surface-container-low py-3 px-6 rounded-xl hover:bg-surface-container transition-all text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">tune</span>
+<span class="font-label-md">Filters</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Directory Grid -->
+<section class="py-16 bg-background">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Profile Card 1 -->
+<div class="group bg-surface-container-lowest rounded-3xl p-6 shadow-sm border border-outline-variant/20 hover:shadow-xl transition-all duration-500 flex flex-col h-full">
+<div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A professional studio portrait of a female therapist in her 40s with a warm and approachable expression. She is wearing a soft cream-colored linen shirt. The background is a soft-focus, blurred sage green wall with a hint of a bookshelf. The lighting is bright and even, conveying a sense of trustworthiness and calm in a high-end editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFc_ZTcw1H-WYNaxwkJv3bjMRl_LUMarM0i4vJTZA6K2MkotZWmmURMQxWi8B6vqtrrhkJiChRE_oGwlRm3yOKncjgbHZ5qqKk2yzT3Lg8yWP4pneJIXQXnfOm_nVXxGopRSspOyL_RY729_DkujJBCAbSHEhhVX1pIpyfFSKLkxEWq2xPnHwBnKx7bRj_Y-oDEj0JHP1R90zOazq8Pp08OLFmsas2dH1Nn136uYbep-EFOaSzTVBF-Q">
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.9</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Dr. Elena Thorne</h3>
+<p class="text-primary font-label-md tracking-wider">CLINICAL PSYCHOLOGIST</p>
+</div>
+<span class="text-on-surface-variant font-label-md">$120/hr</span>
+</div>
+<div class="flex flex-wrap gap-2 my-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold uppercase tracking-wider">Trauma</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold uppercase tracking-wider">EMDR</span>
+</div>
+<p class="text-on-surface-variant text-sm line-clamp-2 mb-6">
+                            Helping individuals find their path through transformative EMDR therapy and compassionate cognitive behavioral strategies.
+                        </p>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-label-md hover:bg-on-primary-fixed-variant transition-colors shadow-md active:scale-95" onclick="openBookingModal('Dr. Elena Thorne')">
+                        Book Session
+                    </button>
+</div>
+<!-- Profile Card 2 -->
+<div class="group bg-surface-container-lowest rounded-3xl p-6 shadow-sm border border-outline-variant/20 hover:shadow-xl transition-all duration-500 flex flex-col h-full">
+<div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A portrait of a male therapist in his late 30s with a kind, friendly smile. He is sitting in a minimalist chair with a background of soft lavender and gray tones. He wears a casual grey knit sweater. The overall lighting is soft, warm, and inviting, emphasizing emotional safety and modern mental health professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDzQT5-YfWN2pRjlmAqYSjlgeCHGmO7lQLxN7FbuTnaO8DqW_aNjUA4aLCnXhhAOe_LZE3puczicG3aLqy1n854w-ViqaxrnmzZcjs5ShV0EPFojS9Zc8QaUMM2GZ1L5uzrCg3NENXqdZxgUY9STSx3oxYFFdE_mmO_8wQwGzyP4O54ruqjfTaAj-FoOsbdLZuO7gg5zsLOncHEoYTy0bt7DmFozErkxh0RBEpzriq0S7g_6wlQ5X9jA">
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.8</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Marcus Chen</h3>
+<p class="text-primary font-label-md tracking-wider">LCSW • MINDFULNESS</p>
+</div>
+<span class="text-on-surface-variant font-label-md">$95/hr</span>
+</div>
+<div class="flex flex-wrap gap-2 my-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold uppercase tracking-wider">Anxiety</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold uppercase tracking-wider">Meditation</span>
+</div>
+<p class="text-on-surface-variant text-sm line-clamp-2 mb-6">
+                            Blending modern science with mindfulness practices to help manage life's daily stresses and find inner quiet.
+                        </p>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-label-md hover:bg-on-primary-fixed-variant transition-colors shadow-md active:scale-95" onclick="openBookingModal('Marcus Chen')">
+                        Book Session
+                    </button>
+</div>
+<!-- Profile Card 3 -->
+<div class="group bg-surface-container-lowest rounded-3xl p-6 shadow-sm border border-outline-variant/20 hover:shadow-xl transition-all duration-500 flex flex-col h-full">
+<div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A portrait of a diverse female therapist looking confident and empathetic. She has curly dark hair and is wearing a soft mauve blouse. The setting is a clean, bright contemporary studio with soft shadows and an airy feel. Her expression is supportive and focused, ideal for a professional healthcare directory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxcaLEiTgcFqPGYeA0NdGI-5ZeISMpNFhUqGbPm67-Xv8Pwn3bHadCNhc3tgo5qAYO6eTq0BLAsE2DGXSUjWFO27WD93zuX8r0prsW6EuAyDSmup6-Mt1g8O-_OVIBIN1Ac2u7Gy585czf_IK1vZVq16jqt0wPdHgQkEhXamGUe84L4u5i6QPrFwEcQLBeQu-AtAwVQKfT-TxPndvqNSqLBkTHuRxxX3847vr258yX1vCyt_C2mwC-4A">
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">5.0</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Dr. Sarah Varma</h3>
+<p class="text-primary font-label-md tracking-wider">MD • PSYCHIATRIST</p>
+</div>
+<span class="text-on-surface-variant font-label-md">$150/hr</span>
+</div>
+<div class="flex flex-wrap gap-2 my-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold uppercase tracking-wider">Depression</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold uppercase tracking-wider">Medication</span>
+</div>
+<p class="text-on-surface-variant text-sm line-clamp-2 mb-6">
+                            Specialized in integrative psychiatry, helping you navigate complex mental health challenges with holistic care.
+                        </p>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-label-md hover:bg-on-primary-fixed-variant transition-colors shadow-md active:scale-95" onclick="openBookingModal('Dr. Sarah Varma')">
+                        Book Session
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Booking Modal -->
+<div class="fixed inset-0 z-[100] hidden" id="bookingModal">
+<div class="absolute inset-0 bg-on-background/40 backdrop-blur-sm" onclick="closeBookingModal()"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-surface-bright rounded-3xl shadow-2xl overflow-hidden transition-all scale-95 opacity-0 duration-300" id="modalContent">
+<div class="p-8">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Book a Session</h2>
+<p class="text-on-surface-variant" id="therapistNameDisplay">With Dr. Elena Thorne</p>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors" onclick="closeBookingModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Step 1: Session Type -->
+<div class="space-y-6" id="step1">
+<h4 class="font-label-md text-on-surface">SELECT SESSION TYPE</h4>
+<div class="grid grid-cols-2 gap-4">
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="sessionType" type="radio" value="online">
+<div class="p-6 rounded-2xl border-2 border-outline-variant peer-checked:border-primary peer-checked:bg-primary-container/10 transition-all">
+<span class="material-symbols-outlined text-3xl mb-3 text-primary">videocam</span>
+<h5 class="font-bold text-on-surface">Online Call</h5>
+<p class="text-sm text-on-surface-variant">Via Secure Video Link</p>
+</div>
+</label>
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="sessionType" type="radio" value="offline">
+<div class="p-6 rounded-2xl border-2 border-outline-variant peer-checked:border-primary peer-checked:bg-primary-container/10 transition-all">
+<span class="material-symbols-outlined text-3xl mb-3 text-primary">location_on</span>
+<h5 class="font-bold text-on-surface">In-Person</h5>
+<p class="text-sm text-on-surface-variant">Clinic at Downtown</p>
+</div>
+</label>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-label-md hover:opacity-90 transition-all shadow-md mt-4" onclick="goToStep(2)">
+                        Continue to Calendar
+                    </button>
+</div>
+<!-- Step 2: Calendar (Simplified Placeholder) -->
+<div class="hidden space-y-6" id="step2">
+<h4 class="font-label-md text-on-surface">SELECT DATE &amp; TIME</h4>
+<div class="grid grid-cols-2 gap-8">
+<div class="bg-surface-container-low rounded-2xl p-4">
+<!-- Simple Calendar Layout -->
+<div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-outline mb-4">
+<span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<div class="h-8 flex items-center justify-center rounded-lg hover:bg-primary-container/20 cursor-pointer">12</div>
+<div class="h-8 flex items-center justify-center rounded-lg hover:bg-primary-container/20 cursor-pointer">13</div>
+<div class="h-8 flex items-center justify-center rounded-lg bg-primary text-on-primary">14</div>
+<div class="h-8 flex items-center justify-center rounded-lg hover:bg-primary-container/20 cursor-pointer">15</div>
+<div class="h-8 flex items-center justify-center rounded-lg hover:bg-primary-container/20 cursor-pointer">16</div>
+<div class="h-8 flex items-center justify-center rounded-lg hover:bg-primary-container/20 cursor-pointer">17</div>
+<div class="h-8 flex items-center justify-center rounded-lg hover:bg-primary-container/20 cursor-pointer">18</div>
+</div>
+</div>
+<div class="space-y-3 custom-scrollbar overflow-y-auto max-h-[180px] pr-2">
+<button class="w-full py-3 px-4 border border-outline-variant rounded-xl text-sm font-medium hover:border-primary hover:text-primary transition-colors">09:00 AM</button>
+<button class="w-full py-3 px-4 border border-outline-variant rounded-xl text-sm font-medium hover:border-primary hover:text-primary transition-colors">11:30 AM</button>
+<button class="w-full py-3 px-4 bg-primary-container text-on-primary-container border-primary-container rounded-xl text-sm font-medium">02:00 PM</button>
+<button class="w-full py-3 px-4 border border-outline-variant rounded-xl text-sm font-medium hover:border-primary hover:text-primary transition-colors">04:30 PM</button>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 py-4 text-on-surface-variant font-label-md hover:bg-surface-container rounded-xl transition-all" onclick="goToStep(1)">Back</button>
+<button class="flex-[2] bg-primary text-on-primary py-4 rounded-xl font-label-md hover:opacity-90 transition-all shadow-md" onclick="goToStep(3)">Confirm Selection</button>
+</div>
+</div>
+<!-- Step 3: Success -->
+<div class="hidden text-center space-y-6 py-8" id="step3">
+<div class="w-20 h-20 bg-primary-container/20 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-primary text-5xl">task_alt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background">Booking Confirmed!</h3>
+<p class="text-on-surface-variant max-w-sm mx-auto">
+                        Your session is scheduled for Oct 14th at 2:00 PM. We've sent a calendar invite to your email.
+                    </p>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-md hover:opacity-90 transition-all shadow-md" onclick="closeBookingModal()">
+                        Done
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-surface-container">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary mb-4">A Place to Breathe</div>
+<p class="text-on-surface-variant font-body-md pr-8">
+                    Dedicated to providing accessible, high-quality emotional support in a space designed for your peace of mind.
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-on-background mb-2">Platform</h4>
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Mission</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Workshops</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Terms of Service</a>
+</div>
+<div>
+<h4 class="font-bold text-on-background mb-4">Need Help Now?</h4>
+<a class="inline-block bg-white border-2 border-[#F4A261] text-[#F4A261] font-bold px-6 py-3 rounded-full hover:bg-[#F4A261] hover:text-white transition-all" href="#">
+                    Crisis Support Center
+                </a>
+<div class="mt-8 flex gap-4">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">language</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">chat_bubble</span>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter py-6 border-t border-outline-variant/20 text-on-surface-variant text-sm text-center">
+            © 2024 A Place to Breathe. Your safe space for healing.
+        </div>
+</footer>
+<script>
+        function openBookingModal(name) {
+            const modal = document.getElementById('bookingModal');
+            const content = document.getElementById('modalContent');
+            const display = document.getElementById('therapistNameDisplay');
+            
+            display.innerText = "With " + name;
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            
+            goToStep(1); // Reset to first step
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            const content = document.getElementById('modalContent');
+            
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function goToStep(num) {
+            const steps = ['step1', 'step2', 'step3'];
+            steps.forEach((step, idx) => {
+                const el = document.getElementById(step);
+                if (idx + 1 === num) {
+                    el.classList.remove('hidden');
+                    el.classList.add('animate-fade-in');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+        }
+
+        // Simple smooth entrance animation class
+        const styleTag = document.createElement('style');
+        styleTag.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.4s ease-out forwards;
+            }
+        `;
+        document.head.appendChild(styleTag);
+    </script>
+</body></html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>A Place to Breathe | Explore</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "outline": "#737972",
+                    "surface-bright": "#fbf9f5",
+                    "outline-variant": "#c2c8c0",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424842",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2f1400",
+                    "primary-fixed": "#cceace",
+                    "surface-container-highest": "#e4e2de",
+                    "on-secondary-container": "#6b5f7b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f3ef",
+                    "on-primary-container": "#233d29",
+                    "tertiary-container": "#dd8f50",
+                    "secondary": "#655974",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0ceb2",
+                    "on-primary-fixed": "#07200f",
+                    "on-secondary-fixed": "#21172e",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "primary-container": "#8ba88e",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary": "#8e4e14",
+                    "surface-container-high": "#eae8e4",
+                    "background": "#fbf9f5",
+                    "primary": "#4a654e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#ecdcfd",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "surface": "#fbf9f5",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "secondary-fixed": "#ecdcfd",
+                    "on-primary-fixed-variant": "#334d38",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "surface-tint": "#4a654e",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "surface-dim": "#dbdad6",
+                    "surface-variant": "#e4e2de",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-padding-mobile": "40px",
+                    "container-max": "1120px",
+                    "section-padding-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Work Sans"],
+                    "crisis-link": ["Nunito Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .organic-blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            opacity: 0.4;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .soft-card-shadow {
+            box-shadow: 0 10px 30px -5px rgba(139, 168, 142, 0.1);
+        }
+        .pulse-crisis {
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(244, 162, 97, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(244, 162, 97, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 162, 97, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container font-body-md">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-[0_20px_20px_0_rgba(139,168,142,0.05)]">
+<nav class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto transition-all duration-300 ease-in-out">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim" href="#">A Place to Breathe</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-semibold text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 transition-all duration-300 ease-in-out" href="#">Explore</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors transition-all duration-300 ease-in-out" href="#">Community</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors transition-all duration-300 ease-in-out" href="#">Workshops</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors transition-all duration-300 ease-in-out" href="#">My Progress</a>
+</div>
+<a class="font-crisis-link text-crisis-link bg-[#F4A261] text-white px-6 py-2.5 rounded-full pulse-crisis hover:opacity-80 transition-all duration-300 ease-in-out" href="#">Crisis Support</a>
+</nav>
+</header>
+<main class="relative pt-32 pb-20 px-gutter max-w-container-max mx-auto overflow-hidden">
+<!-- Background Decor -->
+<div class="organic-blob bg-primary-container w-96 h-96 -top-20 -left-20"></div>
+<div class="organic-blob bg-secondary-container w-80 h-80 top-1/2 -right-20"></div>
+<!-- Header Section -->
+<header class="mb-16 text-center max-w-2xl mx-auto">
+<h1 class="font-headline-xl text-headline-xl mb-4 text-on-surface">Find what you need to feel whole</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Take a deep breath. Whether you're looking for a quick activity or a deep dive into mindfulness, we're here with you.</p>
+</header>
+<!-- Search & Filter Bar -->
+<section class="mb-12 space-y-6">
+<div class="relative max-w-xl mx-auto group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-white border-none rounded-2xl soft-card-shadow focus:ring-2 focus:ring-primary/20 font-body-md text-on-surface placeholder:text-outline-variant transition-all" placeholder="Search for themes, feelings, or activities..." type="text">
+</div>
+<div class="flex flex-wrap justify-center gap-4">
+<div class="flex flex-col gap-2 items-center">
+<span class="font-label-md text-label-md text-outline uppercase tracking-wider">Focus Areas</span>
+<div class="flex gap-2">
+<button class="px-5 py-2 rounded-full bg-primary-container text-on-primary-container font-label-md hover:opacity-90 transition-all">All</button>
+<button class="px-5 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container/50 transition-all">Anxiety</button>
+<button class="px-5 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container/50 transition-all">Stress</button>
+<button class="px-5 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container/50 transition-all">Sleep</button>
+<button class="px-5 py-2 rounded-full bg-secondary-container/30 text-secondary font-label-md hover:bg-secondary-container/50 transition-all">Self-esteem</button>
+</div>
+</div>
+<div class="h-10 w-px bg-outline-variant/30 self-end hidden md:block"></div>
+<div class="flex flex-col gap-2 items-center">
+<span class="font-label-md text-label-md text-outline uppercase tracking-wider">Content Type</span>
+<div class="flex gap-2">
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:border-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">article</span> Article
+                        </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:border-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">self_improvement</span> Activity
+                        </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:border-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">play_circle</span> Video
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Grid (Bento-ish) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Featured Large Card -->
+<article class="md:col-span-8 group cursor-pointer">
+<div class="relative overflow-hidden rounded-3xl bg-white soft-card-shadow h-[400px] flex flex-col md:flex-row border border-surface-container-high transition-transform duration-500 hover:-translate-y-1">
+<div class="md:w-1/2 h-full">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A serene landscape with soft rolling hills during the golden hour. The sky is a blend of pale sage green and muted lavender, with a soft mist rising from the valley. The composition is peaceful and expansive, reflecting the brand's 'A Place to Breathe' identity with gentle light and organic textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXfKL6Mv5FGfCDNyBROKZfTmetc3Fk7vVu91zxqbDGKqyhjOw61UErCW6PSrvLwkgCjj7rsE6FqN2Fb8DrK8x9eas6Uu_v7J_ZoKsdnsZnLe6MI5cGpSPGmvqVaRB2BujRkJoM4IqkCEoOzlz6cbBpOvzh39HFYfhmYynnafO4pwr0Z3H2Le3Syxy2N-gVhJVSNiA_3iebGq9WgzLRi-nwEeUxgxn6aJqdIy6kUa5HEdjxHvqZQHJGnQ">
+</div>
+<div class="md:w-1/2 p-8 flex flex-col justify-center">
+<div class="flex gap-2 mb-4">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-[12px]">Featured Activity</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-label-md text-[12px]">10 min</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-4 text-on-surface leading-tight">Walking Meditation: The Forest Bathing Guide</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Learn to reconnect with your senses while moving through the world. A gentle guide to grounding yourself in nature.</p>
+<button class="w-fit px-8 py-3 bg-primary text-on-primary rounded-full font-headline-md text-[16px] hover:opacity-90 transition-all flex items-center gap-2">
+                            Begin Journey <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Small Card 1 -->
+<article class="md:col-span-4 group cursor-pointer">
+<div class="bg-white rounded-3xl soft-card-shadow border border-surface-container-high p-6 h-full flex flex-col transition-transform duration-500 hover:-translate-y-1">
+<div class="aspect-square rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A macro photograph of a single lavender sprig with soft, out-of-focus background details. The lighting is ethereal and soft, emphasizing the delicate textures and calming purple hues against a warm, creamy background. The image evokes tranquility and sensory mindfulness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRZe0w9Czqxu-Xb3pfaaDTX8SRqk8nBsBpA9KgT-nCODAULg6f48De31iMwgcyZgvMO7pZJuACJfWKCWYPOXQVVsE_i1oEBVUxX130xTExfTV2j7WC_zWFv--o4Sxstl1nj2R2R798y9R7Zy3ezfBlevwW8fekrpIyvDJCH6TQTpOmQtoUw7_IX0bDCFLXkYGIwhPN1wfYfa90a9wInclsuaov5qbA7gaVZhNUb1vvWjuIqaVfypFbpQ">
+</div>
+<span class="font-label-md text-label-md text-primary mb-2">Sleep</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">The Lavender Protocol</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">A simple 5-step ritual to prepare your mind for deep, restorative sleep.</p>
+<div class="mt-auto flex items-center text-outline font-label-md gap-2">
+<span class="material-symbols-outlined text-[18px]">article</span> 4 min read
+                    </div>
+</div>
+</article>
+<!-- Medium Card 2 -->
+<article class="md:col-span-4 group cursor-pointer">
+<div class="bg-secondary-container/20 rounded-3xl soft-card-shadow border border-secondary-container/30 p-8 h-full flex flex-col transition-transform duration-500 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-12">
+<div class="p-3 bg-white rounded-2xl">
+<span class="material-symbols-outlined text-secondary scale-125" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Daily Prompt</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-secondary-container mb-4">What made you feel safe today?</h3>
+<p class="font-body-md text-body-md text-on-secondary-container/80 mb-8 italic">Write for 5 minutes without judging your thoughts. This is just for you.</p>
+<button class="mt-auto text-secondary font-headline-md flex items-center gap-2 group-hover:gap-4 transition-all">
+                        Open Journal <span class="material-symbols-outlined">edit_note</span>
+</button>
+</div>
+</article>
+<!-- Medium Card 3 -->
+<article class="md:col-span-8 group cursor-pointer">
+<div class="bg-white rounded-3xl soft-card-shadow border border-surface-container-high overflow-hidden flex flex-col md:flex-row h-full transition-transform duration-500 hover:-translate-y-1">
+<div class="md:w-2/5 p-8 flex flex-col">
+<div class="flex gap-2 mb-4">
+<span class="px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-md text-[12px]">New Video</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-3">Breathwork for Acute Panic</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">A guided 3-minute session to reset your nervous system during high-stress moments.</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">play_arrow</span>
+</div>
+<span class="font-label-md text-on-surface">3:24 Session</span>
+</div>
+</div>
+<div class="md:w-3/5 relative">
+<img class="w-full h-full object-cover" data-alt="A soft-focus, abstract image representing rhythmic breathing. Gentle, flowing waves of translucent silk in shades of sage and cream drift across the frame. The lighting is warm and directional, creating a sense of movement and airiness. The image is calm, inviting, and visually soothing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVAHafd_t_9U3k4U9nZHkaDOXoRTYBYH-FnkfTUm_8s4rwvbJbzGFJXwEJrHCBanurhV_vPDNZ-2tGyeH3Gpr0v-US1orj2qtj5azr8_37ENN_s8cvplohn8xxCO3fF1YjgC9URRq3oS4cejo0Cgi_adAjf68grsE-bKG0ZrPCv_oGQvdaZH0ZGn4fyiLYN-ztKvpTydJvgnD3wnJznE0e2UTfcx6nYjHiuHu0u4_XCFUYVk67IOzO1w">
+<div class="absolute inset-0 bg-primary/10 group-hover:bg-primary/0 transition-colors"></div>
+</div>
+</div>
+</article>
+<!-- Small Card 4 -->
+<article class="md:col-span-4 group cursor-pointer">
+<div class="bg-white rounded-3xl soft-card-shadow border border-surface-container-high p-6 h-full flex flex-col transition-transform duration-500 hover:-translate-y-1">
+<div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="An overhead shot of a minimalist wooden desk with a ceramic mug of herbal tea, a simple journal, and a single green leaf. The scene is bright and airy with natural sunlight casting soft shadows. The aesthetic is clean, organic, and peaceful, embodying a slow-living morning routine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8ySdWKwtWcRFjJZBc_XXr5NJMXuYpFxpQQApK6btvgLvuYFO3KXUGM2y5tecEHfRhb8dZkE6xqXB0p2Gi8zZHsgC1IsUfMPU0aoVc13J1x1g0RAx7nYHb-rCVa-EUwSVfnnTlWgY6jrEwFY21PUuC9UgMeh3MsdmMBGsR_8NkOEsP2frT7S3vJH3OdKtx-XTd9hGiB94iT6fC3U7Dh5Q0a0dBIVK-w034zm9a73zBjiXAUz6EG3LRhg">
+</div>
+<span class="font-label-md text-label-md text-primary mb-2">Self-esteem</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Reclaiming Your Narrative</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Simple cognitive reframing exercises to silence your inner critic.</p>
+<div class="mt-6 flex items-center text-outline font-label-md gap-2">
+<span class="material-symbols-outlined text-[18px]">self_improvement</span> 15 min activity
+                    </div>
+</div>
+</article>
+<!-- Small Card 5 -->
+<article class="md:col-span-4 group cursor-pointer">
+<div class="bg-surface-container-low rounded-3xl p-8 flex flex-col justify-center text-center border border-dashed border-outline-variant transition-all hover:bg-white hover:border-solid hover:soft-card-shadow">
+<span class="material-symbols-outlined text-4xl text-primary mb-4">explore</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Personalize Your Feed</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Tell us how you're feeling today, and we'll curate a list just for you.</p>
+<button class="px-6 py-2 border-2 border-primary text-primary rounded-full font-headline-md text-[14px] hover:bg-primary hover:text-white transition-all">
+                        Take the Quiz
+                    </button>
+</div>
+</article>
+<!-- Small Card 6 -->
+<article class="md:col-span-4 group cursor-pointer">
+<div class="bg-white rounded-3xl soft-card-shadow border border-surface-container-high p-6 h-full flex flex-col transition-transform duration-500 hover:-translate-y-1">
+<div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A cozy indoor scene featuring a comfortable reading nook with soft pillows and a knit blanket. Large windows look out onto a misty, peaceful forest. The color palette is warm neutrals with pops of sage green. The lighting is soft and diffused, creating an atmosphere of safety and comfort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSEsc1eB3W8RWCKPa9tINrmReatLC0gsDYmpBqb6SrmURnEQWbhM8saPZ6UOfh2ut43EF7KESQ1xNxtOii1SOl58WSQrMnHAGkWEdpqWzxCLxQwaosvTRmAKlYr7NUGgv81qfxv6tFycLEeBm1QaoAqTcWlzBMbcLqrBHF0rf-w_346m4SlYl_dExgNV_UOrV7aa_fV_0ngRscsE3Jtg6WryrAk3c3AcWmSDHMPLuRlznFc5CaI7aPNA">
+</div>
+<span class="font-label-md text-label-md text-primary mb-2">Anxiety</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">The '5-4-3-2-1' Method</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">A sensory grounding technique to pull you back from the spiral.</p>
+<div class="mt-6 flex items-center text-outline font-label-md gap-2">
+<span class="material-symbols-outlined text-[18px]">play_circle</span> Video Tutorial
+                    </div>
+</div>
+</article>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-20 text-center">
+<button class="px-10 py-4 bg-white border border-surface-container-high rounded-full font-headline-md text-primary soft-card-shadow hover:bg-primary-container/10 transition-all">
+                Load more breathing room
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-surface-container dark:bg-surface-container-high">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<div class="space-y-4">
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">A Place to Breathe</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    © 2024 A Place to Breathe. Your safe space for healing.
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Quick Links</h3>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Mission</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-primary dark:text-primary-fixed-dim font-bold hover:underline transition-all" href="#">Crisis Support</a>
+</div>
+<div class="space-y-4">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Stay Connected</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Join our gentle newsletter for weekly mindfulness reminders.</p>
+<div class="flex gap-2">
+<input class="bg-white border-none rounded-xl px-4 py-2 w-full focus:ring-1 focus:ring-primary" placeholder="email@space.com" type="email">
+<button class="bg-primary text-white p-2 rounded-xl">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+</footer>
+<!-- Interactive Elements Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simple filter toggle logic
+            const filterButtons = document.querySelectorAll('button[class*="rounded-full"]');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Logic for visual feedback on button click
+                    if(btn.innerText.trim() !== "Crisis Support" && btn.innerText.trim() !== "Begin Journey") {
+                        // This is a simple visual placeholder for filtering
+                        console.log('Filtering by:', btn.innerText.trim());
+                    }
+                });
+            });
+
+            // Parallax-ish blob movement
+            document.addEventListener('mousemove', (e) => {
+                const blobs = document.querySelectorAll('.organic-blob');
+                const x = (window.innerWidth - e.pageX) / 50;
+                const y = (window.innerHeight - e.pageY) / 50;
+                
+                blobs.forEach(blob => {
+                    blob.style.transform = `translate(${x}px, ${y}px)`;
+                });
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Manage Therapists | A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "outline": "#737972",
+                    "surface-bright": "#fbf9f5",
+                    "outline-variant": "#c2c8c0",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424842",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2f1400",
+                    "primary-fixed": "#cceace",
+                    "surface-container-highest": "#e4e2de",
+                    "on-secondary-container": "#6b5f7b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f3ef",
+                    "on-primary-container": "#233d29",
+                    "tertiary-container": "#dd8f50",
+                    "secondary": "#655974",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0ceb2",
+                    "on-primary-fixed": "#07200f",
+                    "on-secondary-fixed": "#21172e",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "primary-container": "#8ba88e",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary": "#8e4e14",
+                    "surface-container-high": "#eae8e4",
+                    "background": "#fbf9f5",
+                    "primary": "#4a654e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#ecdcfd",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "surface": "#fbf9f5",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "secondary-fixed": "#ecdcfd",
+                    "on-primary-fixed-variant": "#334d38",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "surface-tint": "#4a654e",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "surface-dim": "#dbdad6",
+                    "surface-variant": "#e4e2de",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-padding-mobile": "40px",
+                    "container-max": "1120px",
+                    "section-padding-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Work Sans"],
+                    "crisis-link": ["Nunito Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+            overflow-x: hidden;
+        }
+        .organic-blob {
+            position: fixed;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.4;
+            border-radius: 50%;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c2c8c0;
+            border-radius: 10px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md bg-background">
+<!-- Background Decoration -->
+<div class="organic-blob bg-primary-fixed w-[500px] h-[500px] -top-64 -right-32"></div>
+<div class="organic-blob bg-secondary-fixed w-[400px] h-[400px] bottom-0 -left-32"></div>
+<!-- Side Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-highest flex flex-col py-8 gap-2 shadow-[4px_0_24px_rgba(139,168,142,0.05)] z-40 transition-all duration-300 ease-in-out">
+<div class="px-6 mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface-variant">Admin Panel</h1>
+<p class="text-on-surface-variant text-sm opacity-70">Management Console</p>
+</div>
+<nav class="flex-grow">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Users (Active) -->
+<a class="flex items-center gap-3 bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl mx-2 px-4 py-3 transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-semibold">Users</span>
+</a>
+<!-- Content -->
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span>Content</span>
+</a>
+<!-- Reports -->
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Reports</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-on-primary py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                View Site
+            </button>
+<div class="flex items-center gap-3 mt-6 p-2 bg-surface-container rounded-xl">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A soft-lit professional headshot of a female administrator with a friendly expression, set against a blurred, light-filled office with indoor plants. The photo has a high-key, airy quality with a gentle sage and cream color palette, emphasizing trust and approachable leadership." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfWjvhtYkt2ioAXpKFXuATg45tQ3DNvaVpnxtD_HkxqXjk-EuzXY5bBXNLAQhY3fRfbKdQ6jcCnxwMf-0ljfz0ARIWs2kqKoZC3MrZBSQjOtiZmzYhcEaMcsCudYGh-gmDeXZQcKIabftntY1bXTw-L1iR7xPBCK4lzEOLg_AJ8e7M8iraQnAY2tAupDJ6T8mEOlNO0TSDshzqD9kmbHvh4Ti4HVsaU4X7-Apt6slUu9kC2y046etUSA">
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate text-on-surface">Admin Profile</p>
+<p class="text-[10px] text-on-surface-variant truncate">Management</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen p-gutter max-w-container-max">
+<!-- Header Actions -->
+<header class="flex flex-col md:flex-row justify-between items-end md:items-center gap-4 mb-10">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary mb-2">Manage Therapists</h2>
+<p class="text-on-surface-variant max-w-2xl">Review and update the profiles of our healing partners. Maintain the quality and warmth of our community of experts.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-full shadow-sm hover:shadow-md transition-all active:scale-95 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
+<span class="font-semibold">Add New Therapist</span>
+</button>
+</header>
+<!-- Stats Grid (Non-clinical feel) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-container-low p-6 rounded-[2rem] border border-outline-variant/30 shadow-sm flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">psychology</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm">Active Therapists</p>
+<p class="text-2xl font-bold text-on-surface">42</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-[2rem] border border-outline-variant/30 shadow-sm flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">event_available</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm">Avg. Availability</p>
+<p class="text-2xl font-bold text-on-surface">88%</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-[2rem] border border-outline-variant/30 shadow-sm flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-3xl">star</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm">Community Rating</p>
+<p class="text-2xl font-bold text-on-surface">4.9/5</p>
+</div>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface/50 backdrop-blur-md sticky top-0 py-4 mb-6 z-10 flex items-center gap-4">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-full pl-12 pr-6 py-3 focus:ring-2 focus:ring-primary/20 text-on-surface placeholder:text-outline-variant transition-all" placeholder="Search by name, specialty, or mood focus..." type="text">
+</div>
+<button class="flex items-center gap-2 px-5 py-3 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-xl">tune</span>
+<span class="text-sm font-semibold">Filter</span>
+</button>
+</div>
+<!-- Therapist Table/List -->
+<div class="bg-surface-container-lowest rounded-[2rem] shadow-sm overflow-hidden border border-outline-variant/20">
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50 border-b border-outline-variant/10 text-left">
+<th class="px-8 py-5 font-semibold text-on-surface-variant text-sm uppercase tracking-wider">Therapist</th>
+<th class="px-8 py-5 font-semibold text-on-surface-variant text-sm uppercase tracking-wider">Focus Areas</th>
+<th class="px-8 py-5 font-semibold text-on-surface-variant text-sm uppercase tracking-wider">Availability</th>
+<th class="px-8 py-5 font-semibold text-on-surface-variant text-sm uppercase tracking-wider">Pricing</th>
+<th class="px-8 py-5 font-semibold text-on-surface-variant text-sm uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of a kind-faced male therapist with a warm smile. He has short salt-and-pepper hair and is wearing a soft linen shirt in a dusty rose color. The background is a soft-focus garden scene with morning sunlight filtering through leaves, creating an atmosphere of calm and professional empathy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-3VK76YE8SJsmevbyTs726VsE2DU2FkpT8ZoS9zJ-fzJUXd65ismsSQzcsMW-MZ0vfE_hAI-CdZ-Js5Pzj1mt_fe5sUynjDe0nCQkjwJieQO3O5hzuSnvGTJ29i3A8VjyUjEf8k9LEsfVOhhXjiyHvjUsMGyljdHZszvi3a7nm4yZ3vsi25PtGurwoRQ3cwfsfzIXeoy4NRTX3WFvsFqWiphWxcY2fydwWO33nU-RbYLQvzc7Ivs3jQ">
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-primary border-2 border-white rounded-full"></div>
+</div>
+<div>
+<p class="font-bold text-on-surface">Dr. Julian Rivers</p>
+<p class="text-xs text-on-surface-variant">Clinical Psychologist</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-wrap gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">Anxiety</span>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">Mindfulness</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
+<span class="text-sm">Mon, Wed, Fri</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<p class="font-semibold text-on-surface">$120<span class="text-xs text-outline-variant font-normal"> / session</span></p>
+</td>
+<td class="px-8 py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-outline hover:text-primary hover:bg-primary/10 rounded-lg transition-all" title="Edit Profile">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error hover:bg-error/10 rounded-lg transition-all" title="Remove">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of a serene female therapist with long dark hair tied back in a loose bun. She is wearing a soft cream-colored sweater and small pearl earrings. The lighting is soft and side-lit, coming from a window in a peaceful, minimalist room with a single plant in the corner, evoking a sense of tranquility and safety." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAukkla2LgUrPA-l4YGhiTwHog0P28p22eEWqUaWTEPPdjEfpgosQsGWlm3U6r0JmEvq8rRYRTr8QxH--PR8Teel3JEGMdMutyY-GxdJnezjVDTu8kuV7gHkPgwjGe4XjbMfkH6wA6Xxl3yVrU1u6meMxt9Dt9wL10xtOZZ9fLRLFFp9yEzs7RJ8RokkX7rbdxnBy9CwB3MAO5EYlczm2mHg0at1qF_TNItMdSDD5WmEObDIIAGPfHyFQ">
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary-container border-2 border-white rounded-full"></div>
+</div>
+<div>
+<p class="font-bold text-on-surface">Maya Sterling</p>
+<p class="text-xs text-on-surface-variant">Trauma Specialist</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-wrap gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">CBT</span>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">Grief Recovery</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
+<span class="text-sm">Tue, Thu, Sat</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<p class="font-semibold text-on-surface">$145<span class="text-xs text-outline-variant font-normal"> / session</span></p>
+</td>
+<td class="px-8 py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-outline hover:text-primary hover:bg-primary/10 rounded-lg transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error hover:bg-error/10 rounded-lg transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of an older therapist with a warm, grandfatherly presence. He has a neatly trimmed gray beard and wears thin-rimmed glasses and a navy cardigan. The background is a cozy library with shelves of books in soft focus, creating a feeling of wisdom, experience, and grounded stability. The overall tone is inviting and deeply reassuring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbpUv7SBDoB0e_VUNGxBKbVpiLXI5deEajTg91224aPSTaOEd8hZOH5kqMvvwMI9x5F5OP4c8mAPDF7pzXP2S1V2e1Vie7qIAiGKj89gT3r5TmATyxWLHDQK7q6-sfAxnuo3gDZvdSHHMqpYPkpG3nwQkTPMjYAV5952kths-QO6qPruyQEcevV9YpS1cC658Uwj5TEvJqY7f-p2BP-C9grDTkHK7KwHmaQwxZCumRnELRRC2Sy_Azrw">
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-primary border-2 border-white rounded-full"></div>
+</div>
+<div>
+<p class="font-bold text-on-surface">Arthur Vance</p>
+<p class="text-xs text-on-surface-variant">LCSW Counselor</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-wrap gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">Relationships</span>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">Self-Esteem</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
+<span class="text-sm">Daily (PM)</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<p class="font-semibold text-on-surface">$110<span class="text-xs text-outline-variant font-normal"> / session</span></p>
+</td>
+<td class="px-8 py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-outline hover:text-primary hover:bg-primary/10 rounded-lg transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error hover:bg-error/10 rounded-lg transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination-like footer -->
+<div class="px-8 py-6 bg-surface-container-low/30 border-t border-outline-variant/10 flex justify-between items-center">
+<p class="text-sm text-on-surface-variant">Showing 3 of 42 therapists</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-outline hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-primary text-primary bg-primary-container/20 font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-outline hover:bg-surface-container-high transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-outline hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Crisis Link Floating (Brand Anchor Requirement) -->
+<div class="fixed bottom-8 right-8 z-50">
+<a class="bg-error-container text-on-error-container px-6 py-3 rounded-full font-crisis-link text-crisis-link shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center gap-2 border-2 border-error/20 animate-pulse" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+                Crisis Support
+            </a>
+</div>
+</main>
+<!-- Footer Cluster -->
+<footer class="ml-64 w-[calc(100%-16rem)] mt-20 bg-surface-container dark:bg-surface-container-high py-section-padding-desktop">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex flex-col gap-4">
+<h3 class="font-headline-lg text-headline-lg font-bold text-primary">A Place to Breathe</h3>
+<p class="text-on-surface-variant font-body-md">Your safe space for healing and management. Providing tools to create a more mindful world, one session at a time.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-semibold text-on-surface mb-2">Management Links</h4>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Mission</a>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Terms of Service</a>
+<a class="text-primary font-bold hover:underline" href="#">Crisis Support</a>
+</div>
+<div class="flex flex-col justify-between items-start md:items-end">
+<div class="flex gap-4">
+<span class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary cursor-pointer hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">share</span>
+</span>
+<span class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary cursor-pointer hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">mail</span>
+</span>
+</div>
+<p class="text-sm text-outline-variant mt-8 text-right">© 2024 A Place to Breathe. All Rights Reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for hover states on table rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateY(-2px)';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.01]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.01]');
+        });
+    </script>
+</body></html>

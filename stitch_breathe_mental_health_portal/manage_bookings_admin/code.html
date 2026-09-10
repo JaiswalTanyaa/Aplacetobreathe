@@ -1,0 +1,437 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Manage Bookings - A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "outline": "#737972",
+                    "surface-bright": "#fbf9f5",
+                    "outline-variant": "#c2c8c0",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424842",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2f1400",
+                    "primary-fixed": "#cceace",
+                    "surface-container-highest": "#e4e2de",
+                    "on-secondary-container": "#6b5f7b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f3ef",
+                    "on-primary-container": "#233d29",
+                    "tertiary-container": "#dd8f50",
+                    "secondary": "#655974",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0ceb2",
+                    "on-primary-fixed": "#07200f",
+                    "on-secondary-fixed": "#21172e",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "primary-container": "#8ba88e",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary": "#8e4e14",
+                    "surface-container-high": "#eae8e4",
+                    "background": "#fbf9f5",
+                    "primary": "#4a654e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#ecdcfd",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "surface": "#fbf9f5",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "secondary-fixed": "#ecdcfd",
+                    "on-primary-fixed-variant": "#334d38",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "surface-tint": "#4a654e",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "surface-dim": "#dbdad6",
+                    "surface-variant": "#e4e2de",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-padding-mobile": "40px",
+                    "container-max": "1120px",
+                    "section-padding-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Work Sans"],
+                    "crisis-link": ["Nunito Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .organic-blob {
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -1;
+            position: absolute;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c2c8c0;
+            border-radius: 10px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container">
+<!-- Sidebar Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-highest shadow-[4px_0_24px_rgba(139,168,142,0.05)] z-50 flex flex-col h-full py-8 gap-2">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface-variant">Admin Panel</h1>
+<p class="text-xs text-on-surface-variant/70 uppercase tracking-widest font-semibold mt-1">Management Console</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl mx-2 px-4 py-3 flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-body-md">Bookings</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Users</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md">Reports</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<div class="p-4 bg-surface-container rounded-2xl flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a professional but friendly administrative assistant with a warm smile, wearing a soft linen shirt, set against a blurred background of a tranquil office with indoor plants and soft natural light. The photo has a soft-focus, high-key quality consistent with a wellness brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1NVogAPoXb8DBqjZ7xhzONIKVi31AxfaSkcx4Do93uJvEXFhs52hml074jYhisWv2BN1nTkMWc_EnQX_SwFuZv1BdlMYqRhig8_e12lNijbmj2OiyEX_yi8Zi5Y0YXUqDV2zt_I2GUhzjQiwe4k22vyyQ7RRMuvzK1lTwXbkzqMRMIntfD4cl9m8AePkySwkYCenv5vDqOY2OI5tiZfjLzV-Mf_4ziE80Ds-eKCL_Z8LiO50eNam_uQ">
+</div>
+<div>
+<p class="text-sm font-bold">Admin Profile</p>
+<p class="text-xs text-on-surface-variant">View Site</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen relative overflow-hidden">
+<!-- Organic Background Elements -->
+<div class="organic-blob bg-primary-container w-[500px] h-[500px] -top-48 -right-24 rounded-full"></div>
+<div class="organic-blob bg-secondary-container w-[400px] h-[400px] top-1/2 -left-32 rounded-full"></div>
+<!-- Header -->
+<header class="px-gutter pt-12 pb-8 flex justify-between items-end">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-on-background">Manage Bookings</h2>
+<p class="text-on-surface-variant text-body-lg max-w-xl mt-2">Oversee upcoming sessions, coordinate schedules, and nurture the community through seamless booking management.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-3 rounded-full font-label-md flex items-center gap-2 hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                    Filter
+                </button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md flex items-center gap-2 hover:opacity-90 transition-opacity shadow-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    New Session
+                </button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="px-gutter pb-section-padding-desktop grid grid-cols-12 gap-6">
+<!-- Calendar Section (Large Bento Piece) -->
+<section class="col-span-12 lg:col-span-8 bg-surface/60 backdrop-blur-md rounded-[32px] p-8 border border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-headline-md">Session Calendar</h3>
+<div class="flex items-center gap-4 bg-surface-container-low p-1 rounded-full border border-outline-variant/20">
+<button class="p-2 hover:bg-white rounded-full transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<span class="font-label-md px-2">October 2024</span>
+<button class="p-2 hover:bg-white rounded-full transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="calendar-grid gap-2 text-center mb-2">
+<div class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-tighter">Mon</div>
+<div class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-tighter">Tue</div>
+<div class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-tighter">Wed</div>
+<div class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-tighter">Thu</div>
+<div class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-tighter">Fri</div>
+<div class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-tighter">Sat</div>
+<div class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-tighter">Sun</div>
+</div>
+<div class="calendar-grid gap-2">
+<!-- Day Items with subtle elevation -->
+<div class="h-28 bg-surface-container-lowest/40 rounded-2xl border border-outline-variant/10 p-2 opacity-30">29</div>
+<div class="h-28 bg-surface-container-lowest/40 rounded-2xl border border-outline-variant/10 p-2 opacity-30">30</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)] relative">
+<span class="text-sm font-semibold">1</span>
+<div class="mt-1 flex flex-col gap-1">
+<div class="bg-secondary-container/50 text-[10px] p-1 rounded leading-none text-on-secondary-container truncate">Yoga Flow</div>
+</div>
+</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+<span class="text-sm font-semibold">2</span>
+</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)] relative border-primary/40 ring-1 ring-primary/20">
+<span class="text-sm font-semibold text-primary font-bold">3</span>
+<div class="mt-1 flex flex-col gap-1">
+<div class="bg-primary-container text-[10px] p-1 rounded leading-none text-white truncate">Breathwork</div>
+<div class="bg-secondary-container/50 text-[10px] p-1 rounded leading-none text-on-secondary-container truncate">Meditation</div>
+</div>
+</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+<span class="text-sm font-semibold">4</span>
+</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+<span class="text-sm font-semibold">5</span>
+</div>
+<!-- Row 2 -->
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">6</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">7</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">8</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">9</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">10</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">11</div>
+<div class="h-28 bg-white rounded-2xl border border-outline-variant/30 p-2 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">12</div>
+</div>
+</section>
+<!-- Pending Requests (Side Bento Piece) -->
+<section class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="bg-secondary-container/20 backdrop-blur-md rounded-[32px] p-8 border border-outline-variant/30 flex-1">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-secondary-container">Pending Approvals</h3>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold">4</span>
+</div>
+<div class="space-y-4">
+<!-- Request Card -->
+<div class="bg-white/80 p-5 rounded-2xl shadow-sm border border-outline-variant/10 group hover:shadow-md transition-shadow">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a serene woman in her late 30s with calm, expressive eyes, appearing reflective and peaceful. The image is captured in a minimalist style with soft, diffused sunlight casting gentle shadows. She is wearing a soft lavender knit sweater, perfectly matching the design system's accent color." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfzZ424K7_Gcvo77Bw5-g3pOWGfQ1y3Q4OveTPjkXlUl73sTrzPLHMw-ynk-Y9zfbjtUswQY4-HGg5NdOoncEq8qFo_xyZ1MKQAxaHih7SvPQ455y5zMUDMJ2-EboYg93XN44goJULXqzX00dYHzINhQYKTHayDVsXrWRdEJZAccKl79LUzraZexvZXBI8ZU_m8ImUyvTJgmAfmXIKOBFwvXw-ZZ_dH5CF2zwJ6dIObG91yR1RgVKfIg">
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Elena Richardson</p>
+<p class="text-xs text-on-surface-variant">Private Healing Session</p>
+<div class="flex items-center gap-2 mt-2 text-[10px] text-primary font-semibold">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                        Oct 12, 10:00 AM
+                                    </div>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 bg-primary text-on-primary py-2 rounded-xl text-xs font-bold hover:opacity-90 transition-opacity">Approve</button>
+<button class="flex-1 bg-surface-container py-2 rounded-xl text-xs font-bold hover:bg-surface-variant transition-colors">Decline</button>
+</div>
+</div>
+<!-- Request Card -->
+<div class="bg-white/80 p-5 rounded-2xl shadow-sm border border-outline-variant/10 group hover:shadow-md transition-shadow">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a man in his early 40s with a kind, approachable face and gentle smile. He is in a clean, brightly lit modern room with a soft sage green wall behind him. The aesthetic is clean, warm, and trustworthy, with high-quality soft lighting and natural textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1X1DCnqsnEOqgmU5Di4gRA9LEIVGLvD9gOGKnR9aLh5uRL4vUdGCSaBpgnEQfwXvg3XZYabJ2WzaiekNBJGnsn-M27GVTIMbEHQyUAChzR46tyZwsNrMXuvJJtHW49ExcX-FTfhxaqYhLA9x1r30j41pE5980yfducduLFe_9yBsjb_j8guQwekEDAYu4HMa4ilLuoy_JvDojJZ7DTV5TLidYCss72VCIYs588pYHklsRBITwl79dRw">
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Marcus Chen</p>
+<p class="text-xs text-on-surface-variant">Group Workshop: Foundations</p>
+<div class="flex items-center gap-2 mt-2 text-[10px] text-primary font-semibold">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                        Oct 15, 04:30 PM
+                                    </div>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 bg-primary text-on-primary py-2 rounded-xl text-xs font-bold hover:opacity-90 transition-opacity">Approve</button>
+<button class="flex-1 bg-surface-container py-2 rounded-xl text-xs font-bold hover:bg-surface-variant transition-colors">Decline</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Upcoming List (Wide Bottom Piece) -->
+<section class="col-span-12 bg-surface-container-low rounded-[32px] p-8 border border-outline-variant/20">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-headline-md">Upcoming Sessions List</h3>
+<div class="flex gap-2">
+<button class="bg-white text-on-surface px-4 py-2 rounded-full text-sm font-semibold border border-outline-variant/30 hover:shadow-sm transition-shadow">All</button>
+<button class="bg-white/50 text-on-surface-variant px-4 py-2 rounded-full text-sm font-semibold border border-outline-variant/10">Workshops</button>
+<button class="bg-white/50 text-on-surface-variant px-4 py-2 rounded-full text-sm font-semibold border border-outline-variant/10">1-on-1</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest border-b border-outline-variant/20">
+<th class="pb-4 font-semibold">Client / Participant</th>
+<th class="pb-4 font-semibold">Session Type</th>
+<th class="pb-4 font-semibold">Date &amp; Time</th>
+<th class="pb-4 font-semibold">Status</th>
+<th class="pb-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Table Row -->
+<tr class="group">
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center font-bold text-secondary">SR</div>
+<div>
+<p class="font-bold text-sm">Sarah Jenkins</p>
+<p class="text-xs text-on-surface-variant">sarah.j@email.com</p>
+</div>
+</div>
+</td>
+<td class="py-6 text-sm text-on-surface-variant">Morning Meditation</td>
+<td class="py-6">
+<p class="text-sm font-bold">Tomorrow</p>
+<p class="text-xs text-on-surface-variant">08:00 AM - 09:00 AM</p>
+</td>
+<td class="py-6">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
+</td>
+<td class="py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg transition-colors text-on-surface-variant" title="Reschedule"><span class="material-symbols-outlined text-[20px]">schedule</span></button>
+<button class="p-2 hover:bg-white rounded-lg transition-colors text-on-surface-variant" title="Message"><span class="material-symbols-outlined text-[20px]">chat_bubble</span></button>
+<button class="p-2 hover:bg-white rounded-lg transition-colors text-error" title="Cancel"><span class="material-symbols-outlined text-[20px]">cancel</span></button>
+</div>
+</td>
+</tr>
+<!-- Table Row -->
+<tr class="group">
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed/30 flex items-center justify-center font-bold text-tertiary">DA</div>
+<div>
+<p class="font-bold text-sm">David Ames</p>
+<p class="text-xs text-on-surface-variant">d.ames@company.co</p>
+</div>
+</div>
+</td>
+<td class="py-6 text-sm text-on-surface-variant">Integrative Breathwork</td>
+<td class="py-6">
+<p class="text-sm font-bold">Oct 5, 2024</p>
+<p class="text-xs text-on-surface-variant">02:30 PM - 03:30 PM</p>
+</td>
+<td class="py-6">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
+</td>
+<td class="py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-white rounded-lg transition-colors text-on-surface-variant" title="Reschedule"><span class="material-symbols-outlined text-[20px]">schedule</span></button>
+<button class="p-2 hover:bg-white rounded-lg transition-colors text-on-surface-variant" title="Message"><span class="material-symbols-outlined text-[20px]">chat_bubble</span></button>
+<button class="p-2 hover:bg-white rounded-lg transition-colors text-error" title="Cancel"><span class="material-symbols-outlined text-[20px]">cancel</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Crisis Support Link (Global Persistence) -->
+<div class="fixed bottom-8 right-8 z-[100]">
+<a class="bg-error-container text-on-error-container px-6 py-4 rounded-full font-crisis-link text-crisis-link shadow-xl border border-error/20 flex items-center gap-3 animate-pulse hover:animate-none transition-all hover:scale-105 active:scale-95" href="#">
+<span class="material-symbols-outlined fill" style="font-variation-settings: 'FILL' 1;">emergency</span>
+                Crisis Support
+            </a>
+</div>
+</main>
+<!-- Footer Cluster -->
+<footer class="ml-64 bg-surface-container dark:bg-surface-container-high w-full mt-20 border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<div class="col-span-1">
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">A Place to Breathe</h2>
+<p class="mt-4 text-on-surface-variant text-body-md leading-relaxed">
+                    Nurturing emotional refuge through digital tranquility and mindful connection.
+                </p>
+</div>
+<div class="col-span-1 flex flex-col gap-3">
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-xs">Resources</h4>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md hover:underline" href="#">Mission</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md hover:underline" href="#">Community Guidelines</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md hover:underline" href="#">Workshop Archive</a>
+</div>
+<div class="col-span-1 flex flex-col gap-3">
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-xs">Legal</h4>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md hover:underline" href="#">Terms of Service</a>
+<a class="text-primary font-bold text-body-md hover:underline" href="#">Crisis Support</a>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter pb-12 border-t border-outline-variant/10 pt-8 flex justify-between items-center text-xs text-on-surface-variant/60">
+<p>© 2024 A Place to Breathe. Your safe space for healing.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[18px]">public</span>
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="material-symbols-outlined text-[18px]">eco</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for the calendar days
+        document.querySelectorAll('.calendar-grid div').forEach(day => {
+            day.addEventListener('mouseenter', () => {
+                if (!day.classList.contains('opacity-30')) {
+                    day.style.transform = 'translateY(-2px)';
+                }
+            });
+            day.addEventListener('mouseleave', () => {
+                day.style.transform = 'translateY(0px)';
+            });
+        });
+
+        // Toggle hover effect on main list rows
+        document.querySelectorAll('tr.group').forEach(row => {
+            row.addEventListener('click', () => {
+                row.classList.toggle('bg-white/40');
+            });
+        });
+    </script>
+</body></html>

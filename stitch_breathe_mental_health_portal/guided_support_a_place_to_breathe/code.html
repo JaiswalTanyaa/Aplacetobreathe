@@ -1,0 +1,322 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Support &amp; Connection | A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "outline": "#737972",
+                    "surface-bright": "#fbf9f5",
+                    "outline-variant": "#c2c8c0",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424842",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2f1400",
+                    "primary-fixed": "#cceace",
+                    "surface-container-highest": "#e4e2de",
+                    "on-secondary-container": "#6b5f7b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f3ef",
+                    "on-primary-container": "#233d29",
+                    "tertiary-container": "#dd8f50",
+                    "secondary": "#655974",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0ceb2",
+                    "on-primary-fixed": "#07200f",
+                    "on-secondary-fixed": "#21172e",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "primary-container": "#8ba88e",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary": "#8e4e14",
+                    "surface-container-high": "#eae8e4",
+                    "background": "#fbf9f5",
+                    "primary": "#4a654e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#ecdcfd",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "surface": "#fbf9f5",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "secondary-fixed": "#ecdcfd",
+                    "on-primary-fixed-variant": "#334d38",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "surface-tint": "#4a654e",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "surface-dim": "#dbdad6",
+                    "surface-variant": "#e4e2de",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-padding-mobile": "40px",
+                    "container-max": "1120px",
+                    "section-padding-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Work Sans"],
+                    "crisis-link": ["Nunito Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .organic-blob {
+            filter: blur(60px);
+            opacity: 0.15;
+            z-index: -1;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .chat-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+            background: #c2c8c0;
+            border-radius: 10px;
+        }
+        .crisis-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-[0_20px_20px_0_rgba(139,168,142,0.05)]">
+<nav class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">A Place to Breathe</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Workshops</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">My Progress</a>
+</div>
+<div class="flex items-center gap-4">
+<a class="font-crisis-link text-crisis-link text-[#F4A261] underline crisis-pulse" href="#">Crisis Support</a>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<!-- Background Blobs -->
+<div class="organic-blob bg-primary w-96 h-96 top-[-100px] left-[-100px]"></div>
+<div class="organic-blob bg-secondary w-[500px] h-[500px] bottom-[-200px] right-[-100px]"></div>
+<main class="pt-32 pb-20 px-gutter max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left Side: Context & Guidance -->
+<div class="lg:col-span-4 space-y-8 sticky top-32">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-4">You're not alone.</h1>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+                        Share what's on your mind. Whether you need a listening ear, a quiet exercise, or a path toward healing, we are here with you.
+                    </p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-3xl border border-outline-variant/30 shadow-sm">
+<h3 class="font-headline-md text-headline-md text-secondary mb-4">Direct Connection</h3>
+<p class="text-body-md text-on-surface-variant mb-6">Sometimes you need a real voice. Our human supporters are available 24/7 for a private chat.</p>
+<button class="w-full bg-primary text-on-primary font-bold py-4 rounded-full transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">person</span>
+                        Talk to a human
+                    </button>
+</div>
+<div class="p-6 bg-tertiary-container/10 rounded-2xl border-l-4 border-tertiary">
+<p class="text-label-md text-on-tertiary-container flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">info</span>
+                        NOT A REPLACEMENT FOR PROFESSIONAL HELP
+                    </p>
+<p class="text-sm text-on-surface-variant mt-2 leading-relaxed italic">
+                        This digital guide is for emotional support and wellness activities. If you are in immediate danger or a medical emergency, please use our crisis links or call emergency services.
+                    </p>
+</div>
+</div>
+<!-- Right Side: The Chat Interface -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-lowest rounded-[40px] shadow-[0_32px_64px_-16px_rgba(139,168,142,0.12)] border border-outline-variant/20 overflow-hidden flex flex-col h-[700px]">
+<!-- Chat Header -->
+<div class="px-8 py-6 border-b border-outline-variant/10 flex justify-between items-center bg-white/50">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md">Guided Support</h2>
+<span class="text-sm text-primary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+                                    Active Now
+                                </span>
+</div>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Chat Messages -->
+<div class="flex-1 overflow-y-auto p-8 chat-scroll flex flex-col gap-6" id="chat-container">
+<!-- Bot Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex-shrink-0 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">nature</span>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl rounded-tl-none">
+<p class="text-body-md text-on-surface">Hello. I'm here to listen. How are you feeling in this moment?</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<button class="px-4 py-2 bg-white border border-outline-variant/50 rounded-full text-sm hover:bg-primary-container/10 transition-colors">I'm feeling anxious</button>
+<button class="px-4 py-2 bg-white border border-outline-variant/50 rounded-full text-sm hover:bg-primary-container/10 transition-colors">I just need to vent</button>
+<button class="px-4 py-2 bg-white border border-outline-variant/50 rounded-full text-sm hover:bg-primary-container/10 transition-colors">Help me relax</button>
+</div>
+</div>
+</div>
+<!-- User Message (Static Example) -->
+<div class="flex gap-4 max-w-[85%] self-end flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+<div class="bg-primary-container text-on-primary-container p-5 rounded-2xl rounded-tr-none">
+<p class="text-body-md">I've had a really overwhelming day at work and my chest feels tight.</p>
+</div>
+</div>
+<!-- Bot Message with Suggestions -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex-shrink-0 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">nature</span>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl rounded-tl-none">
+<p class="text-body-md text-on-surface">I'm sorry you're carrying that weight. Tightness in the chest can be so unsettling. Would you like to try a 3-minute Box Breathing exercise together, or should we look at some tips for workplace stress?</p>
+<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-white p-4 rounded-xl shadow-sm border border-outline-variant/10 cursor-pointer hover:shadow-md transition-all group">
+<div class="w-10 h-10 rounded-lg bg-[#E0F2F1] text-[#00695C] flex items-center justify-center mb-3 group-hover:bg-[#00695C] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">air</span>
+</div>
+<h4 class="font-bold text-sm">Box Breathing</h4>
+<p class="text-xs text-on-surface-variant">3 min session</p>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm border border-outline-variant/10 cursor-pointer hover:shadow-md transition-all group">
+<div class="w-10 h-10 rounded-lg bg-[#FFF3E0] text-[#E65100] flex items-center justify-center mb-3 group-hover:bg-[#E65100] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">article</span>
+</div>
+<h4 class="font-bold text-sm">Workplace Boundaries</h4>
+<p class="text-xs text-on-surface-variant">Read Article</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-8 border-t border-outline-variant/10 bg-white">
+<div class="relative">
+<textarea class="w-full bg-surface-container-low border-none rounded-[24px] py-5 px-8 pr-32 focus:ring-2 focus:ring-primary/20 text-body-md resize-none transition-all scrollbar-hide" placeholder="Type your thoughts here... Take your time, this is a safe space." rows="1"></textarea>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-on-primary hover:opacity-90 transition-opacity shadow-lg">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<div class="mt-4 flex justify-center">
+<p class="text-[12px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                                Encrypted and Private
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-surface-container">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<div class="space-y-4">
+<div class="font-headline-lg text-headline-lg font-bold text-primary">A Place to Breathe</div>
+<p class="text-on-surface-variant text-body-md">Your digital sanctuary for mindfulness and emotional healing. We believe every soul deserves a moment of peace.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-primary">Quick Links</h4>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Mission</a>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-bold hover:text-primary transition-all hover:underline" href="#">Crisis Support</a>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-primary">Connect With Us</h4>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary cursor-pointer hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">rss_feed</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary cursor-pointer hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">mail</span>
+</div>
+</div>
+<p class="text-label-md text-on-surface-variant pt-4">© 2024 A Place to Breathe. Your safe space for healing.</p>
+</div>
+</div>
+</footer>
+<script>
+        // Simple auto-resize for textarea
+        const tx = document.getElementsByTagName("textarea");
+        for (let i = 0; i < tx.length; i++) {
+            tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+            tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+            this.style.height = 0;
+            this.style.height = (this.scrollHeight) + "px";
+        }
+
+        // Scroll to bottom of chat
+        const chatContainer = document.getElementById('chat-container');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    </script>
+</body></html>

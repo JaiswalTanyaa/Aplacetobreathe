@@ -1,0 +1,391 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Admin Panel - A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1c1a",
+                        "outline": "#737972",
+                        "surface-bright": "#fbf9f5",
+                        "outline-variant": "#c2c8c0",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#424842",
+                        "on-surface": "#1b1c1a",
+                        "on-tertiary-fixed": "#2f1400",
+                        "primary-fixed": "#cceace",
+                        "surface-container-highest": "#e4e2de",
+                        "on-secondary-container": "#6b5f7b",
+                        "tertiary-fixed": "#ffdcc4",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f5f3ef",
+                        "on-primary-container": "#233d29",
+                        "tertiary-container": "#dd8f50",
+                        "secondary": "#655974",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#b0ceb2",
+                        "on-primary-fixed": "#07200f",
+                        "on-secondary-fixed": "#21172e",
+                        "secondary-fixed-dim": "#d0c1e0",
+                        "primary-container": "#8ba88e",
+                        "surface-container": "#efeeea",
+                        "on-tertiary-container": "#592c00",
+                        "tertiary": "#8e4e14",
+                        "surface-container-high": "#eae8e4",
+                        "background": "#fbf9f5",
+                        "primary": "#4a654e",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ecdcfd",
+                        "on-tertiary-fixed-variant": "#6f3800",
+                        "surface": "#fbf9f5",
+                        "primary-fixed-dim": "#b0ceb2",
+                        "tertiary-fixed-dim": "#ffb780",
+                        "secondary-fixed": "#ecdcfd",
+                        "on-primary-fixed-variant": "#334d38",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#4d425c",
+                        "surface-tint": "#4a654e",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "surface-dim": "#dbdad6",
+                        "surface-variant": "#e4e2de",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#30312e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "section-padding-mobile": "40px",
+                        "container-max": "1120px",
+                        "section-padding-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Nunito Sans"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "body-lg": ["Work Sans"],
+                        "crisis-link": ["Nunito Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "crisis-link": ["16px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+            overflow-x: hidden;
+        }
+        .organic-blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: pulse 15s infinite alternate ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(5%, 5%); }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md bg-background">
+<!-- Decorative Organic Blobs -->
+<div class="organic-blob w-[500px] h-[500px] bg-secondary-container rounded-full -top-48 -left-48"></div>
+<div class="organic-blob w-[400px] h-[400px] bg-primary-fixed rounded-full top-1/2 -right-24"></div>
+<!-- SideNavBar Integration -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-highest shadow-[4px_0_24px_rgba(139,168,142,0.05)] flex flex-col py-8 gap-2 z-50">
+<div class="px-6 mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface-variant">Admin Panel</h1>
+<p class="text-on-surface-variant/70 text-sm">Management Console</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard Active -->
+<a class="bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl mx-2 px-4 py-3 flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md">Users</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span class="font-body-md">Content</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body-md">Reports</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 bg-secondary-container text-on-secondary-container rounded-full font-label-md flex items-center justify-center gap-2 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                View Site
+            </button>
+<div class="mt-6 flex items-center gap-3 px-2">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-primary-container" data-alt="A professional high-resolution headshot of a middle-aged woman with a friendly expression, wearing minimalist business casual attire. The lighting is soft and natural, coming from a large side window, creating gentle shadows. The background is a blurred, airy office space with soft sage and cream tones, emphasizing a calm, professional environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9YgvfViRbcCO00cKgCHf9dRgLi2HhloyFtu9ATegKJ-ti1myk-gUtLXIMSIgRjjt6vIaIFnsiCYw6mS7VjQx4zzBlUPkRDBB8-lj4NROPygUWnTGTixEm4ZZd00u12O5t2xYwJ3Y3do9aUBDQskKdsmVEcqggfScdYmCpIg_agMT7lExRwByHmrNy9NgEbauZ7rzHlJVEZee6Sa0Lcnc7jq1bEENLDT8gmMwcUg41qbj0n1Y7llNs7g">
+<div>
+<p class="text-sm font-semibold text-on-surface">Admin Profile</p>
+<p class="text-xs text-on-surface-variant">System Manager</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 p-gutter max-w-container-max mx-auto min-h-screen">
+<!-- Header Section -->
+<header class="flex justify-between items-end mb-12 pt-8">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary mb-2">Welcome back, Admin.</h2>
+<p class="text-body-lg text-on-surface-variant">Here is a snapshot of the sanctuary today.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 rounded-full border border-outline-variant text-primary font-label-md hover:bg-surface-container transition-colors">
+                    Download Report
+                </button>
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-label-md hover:shadow-lg transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                    New Event
+                </button>
+</div>
+</header>
+<!-- Metrics Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+<!-- Active Users -->
+<div class="glass-card p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<span class="text-primary font-bold text-sm">+12%</span>
+</div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Active Users</p>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">1,284</h3>
+<div class="mt-4 w-full bg-outline-variant/30 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4 rounded-full"></div>
+</div>
+</div>
+<!-- Bookings -->
+<div class="glass-card p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+</div>
+<span class="text-secondary font-bold text-sm">+5%</span>
+</div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Bookings</p>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">85</h3>
+<div class="mt-4 flex gap-1">
+<div class="h-8 w-full bg-secondary-container/50 rounded-sm"></div>
+<div class="h-10 w-full bg-secondary-container/50 rounded-sm"></div>
+<div class="h-6 w-full bg-secondary-container/50 rounded-sm"></div>
+<div class="h-12 w-full bg-secondary rounded-sm"></div>
+</div>
+</div>
+<!-- Upcoming Events -->
+<div class="glass-card p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+</div>
+<span class="text-tertiary font-bold text-sm">3 Today</span>
+</div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Upcoming Events</p>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">24</h3>
+<p class="text-xs text-on-surface-variant mt-4 italic">Next: Breathwork Workshop @ 2PM</p>
+</div>
+<!-- Pending Requests -->
+<div class="glass-card p-8 rounded-[32px] border-2 border-tertiary/20 shadow-sm hover:shadow-md transition-all duration-300 bg-tertiary-fixed/10">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-2xl bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="pending_actions">pending_actions</span>
+</div>
+<div class="px-2 py-1 bg-error/10 text-error rounded text-[10px] font-bold">URGENT</div>
+</div>
+<p class="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Pending Requests</p>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">12</h3>
+<button class="mt-4 text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                    Review all <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Main Dashboard Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Community Activity Table -->
+<section class="lg:col-span-2 glass-card rounded-[32px] overflow-hidden p-8">
+<div class="flex justify-between items-center mb-8">
+<h4 class="font-headline-md text-headline-md text-on-surface">Community Pulse</h4>
+<select class="bg-surface-container-low border-none rounded-full text-sm font-label-md text-on-surface-variant px-4 py-2 ring-1 ring-outline-variant/30">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+</select>
+</div>
+<div class="space-y-6">
+<!-- Row 1 -->
+<div class="flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors group">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Close up of a tranquil person with eyes closed, bathed in warm, soft sunlight. The image is rendered in high-definition with a focus on skin texture and gentle environmental light. Soft pastel colors of lavender and cream dominate the palette, creating an atmosphere of deep peace and mindfulness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAyFLBrDDaXZABL3b2qIFGfJVJAaDjv2-_YCnff41gfb8XHZ0RORO-rooS7qakRM1T-kAzPd43MrQqKCHXsFZV09S-qOaIp7TpEWqUQlXOpoWOF0-nu4xiTzIu_cBiGEH_tIoLL_LXaxnnpgx3NkHh6StgS4tMQrxgq3pIv5l5OBoz5y-pyYyNggUwyHXjKXO4skzAF_o0tzr_xHTYxu4dR4iGrBwrgcDkrOlBMA-tZsZoq7O99mIe2w">
+<div class="flex-1">
+<h5 class="font-semibold text-on-surface">Sarah Jenkins</h5>
+<p class="text-sm text-on-surface-variant">Completed "Ocean Breath" Workshop</p>
+</div>
+<div class="text-right">
+<span class="block text-xs font-label-md text-outline">12 mins ago</span>
+<span class="text-[10px] px-2 py-0.5 bg-primary-container/20 text-primary rounded-full">Success</span>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-secondary font-bold">MK</div>
+<div class="flex-1">
+<h5 class="font-semibold text-on-surface">Marcus Kane</h5>
+<p class="text-sm text-on-surface-variant">Requested 1-on-1 Crisis Support</p>
+</div>
+<div class="text-right">
+<span class="block text-xs font-label-md text-outline">45 mins ago</span>
+<span class="text-[10px] px-2 py-0.5 bg-error-container text-error rounded-full">High Priority</span>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors group">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of a serene young man in a minimalist studio setting. Soft, diffused lighting creates long, gentle shadows. He is wearing a simple linen shirt in a soft sage green. The background is a clean, off-white wall with a slight organic texture. The overall mood is calm, modern, and focused on mental well-being." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl8zkUCs2l4wxm5ponArXATlc0vG3MSihprPPsJxdXmLw9iWUGseDS3Dac2EDdUzOhh6LHW8f7IWV0ZSuaQfHgfaelFb0-O9gTiGMgUmrRs0GLmWLm2VTW_uPomokqjSt6Rw3WZ5LjNQpvveZ88jYlxRuCgKP0Ua-UmhqRGyNGPVzoHOrCyAHIBO9GWQyX-NbjVjbcKKcKES2Qn1KeXp6lo2ZNL8kZnl9laKlHvLfHWjju2ByT34JfKw">
+<div class="flex-1">
+<h5 class="font-semibold text-on-surface">Leo Davids</h5>
+<p class="text-sm text-on-surface-variant">Posted in "New Beginnings" Circle</p>
+</div>
+<div class="text-right">
+<span class="block text-xs font-label-md text-outline">2 hours ago</span>
+<span class="text-[10px] px-2 py-0.5 bg-outline-variant/40 text-on-surface-variant rounded-full">Engagement</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 text-primary font-semibold hover:bg-primary/5 rounded-2xl transition-all">
+                    View All Activity
+                </button>
+</section>
+<!-- Quick Action & Resource Card -->
+<aside class="space-y-6">
+<!-- System Status Card -->
+<div class="bg-primary-container p-8 rounded-[32px] text-on-primary-container relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-headline-md text-headline-md mb-2">System Health</h4>
+<p class="text-sm opacity-90 mb-6">Everything is breathing smoothly today.</p>
+<div class="flex items-center gap-2 mb-4">
+<span class="w-2 h-2 rounded-full bg-on-primary-container animate-pulse"></span>
+<span class="text-xs font-bold uppercase tracking-widest">Servers Operational</span>
+</div>
+<button class="w-full py-3 bg-on-primary-container text-primary-container rounded-full font-bold text-sm">
+                            Manage Infrastructure
+                        </button>
+</div>
+<!-- Subtle pattern -->
+<div class="absolute -bottom-10 -right-10 opacity-10">
+<span class="material-symbols-outlined text-[150px]" data-icon="cloud_done">cloud_done</span>
+</div>
+</div>
+<!-- Workshop Management -->
+<div class="glass-card p-8 rounded-[32px]">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-semibold text-on-surface">Live Now</h4>
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container rounded-2xl">
+<p class="text-xs font-bold text-secondary uppercase mb-1">Workshop</p>
+<h5 class="font-semibold text-on-surface mb-2">Morning Mindfulness</h5>
+<div class="flex justify-between text-xs text-on-surface-variant">
+<span>34 Participants</span>
+<span>12:30 - 13:30</span>
+</div>
+</div>
+<div class="p-4 border border-outline-variant rounded-2xl border-dashed flex flex-col items-center justify-center py-8">
+<span class="material-symbols-outlined text-outline mb-2" data-icon="add_circle">add_circle</span>
+<p class="text-sm text-outline font-medium">Add Quick Session</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Footer -->
+<footer class="w-full mt-20 border-t border-outline-variant/10 pt-10 pb-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div>
+<h3 class="font-headline-lg text-headline-lg font-bold text-primary mb-4">A Place to Breathe</h3>
+<p class="text-on-surface-variant text-sm max-w-xs">Admin Console for management of the digital sanctuary and emotional refuge platform.</p>
+</div>
+<div class="flex gap-12">
+<div class="space-y-4">
+<p class="font-bold text-on-surface">Platform</p>
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Mission</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-on-surface">Support</p>
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors text-primary font-bold" href="#">Crisis Support</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Documentation</a></li>
+</ul>
+</div>
+</div>
+<div class="md:text-right">
+<p class="text-on-surface-variant text-sm">© 2024 A Place to Breathe.<br>Your safe space for healing.</p>
+</div>
+</div>
+</footer>
+</main>
+<!-- Floating Action Button for Emergency Situations (Restricted to Home/Dashboard) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-[#F4A261] text-white rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform active:scale-95 z-[60]">
+<span class="material-symbols-outlined text-3xl group-hover:animate-pulse" data-icon="emergency_share">emergency_share</span>
+<span class="absolute -top-12 right-0 bg-[#F4A261] text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">QUICK ALERT</span>
+</button>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

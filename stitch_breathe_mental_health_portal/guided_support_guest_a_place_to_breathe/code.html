@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guided Support - A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#6b5f7b",
+                        "on-primary-container": "#233d29",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#b0ceb2",
+                        "on-secondary-fixed": "#21172e",
+                        "primary": "#4a654e",
+                        "outline": "#737972",
+                        "inverse-primary": "#b0ceb2",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#6f3800",
+                        "on-surface-variant": "#424842",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e4e2de",
+                        "surface-bright": "#fbf9f5",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary": "#8e4e14",
+                        "tertiary-fixed-dim": "#ffb780",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#cceace",
+                        "secondary-fixed": "#ecdcfd",
+                        "surface-dim": "#dbdad6",
+                        "tertiary-container": "#dd8f50",
+                        "surface-container-high": "#eae8e4",
+                        "primary-container": "#8ba88e",
+                        "tertiary-fixed": "#ffdcc4",
+                        "secondary": "#655974",
+                        "surface-container": "#efeeea",
+                        "surface": "#fbf9f5",
+                        "surface-tint": "#4a654e",
+                        "secondary-container": "#ecdcfd",
+                        "on-tertiary-fixed": "#2f1400",
+                        "outline-variant": "#c2c8c0",
+                        "on-surface": "#1b1c1a",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c1a",
+                        "on-secondary-fixed-variant": "#4d425c",
+                        "surface-container-highest": "#e4e2de",
+                        "inverse-surface": "#30312e",
+                        "on-tertiary-container": "#592c00",
+                        "on-primary-fixed-variant": "#334d38",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#d0c1e0",
+                        "on-primary-fixed": "#07200f",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-padding-mobile": "40px",
+                        "gutter": "24px",
+                        "container-max": "1120px",
+                        "unit": "8px",
+                        "section-padding-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Work Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"],
+                        "headline-xl": ["Nunito Sans"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "crisis-link": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "crisis-link": ["16px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .organic-blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .blob-1 {
+            background: theme('colors.primary-container');
+            width: 400px;
+            height: 400px;
+            border-radius: 50% 40% 60% 40%;
+            top: -100px;
+            left: -100px;
+        }
+        .blob-2 {
+            background: theme('colors.secondary-container');
+            width: 500px;
+            height: 500px;
+            border-radius: 40% 60% 40% 50%;
+            bottom: -150px;
+            right: -100px;
+        }
+        
+        /* Ambient shadows as per style guidelines */
+        .ambient-shadow {
+            box-shadow: 0 20px 20px 0 rgba(139,168,142,0.05);
+        }
+        
+        .chat-container {
+            height: calc(100vh - 80px); /* Adjust based on TopNavBar height */
+        }
+    </style>
+</head>
+<body class="relative min-h-screen overflow-hidden flex flex-col font-body-md">
+<!-- Organic Background Blobs -->
+<div class="organic-blob blob-1"></div>
+<div class="organic-blob blob-2"></div>
+<!-- TopNavBar (Shared Component Blueprint) -->
+<nav class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 shadow-sm shadow-[0_20px_20px_0_rgba(139,168,142,0.05)] transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+                A Place to Breathe
+            </div>
+<div class="hidden md:flex gap-8 items-center">
+<!-- Suppressed navigation shell for focused task (chat) -->
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-headline-md text-headline-md font-semibold text-sm" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-headline-md text-headline-md font-semibold text-sm" href="#">Community</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-headline-md text-headline-md font-semibold text-sm" href="#">Workshops</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-headline-md text-headline-md font-semibold text-sm" href="#">My Progress</a>
+</div>
+<button class="font-crisis-link text-crisis-link bg-[#F4A261] text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity flex items-center gap-2 ambient-shadow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                Crisis Support
+            </button>
+</div>
+</nav>
+<!-- Main Chat Canvas -->
+<main class="flex-1 mt-[76px] relative z-10 flex flex-col max-w-3xl w-full mx-auto chat-container pt-8 pb-4 px-4 sm:px-6 lg:px-8">
+<!-- Chat Header Area -->
+<div class="text-center mb-8">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">Guided Support</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Your safe space to reflect and find calm.</p>
+</div>
+<!-- Chat Messages Area -->
+<div class="flex-1 overflow-y-auto flex flex-col gap-6 p-4 rounded-xl bg-surface/50 backdrop-blur-sm border border-surface-variant ambient-shadow mb-4 no-scrollbar">
+<!-- Bot Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container">spa</span>
+</div>
+<div class="bg-white rounded-2xl rounded-tl-sm p-4 border border-surface-container shadow-[0_4px_12px_rgba(139,168,142,0.03)] text-on-surface">
+<p class="font-body-md text-body-md">Hello. I'm here to listen. How are you feeling right now? Take your time, there's no rush.</p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-[85%] self-end flex-row-reverse">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container">person</span>
+</div>
+<div class="bg-surface-container rounded-2xl rounded-tr-sm p-4 text-on-surface">
+<p class="font-body-md text-body-md">I'm feeling a bit overwhelmed today. Things just feel like too much.</p>
+</div>
+</div>
+<!-- Bot Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container">spa</span>
+</div>
+<div class="bg-white rounded-2xl rounded-tl-sm p-4 border border-surface-container shadow-[0_4px_12px_rgba(139,168,142,0.03)] text-on-surface">
+<p class="font-body-md text-body-md">It's completely understandable to feel overwhelmed sometimes. Acknowledging it is a brave first step.</p>
+<p class="font-body-md text-body-md mt-3">Would you like to try a brief, guided breathing exercise together, or would you prefer to just talk about what's on your mind?</p>
+<!-- Suggestion Chips -->
+<div class="flex flex-wrap gap-2 mt-4">
+<button class="bg-secondary/10 hover:bg-secondary/20 text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md transition-colors border border-secondary/20">
+                            Try breathing exercise
+                        </button>
+<button class="bg-secondary/10 hover:bg-secondary/20 text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md transition-colors border border-secondary/20">
+                            I just want to talk
+                        </button>
+</div>
+</div>
+</div>
+<!-- Typing Indicator (Simulated) -->
+<div class="flex gap-4 max-w-[85%] opacity-70">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container">more_horiz</span>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Input Area -->
+<div class="w-full relative shrink-0">
+<!-- Guest Signup Banner -->
+<div class="absolute bottom-full mb-4 left-0 right-0 bg-primary-container/20 backdrop-blur-md border border-primary-container/30 rounded-xl p-4 flex items-center justify-between gap-4 ambient-shadow transform transition-all duration-300 ease-in-out translate-y-0 opacity-100" id="guest-banner">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">bookmark</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">
+                        Sign up to save this conversation and revisit these suggestions later.
+                    </p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity">
+                        Sign Up
+                    </button>
+<button class="text-outline hover:text-on-surface transition-colors p-1 rounded-full hover:bg-surface-variant/50 flex items-center justify-center" onclick="dismissBanner()">
+<span class="material-symbols-outlined" style="font-size: 20px;">close</span>
+</button>
+</div>
+</div>
+<!-- Input Field -->
+<div class="relative flex items-center bg-white rounded-2xl p-2 border border-surface-variant ambient-shadow focus-within:ring-2 focus-within:ring-primary/30 transition-all">
+<button class="p-3 text-outline hover:text-primary transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-outline-variant px-2 py-3" placeholder="Take your time..." type="text"/>
+<button class="p-3 bg-primary text-on-primary rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center ml-2">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<p class="text-center text-xs text-outline mt-3 font-body-md">This is a safe space. Your privacy is respected.</p>
+</div>
+</main>
+<script>
+        function dismissBanner() {
+            const banner = document.getElementById('guest-banner');
+            banner.classList.remove('translate-y-0', 'opacity-100');
+            banner.classList.add('translate-y-4', 'opacity-0');
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 300);
+        }
+    </script>
+</body></html>

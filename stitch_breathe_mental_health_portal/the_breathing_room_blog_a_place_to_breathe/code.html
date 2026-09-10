@@ -1,0 +1,410 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Blog &amp; Articles Hub - A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Organic ambient background blob */
+        .ambient-blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(236,220,253,0.4) 0%, rgba(251,249,245,0) 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "secondary-container": "#ecdcfd",
+                    "surface-container-highest": "#e4e2de",
+                    "primary-container": "#8ba88e",
+                    "on-secondary-fixed": "#21172e",
+                    "on-secondary-container": "#6b5f7b",
+                    "inverse-primary": "#b0ceb2",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#4a654e",
+                    "surface-container-high": "#eae8e4",
+                    "on-primary-fixed-variant": "#334d38",
+                    "outline": "#737972",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1b1c1a",
+                    "secondary-fixed": "#ecdcfd",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "primary-fixed": "#cceace",
+                    "on-background": "#1b1c1a",
+                    "primary": "#4a654e",
+                    "surface": "#fbf9f5",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "surface-container-low": "#f5f3ef",
+                    "surface-variant": "#e4e2de",
+                    "on-surface-variant": "#424842",
+                    "tertiary": "#8e4e14",
+                    "background": "#fbf9f5",
+                    "surface-dim": "#dbdad6",
+                    "on-primary-container": "#233d29",
+                    "inverse-on-surface": "#f2f0ed",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary-fixed": "#ffdcc4",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#07200f",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "surface-container": "#efeeea",
+                    "secondary": "#655974",
+                    "on-tertiary-fixed": "#2f1400",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c2c8c0",
+                    "surface-bright": "#fbf9f5",
+                    "inverse-surface": "#30312e",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#dd8f50"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-max": "1120px",
+                    "section-padding-mobile": "40px",
+                    "section-padding-desktop": "80px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": [
+                            "Nunito Sans"
+                    ],
+                    "headline-xl": [
+                            "Nunito Sans"
+                    ],
+                    "crisis-link": [
+                            "Nunito Sans"
+                    ],
+                    "body-lg": [
+                            "Work Sans"
+                    ],
+                    "headline-lg": [
+                            "Nunito Sans"
+                    ],
+                    "label-md": [
+                            "Work Sans"
+                    ],
+                    "headline-xl-mobile": [
+                            "Nunito Sans"
+                    ],
+                    "body-md": [
+                            "Work Sans"
+                    ]
+            },
+            "fontSize": {
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-xl": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "crisis-link": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-xl-mobile": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased relative min-h-screen flex flex-col">
+<!-- Ambient Background Layer -->
+<div class="ambient-blob top-0 left-[-100px]"></div>
+<div class="ambient-blob top-[800px] right-[-200px]" style="background: radial-gradient(circle, rgba(204,234,206,0.3) 0%, rgba(251,249,245,0) 70%);"></div>
+<!-- Fake Progress Bar for "Reading View" Hint -->
+<div class="fixed top-0 left-0 h-1 bg-surface-variant w-full z-[60]">
+<div class="h-full bg-primary-container w-[15%] transition-all duration-500 ease-out"></div>
+</div>
+<!-- TopNavBar Component -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-[0_20px_20px_0_rgba(139,168,142,0.05)] transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<a class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim" href="#">A Place to Breathe</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 font-headline-md text-headline-md font-semibold transition-all duration-300 ease-in-out hover:opacity-80" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-headline-md text-headline-md font-semibold hover:opacity-80 transition-opacity" href="#">Community</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-headline-md text-headline-md font-semibold hover:opacity-80 transition-opacity" href="#">Workshops</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-headline-md text-headline-md font-semibold hover:opacity-80 transition-opacity" href="#">My Progress</a>
+</div>
+<a class="bg-tertiary-container text-on-tertiary-container hover:opacity-80 transition-opacity rounded-full px-6 py-2.5 font-crisis-link text-crisis-link flex items-center gap-2 shadow-sm relative overflow-hidden group" href="#">
+<span class="absolute inset-0 bg-tertiary opacity-0 group-hover:opacity-10 transition-opacity"></span>
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                Crisis Support
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[120px] pb-section-padding-desktop px-gutter max-w-container-max mx-auto w-full">
+<!-- Featured Article (Acts as a reading view intro) -->
+<article class="mb-section-padding-desktop">
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<!-- Large Calming Illustration -->
+<div class="w-full lg:w-3/5 relative group rounded-[2rem] overflow-hidden shadow-[0_20px_40px_-15px_rgba(139,168,142,0.15)]">
+<img class="w-full aspect-[4/3] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" data-alt="A deeply calming digital illustration of a figure sitting peacefully by a softly glowing pond surrounded by stylized, fluid weeping willow trees. The color palette features a soothing blend of muted sage green, soft lavender, and warm cream tones characteristic of the 'A Place to Breathe' brand identity. The lighting is gentle and ambient, creating an atmosphere of deep tranquility, safety, and mindfulness. The style is organic minimalism, with soft edges and no harsh lines, perfectly suited for a wellness blog header." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXd6WE5Ccf_-dLG6WNaXGD_SeGa_fEXswZTyzAja-oeHejhUarZr0fPNCBngvLRPg2dokxl02ds8C16OqkKEYukKo6LYEZwJoR-ReUTNuvdMUOlJ6lcZP5uTfuyWf6XpHgPzO0mXmumBk8UrXZyPEKb8VwOrPtfjMeb9KOo_-IVCBIUkNwYXguH-1aNM_Mul-t2zeX8_eOh3oywYo86sVetpZW2IVc0Lx5RSf3_TRy_lTle7RD-pI1Sg">
+<div class="absolute top-6 left-6">
+<span class="bg-surface/90 backdrop-blur-sm text-primary font-label-md text-label-md px-4 py-2 rounded-full shadow-sm">Featured Read</span>
+</div>
+</div>
+<!-- Featured Content -->
+<div class="w-full lg:w-2/5 flex flex-col justify-center space-y-6">
+<div class="flex items-center gap-3 text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span>12 min read</span>
+<span class="text-surface-dim">•</span>
+<span>Wellness Science</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-on-surface leading-tight">
+                        Finding stillness in a world that never stops moving
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Our nervous systems were not built for constant digital connection. Learn practical, scientifically-backed methods to cultivate a quiet mind and reclaim your internal space without completely disconnecting from the world.
+                    </p>
+<div class="pt-4 flex items-center justify-between border-t border-surface-container-high mt-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-headline-md">
+                                SJ
+                            </div>
+<div>
+<p class="font-headline-md text-[16px] text-on-surface m-0">Dr. Sarah Jenkins</p>
+<p class="font-body-md text-[14px] text-on-surface-variant m-0">Clinical Psychologist</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Category Tabs -->
+<section class="mb-16 flex flex-col items-center">
+<h2 class="sr-only">Article Categories</h2>
+<div class="flex overflow-x-auto w-full no-scrollbar justify-start md:justify-center gap-4 pb-4">
+<button class="whitespace-nowrap px-6 py-3 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md transition-all shadow-sm">
+                    All Articles
+                </button>
+<button class="whitespace-nowrap px-6 py-3 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all">
+                    Expert Advice
+                </button>
+<button class="whitespace-nowrap px-6 py-3 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all">
+                    Student Contributors
+                </button>
+<button class="whitespace-nowrap px-6 py-3 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all">
+                    Wellness Science
+                </button>
+<button class="whitespace-nowrap px-6 py-3 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all">
+                    Personal Essays
+                </button>
+</div>
+</section>
+<!-- Article Grid (Bento/Card Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Standard Card 1 -->
+<article class="bg-surface-container-lowest border border-surface-dim rounded-2xl p-6 flex flex-col gap-4 shadow-[0_4px_20px_0_rgba(139,168,142,0.05)] hover:shadow-[0_8px_30px_0_rgba(139,168,142,0.1)] transition-all duration-300 group cursor-pointer h-full">
+<div class="w-full aspect-[16/10] rounded-xl overflow-hidden mb-2">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An organic, abstract composition featuring soft, overlapping fluid shapes in pale sage green and soft lavender on a cream background. The shapes resemble smooth river stones or gentle waves, evoking a sense of calm and mental clarity. The lighting is soft and diffused, creating a serene and minimalist aesthetic aligned with a modern mental wellness brand. The design is uncluttered, allowing for a feeling of 'digital breath' and expansive whitespace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvHMBXVb7_7uA4zyMAV3Hk6I3MBXZhFelyeDGEgI08xOvQblS5nqLQUVi3X9sodWDzO5e4oCC5XRViPgqbsAwiSFwrPD_sbAY9VLkUPwZIJCtNQQ7h9cigysNK1MIlVfXYabo132IchAIY1hDxaHsDWxhizxslTZNXiJYYsbRVgeag55mSrSfS-4PbnfkZZLtYLZ3fvTEndgxeiQk7GdzZNTvl1K91RpvQ0TiC5RbSI7-GHXZ74KouLw">
+</div>
+<div class="flex items-center gap-2 text-secondary font-label-md text-[12px]">
+<span class="material-symbols-outlined text-[16px]" data-icon="menu_book">menu_book</span>
+<span>8 min read</span>
+<span class="text-surface-dim">•</span>
+<span>Personal Essays</span>
+</div>
+<h3 class="font-headline-lg text-[22px] leading-snug text-on-surface group-hover:text-primary transition-colors">
+                    The gentle art of saying no without guilt
+                </h3>
+<p class="font-body-md text-on-surface-variant flex-grow line-clamp-3">
+                    Setting boundaries is often framed as a battle. But what if we approached it as an act of profound self-care and mutual respect? Exploring softer ways to protect your energy.
+                </p>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-surface-container">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-label-md text-[12px]">
+                            EM
+                        </div>
+<span class="font-label-md text-on-surface">Elena Markos</span>
+</div>
+<div class="flex gap-2">
+<button aria-label="Save article" class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Standard Card 2 -->
+<article class="bg-surface-container-lowest border border-surface-dim rounded-2xl p-6 flex flex-col gap-4 shadow-[0_4px_20px_0_rgba(139,168,142,0.05)] hover:shadow-[0_8px_30px_0_rgba(139,168,142,0.1)] transition-all duration-300 group cursor-pointer h-full">
+<div class="w-full aspect-[16/10] rounded-xl overflow-hidden mb-2">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A soft, minimalist photograph of a cup of warm tea resting on a light wooden table next to an open journal. The scene is bathed in warm, gentle morning light filtering through a window out of frame. The color palette focuses on creamy whites, soft beige, and a touch of organic green from a small potted plant in the background. The mood is intimate, reflective, and deeply calming, fitting for a wellness article about morning routines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC66CInwOm_nJeJMs_Y7_yvXJRRR31ytacUX9sRrIjs45zUKi9AF7GlqcLHDeiLkSKsZPCD7yZbMRq1DVwWb0ECUdCsJMyir-F2k5zdHNLlx3hkWAgSZfTbhsO_0Aq0fUehgD2ifp4bmvHbLefPcHbw-4N8TLJeRKam7wPVkpIh02p6erAVP12RRUWPxZoQfTLY_rZ6yL7neQSVyphKtwTu06f_6LR_cA34CAQSxpn9AAO0W6kmzEPW3w">
+</div>
+<div class="flex items-center gap-2 text-secondary font-label-md text-[12px]">
+<span class="material-symbols-outlined text-[16px]" data-icon="menu_book">menu_book</span>
+<span>10 min read</span>
+<span class="text-surface-dim">•</span>
+<span>Expert Advice</span>
+</div>
+<h3 class="font-headline-lg text-[22px] leading-snug text-on-surface group-hover:text-primary transition-colors">
+                    Re-framing anxiety: When your body is trying to help
+                </h3>
+<p class="font-body-md text-on-surface-variant flex-grow line-clamp-3">
+                    Instead of viewing anxiety as an enemy to be defeated, somatic therapists suggest listening to it as a protective signal. How to interpret the physical language of your nervous system.
+                </p>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-surface-container">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-label-md text-[12px]">
+                            JD
+                        </div>
+<span class="font-label-md text-on-surface">James Davies</span>
+</div>
+<div class="flex gap-2">
+<button aria-label="Save article" class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Text-Heavy Card 3 (No image, emphasizing typography) -->
+<article class="bg-surface-container border border-surface-dim rounded-2xl p-8 flex flex-col gap-4 shadow-[0_4px_20px_0_rgba(139,168,142,0.05)] hover:shadow-[0_8px_30px_0_rgba(139,168,142,0.1)] transition-all duration-300 group cursor-pointer h-full relative overflow-hidden">
+<!-- Decorative subtle element -->
+<div class="absolute -bottom-10 -right-10 text-surface-dim/40 material-symbols-outlined text-[150px] rotate-[-15deg] pointer-events-none" data-icon="spa" style="font-variation-settings: 'FILL' 1;">spa</div>
+<div class="flex items-center gap-2 text-secondary font-label-md text-[12px] relative z-10">
+<span class="material-symbols-outlined text-[16px]" data-icon="menu_book">menu_book</span>
+<span>5 min read</span>
+<span class="text-surface-dim">•</span>
+<span>Student Contributors</span>
+</div>
+<h3 class="font-headline-lg text-[28px] leading-tight text-on-surface group-hover:text-primary transition-colors mt-2 relative z-10">
+                    My unexpected journey with mindful breathing
+                </h3>
+<p class="font-body-lg text-on-surface-variant flex-grow leading-relaxed mt-4 relative z-10">
+                    "I used to think meditation was for people who already had their lives figured out. Then I hit a wall during finals week, and a simple four-count breath became my anchor." A personal account of finding calm in chaos.
+                </p>
+<div class="flex items-center justify-between mt-6 pt-4 border-t border-outline-variant/30 relative z-10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-label-md text-[12px]">
+                            AK
+                        </div>
+<span class="font-label-md text-on-surface">Alex Kim</span>
+</div>
+<div class="flex gap-2">
+<button aria-label="Save article" class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Load More / Pagination -->
+<div class="mt-16 flex justify-center">
+<button class="px-8 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors font-label-md text-label-md flex items-center gap-2">
+                Load more articles
+                <span class="material-symbols-outlined text-[18px]" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="w-full mt-20 bg-surface-container dark:bg-surface-container-high transition-colors duration-200">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<!-- Brand / Copyright -->
+<div class="flex flex-col gap-4">
+<span class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">A Place to Breathe</span>
+<p class="font-body-md text-body-md text-tertiary dark:text-tertiary-fixed-dim">
+                    © 2024 A Place to Breathe. Your safe space for healing.
+                </p>
+</div>
+<!-- Links Column 1 -->
+<div class="flex flex-col gap-3">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all" href="#">Mission</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all" href="#">Terms of Service</a>
+</div>
+<!-- Links Column 2 -->
+<div class="flex flex-col gap-3">
+<a class="font-body-md text-body-md text-primary dark:text-primary-fixed-dim font-bold hover:underline transition-all" href="#">Crisis Support</a>
+</div>
+</div>
+</footer>
+</body></html>

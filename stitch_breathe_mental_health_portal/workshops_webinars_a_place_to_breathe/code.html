@@ -1,0 +1,388 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Workshops &amp; Webinars | A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1c1a",
+                        "outline": "#737972",
+                        "surface-bright": "#fbf9f5",
+                        "outline-variant": "#c2c8c0",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#424842",
+                        "on-surface": "#1b1c1a",
+                        "on-tertiary-fixed": "#2f1400",
+                        "primary-fixed": "#cceace",
+                        "surface-container-highest": "#e4e2de",
+                        "on-secondary-container": "#6b5f7b",
+                        "tertiary-fixed": "#ffdcc4",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f5f3ef",
+                        "on-primary-container": "#233d29",
+                        "tertiary-container": "#dd8f50",
+                        "secondary": "#655974",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#b0ceb2",
+                        "on-primary-fixed": "#07200f",
+                        "on-secondary-fixed": "#21172e",
+                        "secondary-fixed-dim": "#d0c1e0",
+                        "primary-container": "#8ba88e",
+                        "surface-container": "#efeeea",
+                        "on-tertiary-container": "#592c00",
+                        "tertiary": "#8e4e14",
+                        "surface-container-high": "#eae8e4",
+                        "background": "#fbf9f5",
+                        "primary": "#4a654e",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ecdcfd",
+                        "on-tertiary-fixed-variant": "#6f3800",
+                        "surface": "#fbf9f5",
+                        "primary-fixed-dim": "#b0ceb2",
+                        "tertiary-fixed-dim": "#ffb780",
+                        "secondary-fixed": "#ecdcfd",
+                        "on-primary-fixed-variant": "#334d38",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#4d425c",
+                        "surface-tint": "#4a654e",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "surface-dim": "#dbdad6",
+                        "surface-variant": "#e4e2de",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#30312e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "section-padding-mobile": "40px",
+                        "container-max": "1120px",
+                        "section-padding-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Nunito Sans"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "body-lg": ["Work Sans"],
+                        "crisis-link": ["Nunito Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+            scroll-behavior: smooth;
+        }
+        .organic-blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .crisis-pulse {
+            animation: pulse-soft 2s infinite;
+        }
+        @keyframes pulse-soft {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-sm">
+<nav class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">A Place to Breathe</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Workshops</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">My Progress</a>
+</div>
+<div class="flex items-center gap-6">
+<a class="font-crisis-link text-crisis-link text-[#F4A261] crisis-pulse border-b-2 border-[#F4A261]" href="#">Crisis Support</a>
+<button class="md:hidden p-2 text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="relative pt-32 pb-20">
+<!-- Organic Background Elements -->
+<div class="organic-blob bg-primary-container w-[500px] h-[500px] rounded-full -top-20 -left-20"></div>
+<div class="organic-blob bg-tertiary-container w-[400px] h-[400px] rounded-full top-1/2 -right-20"></div>
+<section class="max-w-container-max mx-auto px-gutter mb-16 text-center">
+<h1 class="font-headline-xl text-headline-xl mb-4 text-primary">Nurturing Growth Together</h1>
+<p class="text-body-lg max-w-2xl mx-auto text-on-surface-variant">Find your space in our workshops and webinars. Whether you're a student, peer, or seeking expert advice, there's a breath of fresh air waiting for you.</p>
+</section>
+<!-- Search & Filter Bar -->
+<section class="max-w-container-max mx-auto px-gutter mb-12">
+<div class="glass-card p-6 rounded-xl shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="Search workshops, speakers, or topics..." type="text">
+</div>
+<div class="flex flex-wrap gap-3 justify-center">
+<button class="px-6 py-2 bg-primary text-white rounded-full font-label-md hover:opacity-90 transition-opacity">All Sessions</button>
+<button class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md hover:bg-secondary/10 transition-colors">Student Workshops</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md hover:bg-primary-container/20 transition-colors">Peer Support</button>
+<button class="px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md hover:bg-primary-container/20 transition-colors">Expert Webinars</button>
+</div>
+</div>
+</section>
+<!-- Workshop Grid -->
+<section class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1: Expert Webinar -->
+<div class="flex flex-col bg-surface border border-outline-variant/30 rounded-2xl overflow-hidden hover:shadow-[0_20px_20px_0_rgba(139,168,142,0.05)] transition-all duration-300 group">
+<div class="h-48 overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A serene workspace with a soft sage green wall, a small potted succulent, and a laptop open showing a video conference. The lighting is warm and natural, creating a professional yet comforting atmosphere for an expert mental health webinar." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCiZNKPgRAXsqPnvhCc_WuQ9sTvj5J2YqO6cDTYMUf257YvzQlFzS6Z6yWs3M0STtOMho8e-AvClLOvd5g6LWJ-rKvd9j0eZLR0g3OnLvyITrluNQ4mCHoHeS4bl0E_WCm5wkBfwdyGIF-iF6hob9H8XtWnDR3srrqwnPMN9VmGJa1x535dsFLPA_FzPpVIFqYfUKF-kJlXKtAPvIm7mMcsWNmiK4HuanfMK9wBjbsmFB6NO6GOCwPiwQ')"></div>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Expert Webinar</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-semibold text-outline tracking-widest uppercase">Oct 24, 2024</span>
+<span class="px-2 py-0.5 bg-primary-fixed text-on-primary-fixed text-[10px] rounded font-bold uppercase">Paid</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">The Science of Mindful Breathing</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">Join Dr. Aris Thorne as we explore the neurological benefits of structured breathing exercises for anxiety management.</p>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container"></div>
+<span class="text-xs font-medium">Dr. Aris Thorne</span>
+</div>
+<button class="text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                            Register <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Student Workshop -->
+<div class="flex flex-col bg-surface border border-outline-variant/30 rounded-2xl overflow-hidden hover:shadow-[0_20px_20px_0_rgba(139,168,142,0.05)] transition-all duration-300 group">
+<div class="h-48 overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A diverse group of university students sitting in a circle on a bright, sunny lawn. They are smiling and engaged in a supportive discussion, with notebooks and colorful pens spread out. The scene is bright, airy, and evokes a feeling of community and inclusive peer learning." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBB31nxRLqBKrEs6CiukQnLEiv-U5b1OUUOdc5Qa0emc4QO1wLMvT1bDVPvR33YbLKLweUa9vZIGWA7PIvLcTzeJbTYHFqBBun4-0uzkYtyPmP7Omw3myAsW7-z8_-1xYTUxQJcnnwpcxWwtrfU5CymShiYtw29XZYIiaGLnuTkeycawIns1zoy5Dk3SfoMy1GQW1eskEhrFimgx04KOzMvVSizatcTTdEVl1fIduEfnF0b76XJrdKznA')"></div>
+<div class="absolute top-4 left-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Student Workshop</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-semibold text-outline tracking-widest uppercase">Nov 02, 2024</span>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] rounded font-bold uppercase">Free</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">Finals Without the Freak-out</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">A practical session on time management and stress reduction techniques specifically for university students.</p>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-fixed"></div>
+<span class="text-xs font-medium">Sarah Jenkins</span>
+</div>
+<button class="text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                            Save Seat <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Peer Session -->
+<div class="flex flex-col bg-surface border border-outline-variant/30 rounded-2xl overflow-hidden hover:shadow-[0_20px_20px_0_rgba(139,168,142,0.05)] transition-all duration-300 group">
+<div class="h-48 overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Close up of two pairs of hands holding warm ceramic mugs, steam rising softly in a cozy, dimly lit library setting. The atmosphere is quiet and intimate, suggesting a safe, private conversation between peers in a healing space." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDVodtzklQFj8GdNoeMioMZsV1Z1sLdosRivpNs2vtxQKKr7wBTmHGIWMBNzMLqXi_M1gHeGfK3JZ5lUTmt77yd9yQpi2nm1O3VCo9sVSVAb9cEoYxrBuSYb6YqHs-U2L6dQQ_ykPCu2FjRJRA_p6mfx0VCitGm_bk80nauJ_V6CEuHF9wsJOQ71nv88jFbTmrqRuKF4zLfgs4jCNMiCpmZZ-pl5iHTJLl-ihtWJx14oIGdhhaPHrIYkw')"></div>
+<div class="absolute top-4 left-4 bg-primary-container text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Peer Support</div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-semibold text-outline tracking-widest uppercase">Recurring Mon</span>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] rounded font-bold uppercase">Free</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">Monday Morning Reset</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">Start your week with intentionality. A community-led session focused on goal-setting and emotional grounding.</p>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-outline-variant"></div>
+<span class="text-xs font-medium">Open Circle</span>
+</div>
+<button class="text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                            Join Live <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Peer Sessions Featured Section -->
+<section class="mt-32 bg-surface-container-low py-20 relative overflow-hidden">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-6 text-on-surface">Community-Led Peer Sessions</h2>
+<p class="text-body-lg text-on-surface-variant mb-8 leading-relaxed">Sometimes the best healing comes from those who have walked the same path. Our Peer Sessions are informal, safe spaces moderated by trained community volunteers.</p>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">eco</span>
+<span>No hierarchy, just humans helping humans.</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">eco</span>
+<span>Focus on lived experience and shared empathy.</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">eco</span>
+<span>Always free and open to everyone in the community.</span>
+</li>
+</ul>
+<button class="px-8 py-4 bg-primary text-white rounded-full font-bold shadow-md hover:translate-y-[-2px] transition-all">Explore Peer Groups</button>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary-container/20 rounded-[2rem] blur-2xl group-hover:blur-3xl transition-all duration-700"></div>
+<div class="relative h-96 rounded-3xl overflow-hidden border-4 border-white shadow-xl">
+<img class="w-full h-full object-cover" data-alt="An overhead shot of an inclusive group of diverse people sitting together on a large, plush outdoor rug in a peaceful garden at sunset. They are sharing a basket of fruit and talking warmly. Soft golden hour light bathes the scene in a nurturing, sage and gold glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqVcHXPFTMhcz6t6cSCeHfo_uTJGzUq9T0WSAdns4aP9dmiKJP95GD5VS0qubPJ1aXMyClJoK4KrXwVpNeHD9x7_1axmWdlMkn3ximwwbTah4aetVTIhIEoMnZLaiqTnY7J3xRdXiHRFZHpVoXE0k5q1MpqA06j03RkxlxGcJ2lILRbkk-A8bPWsnmVDy-nZFgAqer7j6i2vLf9XZa8d08AiDZhW5JodUgUd5rGliZ-pN9mGVt5j4byg">
+</div>
+</div>
+</div>
+</section>
+<!-- Upcoming Highlights (Asymmetric Layout) -->
+<section class="max-w-container-max mx-auto px-gutter py-32">
+<div class="flex justify-between items-end mb-12">
+<div class="max-w-xl">
+<span class="text-tertiary font-bold tracking-widest uppercase text-sm">Don't Miss Out</span>
+<h2 class="font-headline-lg text-headline-lg mt-2">Next Week's Highlights</h2>
+</div>
+<a class="hidden md:flex items-center gap-2 text-primary font-semibold hover:underline" href="#">
+                    View Full Calendar <span class="material-symbols-outlined">calendar_month</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="md:col-span-8 glass-card p-10 rounded-3xl flex flex-col md:flex-row gap-8 items-center border border-primary/10">
+<div class="w-full md:w-1/3 aspect-square rounded-2xl overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover" data-alt="A macro photograph of an abstract watercolor painting in shades of deep forest green, soft sage, and vibrant golden yellow. The colors bleed into each other, creating a sense of fluid movement and organic transition, symbolizing artistic healing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDImYeZDL3PHEuKD1HlFrFgAJuDF0mskZrLAKTLlEjeaLsEqC5cELS86spvJ_OlicvyyuuPFrJV7DwjbxjoQtnsjL_43VSmYMPD7JWw7rpPzTMxPrIbClDgflJhZWIa38GXzlXI28N7mxCOy4fUeQ7gOz0XeytIlovpud8tabJNADEPqc6YkD66CJeL7Dr8ZyCZoBif5s-tiRqiSGSpRWnN9vxDBEv5puabiD2B69dCqo_I4MbGAsJTeA">
+</div>
+<div class="flex-1">
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-xs font-bold mb-4 inline-block">MOST POPULAR</span>
+<h3 class="font-headline-md text-headline-md mb-3">Artistic Expression for Trauma Healing</h3>
+<p class="text-on-surface-variant mb-6">A transformative workshop led by therapist and artist Elena Rossi, using color and form to speak where words fail.</p>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">schedule</span>
+<span class="text-sm">90 mins</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">group</span>
+<span class="text-sm">Limited Seats</span>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 bg-primary p-10 rounded-3xl text-white flex flex-col justify-between shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md mb-4 leading-tight">Daily Micro-Meditations</h3>
+<p class="opacity-80 text-sm mb-8">Quick 10-minute sessions at noon to help you refocus and regain your center.</p>
+</div>
+<div class="relative z-10">
+<button class="w-full py-4 bg-white text-primary rounded-full font-bold hover:bg-opacity-90 transition-all">Set Reminder</button>
+</div>
+<!-- Decorative background icon -->
+<span class="material-symbols-outlined absolute -bottom-10 -right-10 text-[200px] opacity-10 rotate-12">self_improvement</span>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-container-max mx-auto px-gutter mb-20">
+<div class="bg-surface-container-highest rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-[80px]"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-tertiary rounded-full blur-[80px]"></div>
+</div>
+<h2 class="font-headline-xl text-headline-xl mb-6 relative z-10">Host a Session</h2>
+<p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10 relative z-10">Are you an expert or a passionate community member? We're always looking for new voices to contribute to our collective breath.</p>
+<div class="flex flex-col md:flex-row gap-4 justify-center relative z-10">
+<button class="px-10 py-4 bg-primary text-white rounded-full font-bold shadow-lg hover:bg-primary/90 transition-all">Apply as Speaker</button>
+<button class="px-10 py-4 bg-white border border-primary text-primary rounded-full font-bold hover:bg-primary-container/10 transition-all">Suggest a Topic</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-surface-container dark:bg-surface-container-high">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<div class="flex flex-col gap-4">
+<div class="font-headline-lg text-headline-lg font-bold text-primary">A Place to Breathe</div>
+<p class="text-on-surface-variant max-w-xs">Creating a digital refuge for healing and growth through shared connection and quiet strength.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-on-surface">Explore</h4>
+<div class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Mission</a>
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Workshops</a>
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Terms of Service</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-on-surface">Immediate Help</h4>
+<p class="text-on-surface-variant mb-2">If you are in immediate danger, please contact local emergency services or a crisis hotline.</p>
+<a class="text-primary font-bold text-primary dark:text-primary-fixed-dim font-bold hover:underline transition-all" href="#">Crisis Support Directory</a>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter py-6 border-t border-outline-variant/30 text-center md:text-left text-sm text-on-surface-variant">
+            © 2024 A Place to Breathe. Your safe space for healing.
+        </div>
+</footer>
+<script>
+        // Subtle hover effects and potential search filtering logic
+        document.querySelectorAll('.glass-card button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.glass-card button').forEach(btn => {
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                button.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                button.classList.add('bg-primary', 'text-white');
+            });
+        });
+
+        // Search input micro-interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>

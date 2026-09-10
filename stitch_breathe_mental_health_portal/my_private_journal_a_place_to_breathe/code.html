@@ -1,0 +1,391 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Private Journaling - A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#6f3800",
+                      "secondary-container": "#ecdcfd",
+                      "surface-container-highest": "#e4e2de",
+                      "primary-container": "#8ba88e",
+                      "on-secondary-fixed": "#21172e",
+                      "on-secondary-container": "#6b5f7b",
+                      "inverse-primary": "#b0ceb2",
+                      "on-tertiary": "#ffffff",
+                      "surface-tint": "#4a654e",
+                      "surface-container-high": "#eae8e4",
+                      "on-primary-fixed-variant": "#334d38",
+                      "outline": "#737972",
+                      "on-error": "#ffffff",
+                      "on-surface": "#1b1c1a",
+                      "secondary-fixed": "#ecdcfd",
+                      "primary-fixed-dim": "#b0ceb2",
+                      "primary-fixed": "#cceace",
+                      "on-background": "#1b1c1a",
+                      "primary": "#4a654e",
+                      "surface": "#fbf9f5",
+                      "on-secondary-fixed-variant": "#4d425c",
+                      "tertiary-fixed-dim": "#ffb780",
+                      "surface-container-low": "#f5f3ef",
+                      "surface-variant": "#e4e2de",
+                      "on-surface-variant": "#424842",
+                      "tertiary": "#8e4e14",
+                      "background": "#fbf9f5",
+                      "surface-dim": "#dbdad6",
+                      "on-primary-container": "#233d29",
+                      "inverse-on-surface": "#f2f0ed",
+                      "on-tertiary-container": "#592c00",
+                      "tertiary-fixed": "#ffdcc4",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#07200f",
+                      "secondary-fixed-dim": "#d0c1e0",
+                      "surface-container": "#efeeea",
+                      "secondary": "#655974",
+                      "on-tertiary-fixed": "#2f1400",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c2c8c0",
+                      "surface-bright": "#fbf9f5",
+                      "inverse-surface": "#30312e",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#dd8f50"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "container-max": "1120px",
+                      "section-padding-mobile": "40px",
+                      "section-padding-desktop": "80px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Nunito Sans"
+                      ],
+                      "headline-xl": [
+                              "Nunito Sans"
+                      ],
+                      "crisis-link": [
+                              "Nunito Sans"
+                      ],
+                      "body-lg": [
+                              "Work Sans"
+                      ],
+                      "headline-lg": [
+                              "Nunito Sans"
+                      ],
+                      "label-md": [
+                              "Work Sans"
+                      ],
+                      "headline-xl-mobile": [
+                              "Nunito Sans"
+                      ],
+                      "body-md": [
+                              "Work Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "crisis-link": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blob-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 30px) scale(1.1); }
+        }
+        
+        /* Custom scrollbar for minimal look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(115, 121, 114, 0.2); 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(115, 121, 114, 0.4); 
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- Organic Background Blobs -->
+<div class="blob-bg">
+<div class="blob bg-primary-fixed-dim w-[600px] h-[600px] -top-[200px] -left-[100px]"></div>
+<div class="blob bg-secondary-fixed-dim w-[500px] h-[500px] top-[30%] -right-[150px] animation-delay-2000"></div>
+<div class="blob bg-surface-variant w-[800px] h-[800px] -bottom-[300px] left-[20%] opacity-30"></div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-[0_20px_20px_0_rgba(139,168,142,0.05)] shadow-sm transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<!-- Brand -->
+<a class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim flex items-center gap-2 hover:opacity-80 transition-opacity" href="#">
+                A Place to Breathe
+            </a>
+<!-- Desktop Navigation Links -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-label-md text-label-md hover:opacity-80 transition-opacity transition-all duration-300 ease-in-out" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-label-md text-label-md hover:opacity-80 transition-opacity transition-all duration-300 ease-in-out" href="#">Community</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-label-md text-label-md hover:opacity-80 transition-opacity transition-all duration-300 ease-in-out" href="#">Workshops</a>
+<a aria-current="page" class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 font-label-md text-label-md hover:opacity-80 transition-opacity transition-all duration-300 ease-in-out" href="#">My Progress</a>
+</div>
+<!-- Trailing Action (Crisis Support) -->
+<a class="flex items-center gap-2 bg-tertiary-container/20 text-on-tertiary-container hover:bg-tertiary-container/30 px-4 py-2 rounded-full font-crisis-link text-crisis-link transition-colors duration-300 relative group overflow-hidden" href="#">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                Crisis Support
+                <div class="absolute inset-0 bg-tertiary-container/10 animate-pulse rounded-full z-[-1]"></div>
+</a>
+</div>
+</nav>
+<!-- Main Content Layout -->
+<main class="flex-grow pt-[104px] pb-section-padding-mobile md:pb-section-padding-desktop px-gutter max-w-container-max mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+<!-- Sidebar: Past Entries (Left Col) -->
+<aside class="hidden lg:flex flex-col lg:col-span-3 h-[calc(100vh-160px)] sticky top-[104px]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">history</span>
+                Past Entries
+            </h2>
+<div class="flex-grow overflow-y-auto pr-2 space-y-4">
+<!-- Entry Card 1 -->
+<button class="w-full text-left bg-surface-container-low hover:bg-surface-container-high transition-colors p-4 rounded-xl shadow-[4px_4px_20px_rgba(139,168,142,0.03)] border border-outline-variant/20 group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">Oct 24, 2023</span>
+<span class="bg-secondary-container/50 text-on-secondary-container text-[12px] px-2 py-0.5 rounded-full flex items-center gap-1">
+                            🌱 Calm
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface line-clamp-2 opacity-80">
+                        Started the day with a short walk. Feeling a bit more grounded than yesterday...
+                    </p>
+</button>
+<!-- Entry Card 2 -->
+<button class="w-full text-left bg-surface-container-low hover:bg-surface-container-high transition-colors p-4 rounded-xl shadow-[4px_4px_20px_rgba(139,168,142,0.03)] border border-outline-variant/20 group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">Oct 22, 2023</span>
+<span class="bg-surface-dim/50 text-on-surface text-[12px] px-2 py-0.5 rounded-full flex items-center gap-1">
+                            🌧️ Heavy
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface line-clamp-2 opacity-80">
+                        Things felt overwhelming at work. Tried to use the breathing exercises but struggled to focus.
+                    </p>
+</button>
+<!-- Entry Card 3 -->
+<button class="w-full text-left bg-surface-container-low hover:bg-surface-container-high transition-colors p-4 rounded-xl shadow-[4px_4px_20px_rgba(139,168,142,0.03)] border border-outline-variant/20 group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">Oct 19, 2023</span>
+<span class="bg-primary-container/30 text-on-primary-container text-[12px] px-2 py-0.5 rounded-full flex items-center gap-1">
+                            ✨ Clear
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface line-clamp-2 opacity-80">
+                        Had a really good session today. Realized that I've been holding onto...
+                    </p>
+</button>
+</div>
+<button class="mt-4 w-full py-3 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-variant/30 hover:text-on-surface transition-colors font-label-md text-label-md flex justify-center items-center gap-2">
+                View all history
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</aside>
+<!-- Main Writing Canvas (Right Col) -->
+<section class="lg:col-span-9 flex flex-col h-[70vh] lg:h-[calc(100vh-160px)] bg-surface-container-lowest rounded-3xl shadow-[0_8px_32px_rgba(139,168,142,0.08)] border border-outline-variant/20 p-6 md:p-10 transition-all duration-500 ease-out hover:shadow-[0_12px_40px_rgba(139,168,142,0.12)]">
+<!-- Canvas Header: Date, Privacy, Save Status -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-4 border-b border-outline-variant/10">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] opacity-70">calendar_today</span>
+<span class="font-headline-md text-headline-md text-on-surface" id="current-date">Today, October 26</span>
+</div>
+<div class="flex items-center gap-6">
+<!-- Save Indicator -->
+<div class="flex items-center gap-1.5 text-outline font-label-md text-label-md opacity-0 transition-opacity duration-500" id="save-indicator">
+<span class="material-symbols-outlined text-[16px]">cloud_done</span>
+                        Saved
+                    </div>
+<!-- Share Toggle -->
+<div class="relative flex items-center group">
+<label class="inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="therapist-toggle" type="checkbox" value="">
+<div class="relative w-11 h-6 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ms-3 font-label-md text-label-md text-on-surface-variant select-none flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">lock_open</span>
+                                Share with therapist
+                            </span>
+</label>
+<!-- Tooltip -->
+<div class="absolute bottom-full right-0 mb-3 w-64 bg-inverse-surface text-inverse-on-surface font-body-md text-[14px] p-3 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 pointer-events-none translate-y-2 group-hover:translate-y-0">
+                            When enabled, this specific entry will be visible in your therapist's dashboard prior to your next session.
+                            <div class="absolute -bottom-2 right-12 w-4 h-4 bg-inverse-surface rotate-45"></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Writing Area -->
+<div class="flex-grow relative h-full">
+<textarea class="w-full h-full bg-transparent resize-none outline-none border-0 focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder:text-outline-variant/60 leading-relaxed p-0 m-0" id="journal-input" placeholder="What's on your mind today? Take your time, this is a safe space." spellcheck="false"></textarea>
+<!-- Gentle instructional text at bottom, fades out when typing -->
+<div class="absolute bottom-0 left-0 right-0 py-4 text-center pointer-events-none transition-opacity duration-700" id="instruction-text">
+<span class="bg-surface/50 backdrop-blur-sm px-4 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant flex inline-flex items-center gap-2 shadow-sm border border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px]">draw</span>
+                        Just start typing. Your thoughts are saved automatically.
+                    </span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-surface-container dark:bg-surface-container-high grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto flat no shadows">
+<div class="flex flex-col gap-4">
+<span class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">A Place to Breathe</span>
+<p class="font-body-md text-body-md text-tertiary dark:text-tertiary-fixed-dim">© 2024 A Place to Breathe. Your safe space for healing.</p>
+</div>
+<div class="col-span-1 md:col-span-2 flex flex-wrap gap-x-8 gap-y-4 md:justify-end items-center font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all transition-colors duration-200" href="#">Mission</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all transition-colors duration-200" href="#">Crisis Support</a>
+</div>
+</footer>
+<script>
+        // Simple script to handle 'auto-save' visual feedback and instruction fade
+        const textarea = document.getElementById('journal-input');
+        const saveIndicator = document.getElementById('save-indicator');
+        const instructionText = document.getElementById('instruction-text');
+        const toggleInput = document.getElementById('therapist-toggle');
+        const toggleIcon = toggleInput.nextElementSibling.nextElementSibling.querySelector('.material-symbols-outlined');
+        let timeout = null;
+
+        // Date setting
+        const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', dateOptions);
+
+        textarea.addEventListener('input', function() {
+            // Hide instructions on first type
+            if(instructionText.style.opacity !== '0') {
+                instructionText.style.opacity = '0';
+            }
+
+            // Hide save indicator while typing
+            saveIndicator.style.opacity = '0';
+
+            clearTimeout(timeout);
+            
+            // Show save indicator after typing stops
+            timeout = setTimeout(function() {
+                saveIndicator.style.opacity = '1';
+                setTimeout(() => {
+                    saveIndicator.style.opacity = '0';
+                }, 3000); // Fade out after 3s
+            }, 1000);
+        });
+
+        // Toggle icon visual change
+        toggleInput.addEventListener('change', function() {
+            if(this.checked) {
+                toggleIcon.textContent = 'lock';
+                toggleIcon.classList.add('text-primary');
+            } else {
+                toggleIcon.textContent = 'lock_open';
+                toggleIcon.classList.remove('text-primary');
+            }
+        });
+    </script>
+</body></html>

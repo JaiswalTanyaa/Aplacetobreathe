@@ -1,0 +1,389 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>About Us | A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "outline": "#737972",
+                    "surface-bright": "#fbf9f5",
+                    "outline-variant": "#c2c8c0",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424842",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2f1400",
+                    "primary-fixed": "#cceace",
+                    "surface-container-highest": "#e4e2de",
+                    "on-secondary-container": "#6b5f7b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f3ef",
+                    "on-primary-container": "#233d29",
+                    "tertiary-container": "#dd8f50",
+                    "secondary": "#655974",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0ceb2",
+                    "on-primary-fixed": "#07200f",
+                    "on-secondary-fixed": "#21172e",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "primary-container": "#8ba88e",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary": "#8e4e14",
+                    "surface-container-high": "#eae8e4",
+                    "background": "#fbf9f5",
+                    "primary": "#4a654e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#ecdcfd",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "surface": "#fbf9f5",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "secondary-fixed": "#ecdcfd",
+                    "on-primary-fixed-variant": "#334d38",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "surface-tint": "#4a654e",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "surface-dim": "#dbdad6",
+                    "surface-variant": "#e4e2de",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-padding-mobile": "40px",
+                    "container-max": "1120px",
+                    "section-padding-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Work Sans"],
+                    "crisis-link": ["Nunito Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .organic-blob {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            filter: blur(40px);
+            opacity: 0.15;
+            position: absolute;
+            z-index: -1;
+        }
+        .breathe-animation {
+            animation: breathe 8s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.25; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim" href="#">
+                A Place to Breathe
+            </a>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Community</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Workshops</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">My Progress</a>
+<a class="text-[#F4A261] font-crisis-link text-crisis-link border-b-2 border-[#F4A261] hover:opacity-80 transition-all" href="#">Crisis Support</a>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="relative pt-32">
+<!-- Organic Background Elements -->
+<div class="organic-blob breathe-animation bg-primary w-[500px] h-[500px] -top-20 -left-20"></div>
+<div class="organic-blob breathe-animation bg-secondary w-[400px] h-[400px] top-[40%] -right-20" style="animation-delay: -2s;"></div>
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-gutter mb-section-padding-desktop text-center">
+<div class="max-w-3xl mx-auto space-y-6">
+<span class="text-primary font-label-md text-label-md uppercase tracking-widest">Our Intent</span>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-primary leading-tight">
+                    Healing isn’t a destination.<br>It’s a rhythm.
+                </h1>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+                    We built A Place to Breathe to replace the clinical coldness of healthcare with the warmth of a trusted friend. This is your safe haven for emotional refuge, designed to help you exhale the weight of the world.
+                </p>
+</div>
+</section>
+<!-- Mission & Values Bento Grid -->
+<section class="max-w-container-max mx-auto px-gutter mb-section-padding-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Mission Card -->
+<div class="md:col-span-7 bg-surface-container-low p-8 md:p-12 rounded-[40px] shadow-sm flex flex-col justify-center border border-outline-variant/20 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Our Mission</h2>
+<p class="text-body-lg text-on-surface-variant leading-relaxed mb-6">
+                            To democratize high-quality emotional support through a platform that prioritizes human connection and radical inclusivity over rigid protocols.
+                        </p>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md">Accessible</span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md">Empathetic</span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md">Scientific</span>
+</div>
+</div>
+</div>
+<!-- Values Card - Privacy -->
+<div class="md:col-span-5 bg-primary-container text-on-primary-container p-8 rounded-[40px] shadow-sm flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+<h3 class="font-headline-md text-headline-md mb-2">Radical Privacy</h3>
+<p class="text-body-md opacity-90 leading-relaxed">
+                        Your vulnerability is sacred. We use end-to-end encryption and zero-knowledge storage. What happens here, stays here.
+                    </p>
+</div>
+<!-- Values Card - Inclusivity -->
+<div class="md:col-span-5 bg-secondary-container text-on-secondary-container p-8 rounded-[40px] shadow-sm flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">diversity_1</span>
+<h3 class="font-headline-md text-headline-md mb-2">Radical Inclusivity</h3>
+<p class="text-body-md opacity-90 leading-relaxed">
+                        Space for every identity, background, and lived experience. We are committed to culturally responsive care for all.
+                    </p>
+</div>
+<!-- Interactive Quote Card -->
+<div class="md:col-span-7 bg-surface-container-highest p-8 md:p-12 rounded-[40px] shadow-sm border border-outline-variant/10 flex items-center gap-8 group">
+<div class="flex-1">
+<h4 class="font-headline-md text-headline-md text-primary italic mb-2">"True health begins with the permission to just be."</h4>
+<p class="text-label-md text-outline">— Dr. Elara Vance, Clinical Director</p>
+</div>
+<div class="hidden sm:block w-24 h-24 rounded-full overflow-hidden shrink-0 border-4 border-surface-bright shadow-lg">
+<img class="w-full h-full object-cover" data-alt="A portrait of a serene female clinical professional with a warm, empathetic expression. She has silver hair and wears soft-toned clothing. The background is a blurred, peaceful office with plants and soft natural sunlight, adhering to the sage green and lavender design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVansrvAhmsvBpUvLnJpKXo4uv-nvYjrPYfuCZpwiZ5AwrmnoKpfLHXybQVb9LtlZD0ri3X8nZ7v0ZNegBMu3NwG1G9q_5PkDUG2vGLE7tRmk0wv1Q6mnSqr5Xq-l6YPdV2w2rYMoFJvTc4g5HlwnHLEfRZA8s6_n39LNZ8g92TgCExQBxVoqG-EsbTSfvGgRsHOoyWVQ18UWKKJp597u12wvGTJtfHSj9wvTplEOlZgFtMmMmO12XjQ">
+</div>
+</div>
+</div>
+</section>
+<!-- Therapist Credibility & Team -->
+<section class="max-w-container-max mx-auto px-gutter mb-section-padding-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">The Hearts Behind the Space</h2>
+<p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Our team consists of licensed practitioners, researchers, and lived-experience advocates who believe therapy should feel like home.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<!-- Profile 1 -->
+<div class="group">
+<div class="relative mb-6">
+<div class="w-full aspect-square rounded-[60px] overflow-hidden bg-surface-container-low border border-outline-variant/30">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional headshot of a diverse male therapist in a bright, modern studio. He is smiling gently, wearing a sage green linen shirt. The lighting is soft and airy, creating a sense of trust and calm. High-end lifestyle photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIkQpcglblEosZmncSVb51CPBMVDKe34uHCAygnK-5LeUR5GxhvSSiKdy3-UiNBtg4RLHknJ1_VBGEuD9Ethth8iix3x6bVsRCYH-4s__5N0cok7G1upmtQztTMBdX_GYBFFWntayLG_dHIiNPORQkZy0AYzDNA3Y5o5aeZJV18S2ud9ASxJNoHlJSkhMKeiV2ghilMWLI46a0P1jy31V4eZBygzexFO7F21M6yjiFfqlHoNA9Qbf3AQ">
+</div>
+<div class="absolute -bottom-4 -right-4 bg-primary p-4 rounded-3xl shadow-xl">
+<span class="material-symbols-outlined text-white text-3xl">psychology</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Dr. Julian Reed</h3>
+<p class="text-primary font-label-md text-label-md mb-3">Head of Cognitive Research</p>
+<p class="text-body-md text-on-surface-variant">Specializing in trauma-informed care and neurobiology with 15 years of clinical practice.</p>
+</div>
+<!-- Profile 2 -->
+<div class="group">
+<div class="relative mb-6">
+<div class="w-full aspect-square rounded-[60px] overflow-hidden bg-surface-container-low border border-outline-variant/30">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of a South Asian female therapist with a peaceful, welcoming smile. She is sitting in a sunlit room with organic wooden furniture and soft lavender accents. The image evokes tranquility and professional warmth, shot in high-key lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC13rLFQocWQnucXCTROWmAUBGEpjKG9DjWVmKYpcvR_0FVb3O29avE9p6iEmYGH5G4RhnUXZDiQgV_BRT-lrvhjunJB9sC_Ohn7tuWdUVV8tc1KJM4i5ceuNQ0Gzjz69gf93xBDhQx1XmEpSjqBg9pWeJj9F18fAo4qQ7OWV9LjiaBfjvT6hVhXLGHYSGFVfi8cpg2ws3Mad6vy__LoW83SEYIvFHiJ-lvVPKLPncwrU_AlfKqvRlPzQ">
+</div>
+<div class="absolute -bottom-4 -right-4 bg-secondary p-4 rounded-3xl shadow-xl">
+<span class="material-symbols-outlined text-white text-3xl">self_improvement</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Amara Singh, LCSW</h3>
+<p class="text-primary font-label-md text-label-md mb-3">Director of Community Healing</p>
+<p class="text-body-md text-on-surface-variant">Expert in mindfulness-based stress reduction and group-focused healing modalities.</p>
+</div>
+<!-- Profile 3 -->
+<div class="group">
+<div class="relative mb-6">
+<div class="w-full aspect-square rounded-[60px] overflow-hidden bg-surface-container-low border border-outline-variant/30">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A portrait of a non-binary professional with short hair and glasses, looking thoughtfully into the camera. They are in a minimalist space with soft shadows and muted sage green wall. The mood is authentic, modern, and inclusive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWZvW6qJC1iFwbLOkQJcqODjivDPwLGMMDYMkIgSOzVcgwE4x_zcglLH0EBbnJWxXZ3h9fZVCIVALt-yQ-eaoqivixoxALZtD6T8mA46rOWktK2_doNed1Mi40WkXLGVRLQnxqQDdcgkjkFDHqJ-HGZam4vrtwWg0wP-GL7oMJ_bOt002OIedhEU53dw2XrhkICxLaHDW9XDb7WQdJ_Hz29TyyMffsvjzFvwe88mORxpgFHgGUYOQ13Q">
+</div>
+<div class="absolute -bottom-4 -right-4 bg-tertiary-container p-4 rounded-3xl shadow-xl">
+<span class="material-symbols-outlined text-white text-3xl">verified_user</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Kai Sterling</h3>
+<p class="text-primary font-label-md text-label-md mb-3">Lived Experience Advocate</p>
+<p class="text-body-md text-on-surface-variant">Bridging the gap between peer support and clinical excellence through authentic storytelling.</p>
+</div>
+</div>
+</section>
+<!-- Interactive Credentials Section -->
+<section class="bg-surface-container-low py-section-padding-desktop">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="flex flex-col md:flex-row items-center gap-16">
+<div class="flex-1 space-y-8">
+<h2 class="font-headline-lg text-headline-lg text-primary">Trust is built on transparency.</h2>
+<ul class="space-y-6">
+<li class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Vetted Professionals</h4>
+<p class="text-on-surface-variant">Every guide on our platform undergoes a multi-stage background check and clinical review.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Evidence-Based Pathways</h4>
+<p class="text-on-surface-variant">Our workshops are co-designed with neuroscientists to ensure effective, lasting emotional growth.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">HIPAA Compliant</h4>
+<p class="text-on-surface-variant">We adhere to the highest standards of medical data security and patient confidentiality.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="flex-1 w-full max-w-md">
+<div class="bg-white p-8 rounded-[40px] shadow-lg border border-outline-variant/10 relative">
+<div class="absolute -top-6 -right-6 w-24 h-24 bg-secondary-container rounded-full flex items-center justify-center text-secondary rotate-12">
+<span class="material-symbols-outlined text-4xl">workspace_premium</span>
+</div>
+<h5 class="font-headline-md text-headline-md text-on-surface-variant mb-6">Accreditations</h5>
+<div class="grid grid-cols-2 gap-4">
+<div class="h-16 bg-surface-container rounded-2xl flex items-center justify-center px-4">
+<span class="text-label-md text-outline font-bold">APA Partner</span>
+</div>
+<div class="h-16 bg-surface-container rounded-2xl flex items-center justify-center px-4">
+<span class="text-label-md text-outline font-bold">ISO 27001</span>
+</div>
+<div class="h-16 bg-surface-container rounded-2xl flex items-center justify-center px-4">
+<span class="text-label-md text-outline font-bold">HealthCare Gold</span>
+</div>
+<div class="h-16 bg-surface-container rounded-2xl flex items-center justify-center px-4">
+<span class="text-label-md text-outline font-bold">Ethics Certified</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-section-padding-desktop max-w-container-max mx-auto px-gutter text-center">
+<div class="bg-primary p-12 md:p-20 rounded-[60px] text-on-primary relative overflow-hidden">
+<div class="organic-blob bg-white/20 w-80 h-80 -top-20 -right-20"></div>
+<div class="relative z-10 max-w-2xl mx-auto space-y-8">
+<h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl">Ready to start your journey?</h2>
+<p class="text-body-lg opacity-90">Join 50,000+ others who have found their center in A Place to Breathe.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-white text-primary px-8 py-4 rounded-full font-headline-md text-headline-md hover:scale-105 transition-transform shadow-md">
+                            Get Started
+                        </button>
+<button class="bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-full font-headline-md text-headline-md hover:bg-white/10 transition-all">
+                            View Workshops
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-surface-container dark:bg-surface-container-high">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<div class="space-y-4">
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">A Place to Breathe</h2>
+<p class="text-on-surface-variant font-body-md">Your safe space for healing and emotional growth. Designed for the rhythm of human life.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-on-surface mb-2">Platform</h4>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all" href="#">Mission</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary hover:underline transition-all" href="#">Terms of Service</a>
+<a class="text-[#F4A261] font-bold hover:underline transition-all" href="#">Crisis Support</a>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-on-surface mb-2">Connect</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+<p class="text-outline text-label-md mt-6">© 2024 A Place to Breathe. Your safe space for healing.</p>
+</div>
+</div>
+</footer>
+<script>
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple visibility observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

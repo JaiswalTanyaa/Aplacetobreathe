@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Manage Content &amp; Events | A Place to Breathe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "outline": "#737972",
+                    "surface-bright": "#fbf9f5",
+                    "outline-variant": "#c2c8c0",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424842",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2f1400",
+                    "primary-fixed": "#cceace",
+                    "surface-container-highest": "#e4e2de",
+                    "on-secondary-container": "#6b5f7b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f3ef",
+                    "on-primary-container": "#233d29",
+                    "tertiary-container": "#dd8f50",
+                    "secondary": "#655974",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0ceb2",
+                    "on-primary-fixed": "#07200f",
+                    "on-secondary-fixed": "#21172e",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "primary-container": "#8ba88e",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary": "#8e4e14",
+                    "surface-container-high": "#eae8e4",
+                    "background": "#fbf9f5",
+                    "primary": "#4a654e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#ecdcfd",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "surface": "#fbf9f5",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "secondary-fixed": "#ecdcfd",
+                    "on-primary-fixed-variant": "#334d38",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "surface-tint": "#4a654e",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "surface-dim": "#dbdad6",
+                    "surface-variant": "#e4e2de",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-padding-mobile": "40px",
+                    "container-max": "1120px",
+                    "section-padding-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Work Sans"],
+                    "crisis-link": ["Nunito Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+            overflow-x: hidden;
+        }
+        .organic-blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            opacity: 0.15;
+            border-radius: 50%;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c2c8c0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+<!-- Background Accents -->
+<div class="organic-blob bg-primary w-[500px] h-[500px] -top-64 -left-32"></div>
+<div class="organic-blob bg-secondary-container w-[400px] h-[400px] bottom-0 right-0"></div>
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation (Shared Component) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-highest shadow-[4px_0_24px_rgba(139,168,142,0.05)] py-8 gap-2 z-40">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface-variant">Admin Panel</h1>
+<p class="text-on-surface-variant text-sm opacity-70">Management Console</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span class="font-body-md">Users</span>
+</a>
+<!-- Active Item -->
+<a class="flex items-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl mx-2 px-4 py-3 transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined mr-3">edit_note</span>
+<span class="font-body-md">Content</span>
+</a>
+<a class="flex items-center text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-body-md">Reports</span>
+</a>
+<a class="flex items-center text-on-surface-variant dark:text-outline-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl transition-colors scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<button class="w-full bg-primary text-on-primary py-3 rounded-full font-label-md flex items-center justify-center hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined mr-2">open_in_new</span>
+                    View Site
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-6 md:p-gutter">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<nav class="flex text-sm text-outline mb-2">
+<span>Management</span>
+<span class="mx-2">/</span>
+<span class="text-primary font-semibold">Content &amp; Events</span>
+</nav>
+<h2 class="font-headline-xl text-headline-xl text-on-surface">Manage Library</h2>
+</div>
+<button class="bg-[#F4A261] text-white px-8 py-4 rounded-full font-label-md flex items-center justify-center shadow-lg hover:scale-[1.02] transition-transform active:scale-100 group">
+<span class="material-symbols-outlined mr-2 text-xl group-hover:rotate-90 transition-transform">add</span>
+                    CREATE NEW
+                </button>
+</header>
+<!-- Dashboard Stats/Summary -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-container-low p-8 rounded-3xl border border-outline-variant/30">
+<p class="text-outline text-sm uppercase tracking-wider mb-2">Active Events</p>
+<div class="flex items-end gap-3">
+<span class="text-4xl font-headline-xl text-primary">12</span>
+<span class="text-primary/60 mb-1 text-sm font-semibold">+3 this week</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-3xl border border-outline-variant/30">
+<p class="text-outline text-sm uppercase tracking-wider mb-2">Total Articles</p>
+<div class="flex items-end gap-3">
+<span class="text-4xl font-headline-xl text-on-surface">48</span>
+<span class="text-outline-variant mb-1 text-sm">Drafts: 5</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-3xl border border-outline-variant/30">
+<p class="text-outline text-sm uppercase tracking-wider mb-2">Total Registrations</p>
+<div class="flex items-end gap-3">
+<span class="text-4xl font-headline-xl text-secondary">312</span>
+<span class="text-secondary/60 mb-1 text-sm font-semibold">Live engagement</span>
+</div>
+</div>
+</section>
+<!-- Tabs & Filters -->
+<section class="mb-8">
+<div class="flex flex-col md:flex-row items-center justify-between border-b border-outline-variant/30 pb-4 gap-6">
+<div class="flex gap-8">
+<button class="relative font-headline-md text-primary pb-4">
+                            Workshops
+                            <span class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
+</button>
+<button class="font-headline-md text-outline hover:text-on-surface transition-colors pb-4">
+                            Articles
+                        </button>
+<button class="font-headline-md text-outline hover:text-on-surface transition-colors pb-4">
+                            Activities
+                        </button>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<div class="relative flex-1 md:w-64">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container border-none rounded-2xl focus:ring-2 focus:ring-primary/20 text-body-md placeholder:text-outline-variant" placeholder="Search workshops..." type="text">
+</div>
+<button class="p-3 bg-surface-container rounded-2xl text-outline hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<div class="flex bg-surface-container p-1 rounded-2xl">
+<button class="p-2 bg-white shadow-sm rounded-xl text-primary">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 text-outline">
+<span class="material-symbols-outlined">list</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-white rounded-[32px] overflow-hidden border border-outline-variant/20 shadow-[0_20px_40px_rgba(139,168,142,0.08)] group hover:-translate-y-1 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A serene landscape featuring soft sage green rolling hills under a gentle morning mist. In the foreground, a single minimalist tree with rounded leaves stands peacefully. The lighting is diffused and warm, evoking a sense of calm and breathing space consistent with a premium wellness brand aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAg-0inrfgjDKpneXDio1RrfmhE5W8wovnNS7VnaNvhvGYnw6BxYmY8RDf2n6QZvXcjZVldF-iTamrCDR3PiniqYefYKbpzbRBTEtPn_SRcOd0_B-vHi87nMh-rbe7w-aRm4czvl0F0PcoN7ttxe5tLepFiDETnDChNyrAuSpnz3olNihRIkCcNSyUhSO3xrxNne-EJI-7Jv1gzbC9sV2W7jTzeD9sVKATY2yVdErmp0aVqXtwRm7-Ljw')"></div>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-primary uppercase tracking-wider">Paid</div>
+</div>
+<div class="p-8">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">Workshop</span>
+<span class="text-outline text-xs flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">event</span>
+                                Oct 24, 2024
+                            </span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-2">Deep Breathing for Anxiety</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">A guided session focusing on somatic techniques to regulate the nervous system during stressful moments.</p>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant/10">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center text-[10px] font-bold">128+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary-container/20 rounded-lg transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-[32px] overflow-hidden border border-outline-variant/20 shadow-[0_20px_40px_rgba(139,168,142,0.08)] group hover:-translate-y-1 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="An abstract artistic representation of human connection featuring soft, overlapping shapes in muted lavender and sage green. The background is a warm cream texture with delicate organic patterns. Soft, ambient lighting creates depth and a feeling of safety and tranquility, suitable for a mental health platform library." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB73dRQuHJ1QbOmE0Vpqe4gBBCNTR0J_655BBZytW5tIeYqs1sLBjcTH5DS-a_gV9bKWw1pLXh39wQZf-uXetvFdo1EsZLXr0mUvKDcdoGX_1MI_K6NsvYt9iu7Oj-eGCxFLybZC48NplD80lgQ2_xlBvaBeNNhRHXFWuQyffpDhBjvohSEioS1K5B_p57cNY8FPENozw51fMXPwqRzBmMHeJ3IshRJYCaItk45LsT4GB4lg0bpIOvzJA')"></div>
+<div class="absolute top-4 right-4 bg-primary/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white uppercase tracking-wider">Free</div>
+</div>
+<div class="p-8">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">Article</span>
+<span class="text-outline text-xs flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">schedule</span>
+                                8 min read
+                            </span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-2">The Art of Letting Go</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">Exploring the psychological benefits of mindfulness and how it aids in emotional recovery and personal growth.</p>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant/10">
+<div class="text-sm font-medium text-primary">Published</div>
+<div class="flex gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary-container/20 rounded-lg transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-[32px] overflow-hidden border border-outline-variant/20 shadow-[0_20px_40px_rgba(139,168,142,0.08)] group hover:-translate-y-1 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A peaceful close-up of smooth, stacked river stones balanced perfectly on a sandy beach. The ocean in the background is a soft, blurred turquoise under a warm, golden sunset sky. The entire scene is bathed in a soft glow, emphasizing balance and centeredness, aligned with a modern, high-end healing interface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBDejS5foUHSv80-fRqIs-L8JqWsC2ER-OgYCVpjpGWm0OLecFmpwupOPYLZ3xTJELYJys1qU0jsDESQmDSEQAgd1oLyCNL0A1SH3xmzWHgbCDYyhBsTiS4-RSLWoFoRwgnxyqfK5-_bPbYHNVNn13HTYKeaWJDwRsw9pmchkHb2FIEhP-j33Vtqu7Or99TcI9u0KqkpIE7rcwykN4WwYTfDtSDX3MF5pntmHXSZFEyGvwFrAZ6mDIdew')"></div>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-primary uppercase tracking-wider">Paid</div>
+</div>
+<div class="p-8">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-medium">Activity</span>
+<span class="text-outline text-xs flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">group</span>
+                                45 spots left
+                            </span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-2">Morning Flow &amp; Reflection</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">Start your day with gentle movement and intention-setting journaling to find your inner balance.</p>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant/10">
+<div class="text-sm font-medium text-tertiary">Upcoming</div>
+<div class="flex gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary-container/20 rounded-lg transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="w-full mt-20 border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<div class="space-y-4">
+<h3 class="font-headline-lg text-headline-lg font-bold text-primary">A Place to Breathe</h3>
+<p class="text-on-surface-variant opacity-80 leading-relaxed">Dedicated to providing safe, accessible, and supportive spaces for your emotional and mental well-being.</p>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-6">Quick Links</h4>
+<ul class="space-y-3">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Mission</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Terms of Service</a></li>
+<li><a class="text-primary font-bold hover:underline italic" href="#">Crisis Support</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-6">Connect</h4>
+<div class="flex gap-4 mb-6">
+<a class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-xl">chat</span>
+</a>
+</div>
+<p class="text-sm text-outline">© 2024 A Place to Breathe. Your safe space for healing.</p>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Persistent Crisis Support Link (Floating) -->
+<a class="fixed bottom-8 right-8 z-50 bg-[#F4A261] text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 font-crisis-link text-crisis-link hover:scale-105 transition-transform animate-pulse border-2 border-white/20" href="#">
+<span class="material-symbols-outlined">emergency_home</span>
+        CRISIS SUPPORT
+    </a>
+<!-- Simple Tab Interaction Script -->
+<script>
+        // Simple mock behavior for tab switching
+        const tabs = document.querySelectorAll('.font-headline-md');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('text-primary');
+                    t.classList.add('text-outline');
+                    const indicator = t.querySelector('span');
+                    if (indicator) indicator.remove();
+                });
+                tab.classList.remove('text-outline');
+                tab.classList.add('text-primary');
+                tab.style.position = 'relative';
+                const newIndicator = document.createElement('span');
+                newIndicator.className = 'absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full';
+                tab.appendChild(newIndicator);
+            });
+        });
+    </script>
+</body></html>

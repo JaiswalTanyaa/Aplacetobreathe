@@ -1,0 +1,289 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "outline": "#737972",
+                    "surface-bright": "#fbf9f5",
+                    "outline-variant": "#c2c8c0",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424842",
+                    "on-surface": "#1b1c1a",
+                    "on-tertiary-fixed": "#2f1400",
+                    "primary-fixed": "#cceace",
+                    "surface-container-highest": "#e4e2de",
+                    "on-secondary-container": "#6b5f7b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f3ef",
+                    "on-primary-container": "#233d29",
+                    "tertiary-container": "#dd8f50",
+                    "secondary": "#655974",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b0ceb2",
+                    "on-primary-fixed": "#07200f",
+                    "on-secondary-fixed": "#21172e",
+                    "secondary-fixed-dim": "#d0c1e0",
+                    "primary-container": "#8ba88e",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#592c00",
+                    "tertiary": "#8e4e14",
+                    "surface-container-high": "#eae8e4",
+                    "background": "#fbf9f5",
+                    "primary": "#4a654e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#ecdcfd",
+                    "on-tertiary-fixed-variant": "#6f3800",
+                    "surface": "#fbf9f5",
+                    "primary-fixed-dim": "#b0ceb2",
+                    "tertiary-fixed-dim": "#ffb780",
+                    "secondary-fixed": "#ecdcfd",
+                    "on-primary-fixed-variant": "#334d38",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4d425c",
+                    "surface-tint": "#4a654e",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0ed",
+                    "surface-dim": "#dbdad6",
+                    "surface-variant": "#e4e2de",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#30312e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-padding-mobile": "40px",
+                    "container-max": "1120px",
+                    "section-padding-desktop": "80px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Nunito Sans"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Work Sans"],
+                    "crisis-link": ["Nunito Sans"],
+                    "label-md": ["Work Sans"],
+                    "headline-xl-mobile": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .organic-blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            opacity: 0.15;
+            border-radius: 50%;
+        }
+        .blob-1 { top: 10%; left: -5%; width: 400px; height: 400px; background: #8BA88E; }
+        .blob-2 { bottom: 20%; right: -10%; width: 350px; height: 350px; background: #A799B7; }
+        
+        .pulse-soft {
+            animation: pulse-soft 3s infinite ease-in-out;
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-[0_20px_20px_0_rgba(139,168,142,0.05)] transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">
+                A Place to Breathe
+            </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant hover:text-primary transition-colors" href="#">Explore</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant hover:text-primary transition-colors" href="#">Community</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant hover:text-primary transition-colors" href="#">Workshops</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant hover:text-primary transition-colors" href="#">My Progress</a>
+</div>
+<a class="font-crisis-link text-crisis-link px-6 py-3 bg-secondary-container text-on-secondary-container rounded-full hover:opacity-80 transition-opacity border border-outline-variant/30 shadow-sm pulse-soft" href="#">
+                Crisis Support
+            </a>
+</div>
+</nav>
+<main class="relative min-h-screen pt-32 pb-section-padding-desktop px-gutter overflow-hidden">
+<!-- Background Blobs -->
+<div class="organic-blob blob-1"></div>
+<div class="organic-blob blob-2"></div>
+<div class="max-w-[800px] mx-auto">
+<!-- Header Section -->
+<div class="text-center mb-16">
+<div class="w-48 h-48 mx-auto mb-8 relative">
+<img class="w-full h-full object-contain" data-alt="A soft, friendly digital illustration of a stylized character looking through a telescope towards a gentle moon, surrounded by floating sage green leaves and muted lavender clouds. The art style is minimalist and organic, with soft gradients and no harsh outlines, evoking a sense of calm curiosity and support." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJMIwToPqlGpVVu_txa55NVoiMl8jw4opulFyW_wL8ib8ZorRgETHOC_Wwxpf6g0ss-vIFqTxF6LMvuwDOZJRX7lQWTHjelaRZkRESo2Ct3EihxbHDdgvcFY3WDDo1fBSwsfWm9LY0thqSV2Kn58J27HzUoSoXlReRdUWFA1FWjp6Her6Hs-iGJC0EiGm58ZbRgnMR_AqPQVI2Ap4U01EkEhc1X7akwshQx1HkstS7XusisPelxzrF_Q">
+</div>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-primary mb-4">
+                    Didn't find what you were looking for?
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[600px] mx-auto">
+                    We're here to listen. Tell us what's on your mind, and we'll do our best to help you find the space or resource you need.
+                </p>
+</div>
+<!-- Form Container -->
+<div class="bg-surface-container-low rounded-[40px] p-8 md:p-12 shadow-sm border border-outline-variant/20">
+<form class="space-y-8" id="requestForm">
+<!-- Message Field -->
+<div class="space-y-3">
+<label class="block font-headline-md text-headline-md text-on-surface" for="message">
+                            What can we help you find?
+                        </label>
+<textarea class="w-full p-6 rounded-2xl bg-surface-bright border-transparent focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-body-md outline-none resize-none placeholder:text-outline-variant" id="message" name="message" placeholder="Share your thoughts or what resource you were hoping to see..." rows="4"></textarea>
+<p class="text-on-surface-variant text-body-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+                            Our team reads every single submission carefully.
+                        </p>
+</div>
+<!-- Email Field -->
+<div class="space-y-3">
+<label class="block font-headline-md text-headline-md text-on-surface" for="email">
+                            Email address <span class="text-outline-variant text-body-md font-normal">(Optional)</span>
+</label>
+<input class="w-full p-6 rounded-2xl bg-surface-bright border-transparent focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-body-md outline-none placeholder:text-outline-variant" id="email" name="email" placeholder="If you'd like a response, let us know where to reach you." type="email">
+<p class="text-on-surface-variant text-body-md italic opacity-70">
+                            We promise to keep your email safe and never send spam.
+                        </p>
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+<button class="w-full md:w-auto px-12 py-4 bg-primary text-on-primary font-headline-md text-headline-md rounded-full hover:opacity-90 active:scale-95 transition-all shadow-md flex items-center justify-center gap-3" type="submit">
+                            Send Message
+                            <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</form>
+<!-- Success State (Hidden by default) -->
+<div class="hidden text-center py-12 space-y-6" id="successMessage">
+<div class="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-4xl">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Thank you for sharing</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[400px] mx-auto">
+                        Your message has been received. We’ll review it and get back to you if you provided an email.
+                    </p>
+<button class="font-label-md text-label-md text-primary underline hover:opacity-70 transition-opacity" onclick="window.location.reload()">
+                        Send another request
+                    </button>
+</div>
+</div>
+<!-- Helpful Alternatives -->
+<div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-8 rounded-3xl bg-secondary-container/30 border border-secondary-container/50 hover:shadow-md transition-all cursor-pointer group">
+<span class="material-symbols-outlined text-secondary text-3xl mb-4 group-hover:scale-110 transition-transform">search</span>
+<h3 class="font-headline-md text-headline-md text-on-secondary-container mb-2">Try our search</h3>
+<p class="text-body-md text-on-secondary-container opacity-80">Use keywords like "breathing", "anxiety", or "meditation".</p>
+</div>
+<div class="p-8 rounded-3xl bg-tertiary-fixed/30 border border-tertiary-fixed/50 hover:shadow-md transition-all cursor-pointer group">
+<span class="material-symbols-outlined text-tertiary text-3xl mb-4 group-hover:scale-110 transition-transform">chat_bubble</span>
+<h3 class="font-headline-md text-headline-md text-on-tertiary-container mb-2">Speak to a guide</h3>
+<p class="text-body-md text-on-tertiary-container opacity-80">Our peer support community is active 24/7 for a chat.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-surface-container py-section-padding-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter max-w-container-max mx-auto">
+<div class="space-y-4">
+<div class="font-headline-lg text-headline-lg font-bold text-primary">A Place to Breathe</div>
+<p class="text-body-md text-on-surface-variant max-w-[300px]">
+                    Providing a gentle refuge for your digital and emotional wellbeing. Take your time, there's no rush.
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-md text-label-md text-on-surface uppercase tracking-widest mb-2">Navigation</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Mission</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md font-bold text-primary hover:underline transition-all" href="#">Crisis Support</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-label-md text-on-surface uppercase tracking-widest mb-2">Stay Connected</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">forum</span>
+</a>
+</div>
+<div class="pt-4 text-on-surface-variant text-body-md">
+                    © 2024 A Place to Breathe. Your safe space for healing.
+                </div>
+</div>
+</div>
+</footer>
+<script>
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const success = document.getElementById('successMessage');
+            
+            // Add a simple loading state
+            const btn = form.querySelector('button');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Sending...`;
+
+            // Simulate submission
+            setTimeout(() => {
+                form.classList.add('hidden');
+                success.classList.remove('hidden');
+                success.classList.add('animate-in', 'fade-in', 'duration-700');
+            }, 1000);
+        });
+
+        // Simple scroll behavior for nav
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('py-2', 'bg-surface/95');
+                nav.classList.remove('py-4', 'bg-surface/80');
+            } else {
+                nav.classList.add('py-4', 'bg-surface/80');
+                nav.classList.remove('py-2', 'bg-surface/95');
+            }
+        });
+    </script>
+</body></html>

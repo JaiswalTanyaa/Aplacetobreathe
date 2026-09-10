@@ -1,0 +1,332 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>A Place to Breathe | Recommendations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1c1a",
+                        "outline": "#737972",
+                        "surface-bright": "#fbf9f5",
+                        "outline-variant": "#c2c8c0",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#424842",
+                        "on-surface": "#1b1c1a",
+                        "on-tertiary-fixed": "#2f1400",
+                        "primary-fixed": "#cceace",
+                        "surface-container-highest": "#e4e2de",
+                        "on-secondary-container": "#6b5f7b",
+                        "tertiary-fixed": "#ffdcc4",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f5f3ef",
+                        "on-primary-container": "#233d29",
+                        "tertiary-container": "#dd8f50",
+                        "secondary": "#655974",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#b0ceb2",
+                        "on-primary-fixed": "#07200f",
+                        "on-secondary-fixed": "#21172e",
+                        "secondary-fixed-dim": "#d0c1e0",
+                        "primary-container": "#8ba88e",
+                        "surface-container": "#efeeea",
+                        "on-tertiary-container": "#592c00",
+                        "tertiary": "#8e4e14",
+                        "surface-container-high": "#eae8e4",
+                        "background": "#fbf9f5",
+                        "primary": "#4a654e",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ecdcfd",
+                        "on-tertiary-fixed-variant": "#6f3800",
+                        "surface": "#fbf9f5",
+                        "primary-fixed-dim": "#b0ceb2",
+                        "tertiary-fixed-dim": "#ffb780",
+                        "secondary-fixed": "#ecdcfd",
+                        "on-primary-fixed-variant": "#334d38",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#4d425c",
+                        "surface-tint": "#4a654e",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f2f0ed",
+                        "surface-dim": "#dbdad6",
+                        "surface-variant": "#e4e2de",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "crisis": "#F4A261"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "section-padding-mobile": "40px",
+                        "container-max": "1120px",
+                        "section-padding-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Nunito Sans"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "body-lg": ["Work Sans"],
+                        "crisis-link": ["Nunito Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-xl-mobile": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "crisis-link": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .organic-blob {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        .soft-shadow {
+            box-shadow: 0 20px 40px rgba(139, 168, 142, 0.08);
+        }
+        .crisis-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .8; }
+        }
+        .mood-active {
+            transform: scale(1.1);
+            background-color: #ecdcfd !important;
+            border-color: #8ba88e !important;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-[0_20px_20px_0_rgba(139,168,142,0.05)]">
+<nav class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">A Place to Breathe</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-semibold text-primary border-b-2 border-primary pb-1" href="#">Explore</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant hover:text-primary transition-colors" href="#">Community</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant hover:text-primary transition-colors" href="#">Workshops</a>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface-variant hover:text-primary transition-colors" href="#">My Progress</a>
+</div>
+<a class="font-crisis-link text-crisis-link bg-crisis/10 text-crisis px-6 py-2 rounded-full border-2 border-crisis/20 crisis-pulse hover:bg-crisis/20 transition-all" href="#">Crisis Support</a>
+</nav>
+</header>
+<main class="pt-32 pb-section-padding-desktop px-gutter max-w-container-max mx-auto relative overflow-hidden">
+<!-- Background Organic Shape -->
+<div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-secondary-container/20 organic-blob -z-10 blur-3xl"></div>
+<div class="absolute top-[60%] -left-40 w-[400px] h-[400px] bg-primary-container/10 organic-blob -z-10 blur-3xl"></div>
+<!-- Hero & Mood Tracker Section -->
+<section class="mb-20 text-center">
+<h1 class="font-headline-xl text-headline-xl mb-6">How are you feeling right now?</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
+                Let's find the perfect space for your current state of mind. Select a mood to see personalized recommendations just for you.
+            </p>
+<!-- Mood Widget -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto">
+<button class="mood-btn flex flex-col items-center gap-3 p-6 bg-surface-container-low rounded-2xl border-2 border-transparent transition-all duration-300 hover:border-primary/30" onclick="selectMood(this, 'Calm')">
+<span class="material-symbols-outlined text-4xl text-primary">spa</span>
+<span class="font-label-md text-label-md">Calm</span>
+</button>
+<button class="mood-btn flex flex-col items-center gap-3 p-6 bg-surface-container-low rounded-2xl border-2 border-transparent transition-all duration-300 hover:border-primary/30" onclick="selectMood(this, 'Anxious')">
+<span class="material-symbols-outlined text-4xl text-secondary">waves</span>
+<span class="font-label-md text-label-md">Anxious</span>
+</button>
+<button class="mood-btn flex flex-col items-center gap-3 p-6 bg-surface-container-low rounded-2xl border-2 border-transparent transition-all duration-300 hover:border-primary/30" onclick="selectMood(this, 'Tired')">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">bedtime</span>
+<span class="font-label-md text-label-md">Tired</span>
+</button>
+<button class="mood-btn flex flex-col items-center gap-3 p-6 bg-surface-container-low rounded-2xl border-2 border-transparent transition-all duration-300 hover:border-primary/30" onclick="selectMood(this, 'Inspired')">
+<span class="material-symbols-outlined text-4xl text-tertiary">lightbulb</span>
+<span class="font-label-md text-label-md">Inspired</span>
+</button>
+<button class="mood-btn flex flex-col items-center gap-3 p-6 bg-surface-container-low rounded-2xl border-2 border-transparent transition-all duration-300 hover:border-primary/30" onclick="selectMood(this, 'Heavy')">
+<span class="material-symbols-outlined text-4xl text-outline">cloud</span>
+<span class="font-label-md text-label-md">Heavy</span>
+</button>
+</div>
+</section>
+<!-- Bento Grid Recommendations -->
+<section class="mb-20" id="recommendations">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg">Suggested for you</h2>
+<p class="text-on-surface-variant">Activities tailored to your current rhythm.</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-2 hover:underline">
+                    View all <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[280px]">
+<!-- Featured Card -->
+<div class="md:col-span-8 md:row-span-2 group relative overflow-hidden rounded-3xl bg-surface-container-high soft-shadow border border-surface-variant/50 transition-transform hover:scale-[1.01]">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" data-alt="A serene landscape featuring a misty mountain lake at sunrise with soft sage green and muted coral tones. The composition is airy and minimalist, evoking a sense of deep peace and renewal. Digital art style with soft focus and ambient lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgSVPnZENXGG1QvsAG3iq4Tf0uDbfN-qwQTJ38tt67vB4wRfSeT1Xl9GKl5qshh7X2rRN-Wak3EfMU4TV3sc_3djYxrAWZE6x--tNBFMyfBuMz7sFQyTmepl8EaR22L17axi9Xmg-Tdx3c5RxFakXA1_vrj-fHJz-RVs2qY5xgazhxeYmD9REQAwAAln8apNb8phRcOISltt-95cS7FxLcjZsvmzo268LIpGIK3T8pjE8tpikGyHca4w">
+</div>
+<div class="relative z-10 h-full flex flex-col justify-end p-8 bg-gradient-to-t from-surface/90 via-surface/40 to-transparent">
+<div class="flex gap-2 mb-4">
+<span class="px-3 py-1 bg-primary text-white text-xs rounded-full uppercase tracking-widest font-bold">Guided Meditation</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs rounded-full font-bold">15 Min</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg mb-2">Morning Breath &amp; Grounding</h3>
+<p class="text-on-surface-variant max-w-md mb-6">A gentle session designed to anchor your thoughts and prepare you for the day ahead with clarity.</p>
+<button class="w-fit bg-primary text-white px-8 py-3 rounded-full font-bold hover:shadow-lg transition-all flex items-center gap-2">
+                            Begin Session <span class="material-symbols-outlined">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Secondary Cards -->
+<div class="md:col-span-4 group rounded-3xl bg-surface-container-low p-8 soft-shadow border border-surface-variant/50 flex flex-col justify-between transition-all hover:bg-surface-bright">
+<div class="w-12 h-12 bg-secondary-container/50 rounded-xl flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-2">Gratitude Log</h4>
+<p class="text-on-surface-variant text-sm">Write down three things you're thankful for today.</p>
+</div>
+<a class="mt-4 text-primary font-bold text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all" href="#">Write now <span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+<div class="md:col-span-4 group rounded-3xl bg-surface-container-low p-8 soft-shadow border border-surface-variant/50 flex flex-col justify-between transition-all hover:bg-surface-bright">
+<div class="w-12 h-12 bg-primary-container/30 rounded-xl flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">forest</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-2">Visual Escape</h4>
+<p class="text-on-surface-variant text-sm">Explore an immersive 3D forest environment.</p>
+</div>
+<a class="mt-4 text-primary font-bold text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all" href="#">Explore <span class="material-symbols-outlined text-sm">chevron_right</span></a>
+</div>
+</div>
+</section>
+<!-- User Submitted Section -->
+<section class="grid md:grid-cols-2 gap-12 items-center bg-secondary-container/10 rounded-[40px] p-8 md:p-16 border border-secondary-container/20">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-6">Community Soul Food</h2>
+<p class="text-body-lg text-on-surface-variant mb-8">
+                    Our healing space grows through shared wisdom. Have an activity or a tip that helped you find your breath? Share it with the community.
+                </p>
+<div class="space-y-6">
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-outline-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a smiling woman with a warm, kind expression, soft natural lighting, garden background, minimalist digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4ZBCkCzep-79sukIJGrkjh5M2s0MH5FmM2gO3VAsQ6ygldSlGJxabYBqecD-vwmjrZqBuxl_VCG_1ozCgUf_FK03n1Cw3JxKqUSYEBlva4um_QqjMDNFNrV46-5WRRkKLWJVWS8su1OIzoN7tNQwbPSSWsjceR6gDOMqVyApOs8PI7vBBBiki0XpLWijxcdsG0nI9EbLIpnH9p_5aaZrAY2cW0ZNDFZYe0-6kBlBVaUfAYWE9soG_DQ">
+</div>
+<div class="bg-surface rounded-2xl p-4 soft-shadow border border-surface-variant/30">
+<p class="italic text-sm text-on-surface-variant">"I listen to the sound of rain whenever I feel overwhelmed. It helps me focus on the present moment."</p>
+<span class="text-xs font-bold text-primary mt-2 block">— Sarah J.</span>
+</div>
+</div>
+<div class="flex gap-4 items-start translate-x-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-outline-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young man with a serene expression, soft morning light, cozy indoor setting, earthy tones, minimalist digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxAwKFFrSG1viNEhLXq9q5h1iPVUuScaAMJ-V6ZcuKpxSd4KulB497ItJvvj54x0EZxvVqEC1-jvjk_8VnEZUSx75DxKKGCz7RoyipOxZObUYMxoFk6h-K1vWLoMt5L_Y-DWAZDXiT9NtCPEH8mST0KahtBoXYj1CWAQmL3C6hoM3Wol_MF0j2lAlTxNnu1diTH1KhV681itI45HglLgk71C-rDXR2SqDR49wgpPIWbWvtxwL42Zt97w">
+</div>
+<div class="bg-surface rounded-2xl p-4 soft-shadow border border-surface-variant/30">
+<p class="italic text-sm text-on-surface-variant">"A five-minute stretch session at noon changed my entire productivity levels."</p>
+<span class="text-xs font-bold text-primary mt-2 block">— David M.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Your Recommendation Form -->
+<div class="bg-surface p-8 rounded-3xl soft-shadow border border-surface-variant/50">
+<h3 class="font-headline-md text-headline-md mb-2">Add Your Tip</h3>
+<p class="text-on-surface-variant text-sm mb-6">Your voice might be exactly what someone needs to hear today.</p>
+<form class="space-y-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Category</label>
+<select class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/50 text-on-surface">
+<option>Mindfulness</option>
+<option>Physical Activity</option>
+<option>Creative Expression</option>
+<option>Rest</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Your Suggestion</label>
+<textarea class="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/50 text-on-surface placeholder:text-outline-variant" placeholder="Take your time..." rows="3"></textarea>
+</div>
+<button class="w-full bg-primary text-white font-bold py-4 rounded-full hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95" type="button">
+                        Submit for Review
+                    </button>
+<p class="text-center text-[10px] text-outline italic">Every tip is reviewed by our community facilitators to ensure a safe space.</p>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-surface-container">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-gutter py-section-padding-desktop max-w-container-max mx-auto">
+<div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary mb-4">A Place to Breathe</div>
+<p class="text-on-surface-variant text-sm">© 2024 A Place to Breathe. Your safe space for healing. Designed to nurture the mind, body, and spirit through gentle digital presence.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-tertiary">Quick Links</h4>
+<div class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Mission</a>
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Terms of Service</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-tertiary">Support</h4>
+<p class="text-on-surface-variant text-sm mb-2">If you're in immediate danger or need someone to talk to right now:</p>
+<a class="text-primary font-bold flex items-center gap-2 text-headline-md font-headline-md" href="#">
+<span class="material-symbols-outlined">emergency_share</span> Crisis Support
+                </a>
+</div>
+</div>
+</footer>
+<script>
+        function selectMood(element, mood) {
+            // Remove active classes from all buttons
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.remove('mood-active');
+            });
+            // Add active class to selected
+            element.classList.add('mood-active');
+            
+            // Subtle feedback logic could go here
+            console.log(`Mood selected: ${mood}`);
+            
+            // Visual feedback - scroll to recommendations
+            setTimeout(() => {
+                document.getElementById('recommendations').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+
+        // Lightweight atmospheric effect: gentle floating of the background shapes
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.querySelectorAll('.organic-blob').forEach((blob, i) => {
+                const speed = (i + 1) * 20;
+                blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #4a654e;
+  --background: #fbf9f5;
+  --surface: #fbf9f5;
+  --coral: #F4A261;
+}
+
+body {
+  background-color: #fbf9f5;
+  color: #1b1c1a;
+  overflow-x: hidden;
+}
+
+/* Organic background ambient blobs */
+.organic-blob {
+  position: absolute;
+  z-index: -1;
+  filter: blur(70px);
+  opacity: 0.45;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Material symbols adjustments */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* Bento card hover effect */
+.bento-card {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px -15px rgba(139, 168, 142, 0.35);
+}
+
+/* Coral pulsing button glow */
+.pulse-coral {
+  animation: pulse-coral-animation 2.2s infinite;
+}
+
+@keyframes pulse-coral-animation {
+  0% { box-shadow: 0 0 0 0px rgba(244, 162, 97, 0.5); }
+  70% { box-shadow: 0 0 0 16px rgba(244, 162, 97, 0); }
+  100% { box-shadow: 0 0 0 0px rgba(244, 162, 97, 0); }
+}
+
+/* Breathing animation for pacer */
+@keyframes breathe-circle {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  40% { transform: scale(1.45); opacity: 1; }
+  70% { transform: scale(1.45); opacity: 0.95; }
+}
+
+.animate-breathe {
+  animation: breathe-circle 19s ease-in-out infinite;
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f3ef;
+}
+::-webkit-scrollbar-thumb {
+  background: #c2c8c0;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8ba88e;
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>A Place to Breathe - Login / Join Us</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#6b5f7b",
+                        "on-primary-container": "#233d29",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#b0ceb2",
+                        "on-secondary-fixed": "#21172e",
+                        "primary": "#4a654e",
+                        "outline": "#737972",
+                        "inverse-primary": "#b0ceb2",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#6f3800",
+                        "on-surface-variant": "#424842",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e4e2de",
+                        "surface-bright": "#fbf9f5",
+                        "surface-container-low": "#f5f3ef",
+                        "tertiary": "#8e4e14",
+                        "tertiary-fixed-dim": "#ffb780",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#cceace",
+                        "secondary-fixed": "#ecdcfd",
+                        "surface-dim": "#dbdad6",
+                        "tertiary-container": "#dd8f50",
+                        "surface-container-high": "#eae8e4",
+                        "primary-container": "#8ba88e",
+                        "tertiary-fixed": "#ffdcc4",
+                        "secondary": "#655974",
+                        "surface-container": "#efeeea",
+                        "surface": "#fbf9f5",
+                        "surface-tint": "#4a654e",
+                        "secondary-container": "#ecdcfd",
+                        "on-tertiary-fixed": "#2f1400",
+                        "outline-variant": "#c2c8c0",
+                        "on-surface": "#1b1c1a",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c1a",
+                        "on-secondary-fixed-variant": "#4d425c",
+                        "surface-container-highest": "#e4e2de",
+                        "inverse-surface": "#30312e",
+                        "on-tertiary-container": "#592c00",
+                        "on-primary-fixed-variant": "#334d38",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#d0c1e0",
+                        "on-primary-fixed": "#07200f",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-padding-mobile": "40px",
+                        "gutter": "24px",
+                        "container-max": "1120px",
+                        "unit": "8px",
+                        "section-padding-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Work Sans", "sans-serif"],
+                        "headline-xl-mobile": ["Nunito Sans", "sans-serif"],
+                        "headline-xl": ["Nunito Sans", "sans-serif"],
+                        "headline-md": ["Nunito Sans", "sans-serif"],
+                        "body-md": ["Work Sans", "sans-serif"],
+                        "label-md": ["Work Sans", "sans-serif"],
+                        "crisis-link": ["Nunito Sans", "sans-serif"],
+                        "headline-lg": ["Nunito Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "crisis-link": ["16px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;600;700;800&amp;family=Work+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+        
+        /* Soft Blob Backgrounds */
+        .blob-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(139,168,142,0.15) 0%, rgba(139,168,142,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(40px);
+        }
+        .blob-2 {
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(167,153,183,0.1) 0%, rgba(167,153,183,0) 70%); /* Muted Lavender hint */
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(60px);
+        }
+        
+        .ambient-shadow {
+            box-shadow: 0 20px 40px rgba(139, 168, 142, 0.05); /* Sage Green tint shadow */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col relative overflow-hidden">
+<!-- Organic Background Elements -->
+<div class="blob-1 pointer-events-none"></div>
+<div class="blob-2 pointer-events-none"></div>
+<!-- Navigation suppressed as this is a linear/transactional screen -->
+<main class="flex-grow flex items-center justify-center p-gutter relative z-10 w-full max-w-md mx-auto">
+<div class="w-full bg-surface-container-lowest ambient-shadow rounded-[32px] p-8 md:p-12 border border-surface-container-highest relative overflow-hidden">
+<!-- Branding -->
+<div class="text-center mb-8">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">A Place to Breathe</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Your safe space for healing.</p>
+</div>
+<!-- Gentle Illustration Placeholder -->
+<div class="w-32 h-32 mx-auto mb-8 rounded-full overflow-hidden ambient-shadow border border-surface-container">
+<img class="w-full h-full object-cover" data-alt="A gentle, minimalist digital illustration in a soft circular frame. The image depicts a calming nature scene, perhaps a single soft green leaf floating on a quiet pond, or a gentle rolling hill under a soft, diffused sunrise. The color palette features pastel sage greens (#8ba88e), soft creams (#fbf9f5), and muted earthy tones, adhering to a 'Soft Minimalism' aesthetic. The mood is incredibly tranquil, safe, and breathing-inducing, perfectly suited for a mental wellness app. No harsh lines or high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5zo71z3JSo1F5RpcusBQLkr6QiN7PPtXqz9VLGMJDJzmzEY5g0KQX8_j7ZuE36nKf977-b4qm0ixmGVlXbHPmNA11bkc6XfGbEPusA3NP0xJGEKYKtxUM09HYUvw0NS_fQIgygK1Q1aovmGOUojfXbCM6YyvtnrhmbXQ2j_GiHKh8ixAVslfH4h1jTvfWE8e17i4IaYRdUL2KAxQbYA5klBUGMB1i0vh3Wac16dfUlIjKo0eJeSZG9Q"/>
+</div>
+<!-- Toggle: Login / Join Us -->
+<div class="flex bg-surface-container rounded-full p-1 mb-8" role="tablist">
+<button aria-selected="true" class="flex-1 py-3 px-6 rounded-full font-label-md text-label-md transition-all duration-300 ease-in-out bg-surface-container-lowest text-primary ambient-shadow" id="tab-login" onclick="switchTab('login')" role="tab">
+                    Login
+                </button>
+<button aria-selected="false" class="flex-1 py-3 px-6 rounded-full font-label-md text-label-md transition-all duration-300 ease-in-out text-on-surface-variant hover:text-primary" id="tab-join" onclick="switchTab('join')" role="tab">
+                    Join Us
+                </button>
+</div>
+<!-- Form -->
+<form class="space-y-6" id="auth-form">
+<!-- Name Field (Hidden by default, shown for Join Us) -->
+<div class="hidden opacity-0 transition-opacity duration-300 ease-in-out" id="field-name">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 ml-4" for="name">Preferred Name</label>
+<input class="w-full bg-surface-bright border-none rounded-full px-6 py-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-shadow" id="name" name="name" placeholder="How should we call you?" type="text"/>
+</div>
+<!-- Email/Phone Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 ml-4" for="contact">Email or Phone Number</label>
+<input class="w-full bg-surface-bright border-none rounded-full px-6 py-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-shadow" id="contact" name="contact" placeholder="Enter your details" type="text"/>
+<p class="font-body-md text-[13px] text-on-surface-variant mt-2 ml-4 opacity-70">Take your time. This is a safe space.</p>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-full hover:bg-primary-container transition-colors ambient-shadow flex items-center justify-center gap-2 group" type="submit">
+<span>Send Verification Code</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Guest Link -->
+<div class="mt-8 text-center">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors inline-block border-b border-transparent hover:border-primary pb-1" href="#">
+                    Continue as Guest
+                </a>
+</div>
+</div>
+</main>
+<script>
+        function switchTab(tab) {
+            const loginBtn = document.getElementById('tab-login');
+            const joinBtn = document.getElementById('tab-join');
+            const nameField = document.getElementById('field-name');
+
+            // Reset styles
+            [loginBtn, joinBtn].forEach(btn => {
+                btn.classList.remove('bg-surface-container-lowest', 'text-primary', 'ambient-shadow');
+                btn.classList.add('text-on-surface-variant');
+                btn.setAttribute('aria-selected', 'false');
+            });
+
+            // Apply active styles
+            if (tab === 'login') {
+                loginBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'ambient-shadow');
+                loginBtn.classList.remove('text-on-surface-variant');
+                loginBtn.setAttribute('aria-selected', 'true');
+                
+                // Hide Name field
+                nameField.classList.add('hidden');
+                setTimeout(() => nameField.classList.remove('opacity-100'), 10);
+            } else {
+                joinBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'ambient-shadow');
+                joinBtn.classList.remove('text-on-surface-variant');
+                joinBtn.setAttribute('aria-selected', 'true');
+                
+                // Show Name field
+                nameField.classList.remove('hidden');
+                // Small delay to allow display block to apply before animating opacity
+                setTimeout(() => nameField.classList.add('opacity-100'), 10);
+            }
+        }
+
+        // Form submission prevent default for demo
+        document.getElementById('auth-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Handle logical flow here
+            console.log('Sending verification code...');
+        });
+    </script>
+</body></html>
