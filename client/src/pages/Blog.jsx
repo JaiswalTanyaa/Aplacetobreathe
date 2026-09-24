@@ -1,209 +1,203 @@
 import React, { useState } from 'react';
-import { BookOpen, Clock, ArrowRight, X, Sparkles, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const categories = ['All Articles', 'Expert Advice', 'Student Contributors', 'Wellness Science', 'Personal Essays'];
+
+const articles = [
+  {
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCvHMBXVb7_7uA4zyMAV3Hk6I3MBXZhFelyeDGEgI08xOvQblS5nqLQUVi3X9sodWDzO5e4oCC5XRViPgqbsAwiSFwrPD_sbAY9VLkUPwZIJCtNQQ7h9cigysNK1MIlVfXYabo132IchAIY1hDxaHsDWxhizxslTZNXiJYYsbRVgeag55mSrSfS-4PbnfkZZLtYLZ3fvTEndgxeiQk7GdzZNTvl1K91RpvQ0TiC5RbSI7-GHXZ74KouLw',
+    readTime: '8 min read',
+    category: 'Personal Essays',
+    title: 'The gentle art of saying no without guilt',
+    body: 'Setting boundaries is often framed as a battle. But what if we approached it as an act of profound self-care and mutual respect? Exploring softer ways to protect your energy.',
+    initials: 'EM',
+    initBg: 'bg-primary/20 text-primary',
+    author: 'Elena Markos',
+  },
+  {
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC66CInwOm_nJeJMs_Y7_yvXJRRR31ytacUX9sRrIjs45zUKi9AF7GlqcLHDeiLkSKsZPCD7yZbMRq1DVwWb0ECUdCsJMyir-F2k5zdHNLlx3hkWAgSZfTbhsO_0Aq0fUehgD2ifp4bmvHbLefPcHbw-4N8TLJeRKam7wPVkpIh02p6erAVP12RRUWPxZoQfTLY_rZ6yL7neQSVyphKtwTu06f_6LR_cA34CAQSxpn9AAO0W6kmzEPW3w',
+    readTime: '10 min read',
+    category: 'Expert Advice',
+    title: 'Re-framing anxiety: When your body is trying to help',
+    body: "Instead of viewing anxiety as an enemy to be defeated, somatic therapists suggest listening to it as a protective signal. How to interpret the physical language of your nervous system.",
+    initials: 'JD',
+    initBg: 'bg-secondary-container text-on-secondary-container',
+    author: 'James Davies',
+  },
+  {
+    img: null,
+    readTime: '5 min read',
+    category: 'Student Contributors',
+    title: 'My unexpected journey with mindful breathing',
+    body: '"I used to think meditation was for people who already had their lives figured out. Then I hit a wall during finals week, and a simple four-count breath became my anchor." A personal account of finding calm in chaos.',
+    initials: 'AK',
+    initBg: 'bg-tertiary-container text-on-tertiary-container',
+    author: 'Alex Kim',
+    textCard: true,
+  },
+];
 
 export default function Blog() {
-  const [selectedArticle, setSelectedArticle] = useState(null);
-
-  const featured = {
-    title: 'The Architecture of Rest: Why Doing Nothing is Clinically Necessary',
-    author: 'Dr. Elara Vance, Clinical Director',
-    date: 'Oct 14, 2026',
-    readTime: '8 min read',
-    category: 'Neuroscience & Calm',
-    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
-    summary: 'Our culture treats rest as a reward rather than a biological necessity. Learn how the parasympathetic nervous system requires intentional pauses to prevent neural burn-in.',
-    content: `Rest is not the absence of productivity; it is the biological precondition for healing and neural elasticity. When we deny ourselves unhurried pauses, our sympathetic nervous system remains trapped in a subtle, chronic vigilance. 
-
-In clinical studies, intentional stillness—such as gazing out a window, gentle breathwork, or unguided daydreams—activates the Default Mode Network (DMN). This network consolidates memory, processes emotional residue, and allows the prefrontal cortex to replenish its neurotransmitter reserves.
-
-Next time you feel the urge to fill an empty 10 minutes with screen time or chores, grant yourself the grace of conscious idleness. Inhale peace, exhale the urge to perform.`,
-  };
-
-  const articles = [
-    {
-      id: 1,
-      title: 'Befriending the Amygdala: A Somatic Guide to Panicked Thoughts',
-      author: 'Dr. Julian Reed',
-      date: 'Oct 10, 2026',
-      readTime: '5 min read',
-      category: 'Somatic Healing',
-      image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&auto=format&fit=crop&q=80',
-      summary: 'When panic strikes, logic fails because blood flow shifts away from the reasoning brain. Discover somatic techniques to signal physical safety directly to your amygdala.',
-      content: `Your amygdala does not speak English; it speaks sensation. Telling yourself 'don't panic' rarely stops a panic attack because the auditory reasoning pathways are suppressed. Instead, we must speak the language of somatic reassurance: cool water on the face, prolonged exhalations, and grounding pressure on the feet.`,
-    },
-    {
-      id: 2,
-      title: 'How to Listen to Someone in Pain Without Trying to Fix Them',
-      author: 'Amara Singh, LCSW',
-      date: 'Oct 04, 2026',
-      readTime: '6 min read',
-      category: 'Compassionate Care',
-      image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&auto=format&fit=crop&q=80',
-      summary: 'The instinct to solve another persons suffering often stems from our own discomfort with vulnerability. Learn the transformative power of silent presence.',
-      content: `When someone shares deep sorrow, jumping to advice often communicates 'your pain makes me uncomfortable; please resolve it.' Holding space means sitting in the sacred quiet and affirming: 'I hear you. You do not have to carry this completely alone.'`,
-    },
-    {
-      id: 3,
-      title: 'The Sacred Art of Saying "Not Today"',
-      author: 'Kai Sterling',
-      date: 'Sep 28, 2026',
-      readTime: '4 min read',
-      category: 'Boundaries & Growth',
-      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&auto=format&fit=crop&q=80',
-      summary: 'Boundaries are not walls; they are the gates through which we protect our peace. A reflection on reclaiming personal emotional agency without guilt.',
-      content: `A boundary is the distance at which I can love both you and me simultaneously. Saying no to an obligation is frequently saying yes to your nervous system. Remember: you are allowed to disappoint others to avoid betraying yourself.`,
-    },
-  ];
+  const [activeCategory, setActiveCategory] = useState('All Articles');
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      {/* Header */}
-      <section className="text-center max-w-2xl mx-auto mb-12">
-        <span className="inline-block text-primary font-bold text-xs uppercase tracking-widest bg-primary-container/20 px-4 py-1.5 rounded-full mb-3">
-          The Breathing Room
-        </span>
-        <h1 className="font-headline text-3xl sm:text-4xl font-extrabold text-on-surface mb-3">
-          Quiet Thoughts & Clinical Insights
-        </h1>
-        <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed">
-          Essays and practical wisdom on neuro-wellbeing, emotional grounding, and the gentle pace of sustainable healing.
-        </p>
-      </section>
+    <div className="relative min-h-screen flex flex-col bg-background text-on-background font-body-md antialiased overflow-x-hidden">
+      {/* Ambient Background */}
+      <div className="ambient-blob absolute top-0 left-[-100px] pointer-events-none"
+        style={{ width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(236,220,253,0.4) 0%, rgba(251,249,245,0) 70%)', borderRadius: '50%', filter: 'blur(40px)', zIndex: -1 }} />
+      <div className="ambient-blob absolute pointer-events-none"
+        style={{ top: '800px', right: '-200px', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(204,234,206,0.3) 0%, rgba(251,249,245,0) 70%)', borderRadius: '50%', filter: 'blur(40px)', zIndex: -1 }} />
 
-      {/* Featured Article Card */}
-      <section className="mb-14">
-        <div
-          onClick={() => setSelectedArticle(featured)}
-          className="cursor-pointer bg-white rounded-3xl border border-surface-container-high overflow-hidden shadow-sm hover:shadow-md transition-all grid grid-cols-1 lg:grid-cols-12 group"
-        >
-          <div className="lg:col-span-6 h-64 lg:h-auto overflow-hidden relative">
-            <img
-              src={featured.image}
-              alt={featured.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <span className="absolute top-4 left-4 bg-primary text-white text-xs font-bold uppercase px-3 py-1 rounded-full">
-              Featured Reading
-            </span>
-          </div>
+      {/* Reading Progress Bar */}
+      <div className="fixed top-0 left-0 h-1 bg-surface-variant w-full z-[60]">
+        <div className="h-full bg-primary-container transition-all duration-500 ease-out" style={{ width: '15%' }} />
+      </div>
 
-          <div className="lg:col-span-6 p-8 lg:p-12 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-3 text-xs text-on-surface-variant font-semibold mb-3">
-                <span className="text-primary font-bold">{featured.category}</span>
-                <span>&bull;</span>
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" />
-                  {featured.readTime}
-                </span>
+      <main className="flex-grow pt-[120px] pb-20 px-6 max-w-container-max mx-auto w-full">
+
+        {/* Featured Article */}
+        <article className="mb-20">
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            {/* Image */}
+            <div className="w-full lg:w-3/5 relative group rounded-[2rem] overflow-hidden shadow-[0_20px_40px_-15px_rgba(139,168,142,0.15)]">
+              <img
+                className="w-full aspect-[4/3] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                alt="A calming digital illustration of a figure sitting peacefully by a glowing pond"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXd6WE5Ccf_-dLG6WNaXGD_SeGa_fEXswZTyzAja-oeHejhUarZr0fPNCBngvLRPg2dokxl02ds8C16OqkKEYukKo6LYEZwJoR-ReUTNuvdMUOlJ6lcZP5uTfuyWf6XpHgPzO0mXmumBk8UrXZyPEKb8VwOrPtfjMeb9KOo_-IVCBIUkNwYXguH-1aNM_Mul-t2zeX8_eOh3oywYo86sVetpZW2IVc0Lx5RSf3_TRy_lTle7RD-pI1Sg"
+              />
+              <div className="absolute top-6 left-6">
+                <span className="bg-surface/90 backdrop-blur-sm text-primary font-label-md text-label-md px-4 py-2 rounded-full shadow-sm">Featured Read</span>
               </div>
+            </div>
 
-              <h2 className="font-headline font-bold text-2xl lg:text-3xl text-on-surface mb-4 group-hover:text-primary transition-colors">
-                {featured.title}
-              </h2>
-
-              <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed mb-6">
-                {featured.summary}
+            {/* Content */}
+            <div className="w-full lg:w-2/5 flex flex-col justify-center space-y-6">
+              <div className="flex items-center gap-3 text-secondary font-label-md text-label-md">
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>schedule</span>
+                <span>12 min read</span>
+                <span className="text-surface-dim">•</span>
+                <span>Wellness Science</span>
+              </div>
+              <h1 className="font-headline-xl text-headline-xl text-on-surface leading-tight">
+                Finding stillness in a world that never stops moving
+              </h1>
+              <p className="font-body-lg text-body-lg text-on-surface-variant">
+                Our nervous systems were not built for constant digital connection. Learn practical, scientifically-backed methods to cultivate a quiet mind and reclaim your internal space without completely disconnecting from the world.
               </p>
-            </div>
-
-            <div className="flex items-center justify-between pt-4 border-t border-surface-container-high text-xs">
-              <span className="font-bold text-on-surface">{featured.author}</span>
-              <span className="text-primary font-bold inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                Read Essay &rarr;
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Article Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        {articles.map((art) => (
-          <div
-            key={art.id}
-            onClick={() => setSelectedArticle(art)}
-            className="cursor-pointer bg-white rounded-3xl border border-surface-container-high overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group"
-          >
-            <div>
-              <div className="h-48 overflow-hidden">
-                <img
-                  src={art.image}
-                  alt={art.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              <div className="p-6">
-                <div className="flex items-center justify-between text-xs text-on-surface-variant mb-2">
-                  <span className="text-primary font-bold">{art.category}</span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
-                    {art.readTime}
-                  </span>
+              <div className="pt-4 flex items-center justify-between border-t border-surface-container-high mt-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-headline-md">
+                    SJ
+                  </div>
+                  <div>
+                    <p className="font-headline-md text-on-surface m-0" style={{ fontSize: '16px' }}>Dr. Sarah Jenkins</p>
+                    <p className="font-body-md text-on-surface-variant m-0" style={{ fontSize: '14px' }}>Clinical Psychologist</p>
+                  </div>
                 </div>
-
-                <h3 className="font-headline font-bold text-lg text-on-surface mb-2 group-hover:text-primary transition-colors">
-                  {art.title}
-                </h3>
-
-                <p className="text-xs text-on-surface-variant leading-relaxed line-clamp-3 mb-4">
-                  {art.summary}
-                </p>
               </div>
             </div>
-
-            <div className="p-6 pt-0 border-t border-surface-container-high flex items-center justify-between text-xs mt-auto">
-              <span className="text-on-surface font-semibold">{art.author}</span>
-              <span className="text-primary font-bold flex items-center gap-1">
-                Read &rarr;
-              </span>
-            </div>
           </div>
-        ))}
-      </section>
+        </article>
 
-      {/* Article Reader Modal */}
-      {selectedArticle && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-8 md:p-10 shadow-2xl border border-surface-container-high relative max-h-[85vh] overflow-y-auto">
-            <button
-              onClick={() => setSelectedArticle(null)}
-              className="absolute top-6 right-6 p-2 rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">
-              {selectedArticle.category} &bull; {selectedArticle.readTime}
-            </span>
-
-            <h2 className="font-headline font-extrabold text-2xl md:text-3xl text-on-surface mb-2">
-              {selectedArticle.title}
-            </h2>
-
-            <p className="text-xs text-on-surface-variant mb-6 pb-4 border-b border-surface-container-high">
-              By <strong>{selectedArticle.author}</strong> &bull; {selectedArticle.date}
-            </p>
-
-            <div className="prose prose-stone text-sm text-on-surface leading-relaxed space-y-4">
-              {selectedArticle.content.split('\n\n').map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-surface-container-high flex justify-between items-center text-xs">
-              <span className="text-on-surface-variant">May this reflection bring peace to your day.</span>
+        {/* Category Tabs */}
+        <section className="mb-16 flex flex-col items-center">
+          <h2 className="sr-only">Article Categories</h2>
+          <div className="flex overflow-x-auto w-full no-scrollbar justify-start md:justify-center gap-4 pb-4"
+            style={{ scrollbarWidth: 'none' }}>
+            {categories.map((cat) => (
               <button
-                onClick={() => setSelectedArticle(null)}
-                className="px-6 py-2 rounded-full bg-primary text-white font-bold"
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`whitespace-nowrap px-6 py-3 rounded-full font-label-md text-label-md transition-all ${
+                  activeCategory === cat
+                    ? 'bg-primary-container text-on-primary-container shadow-sm'
+                    : 'bg-surface-container hover:bg-surface-container-high text-on-surface-variant'
+                }`}
               >
-                Close Reading
+                {cat}
               </button>
-            </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Article Grid */}
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.map((a, i) =>
+            a.textCard ? (
+              <article key={i} className="bg-surface-container border border-surface-dim rounded-2xl p-8 flex flex-col gap-4 shadow-[0_4px_20px_0_rgba(139,168,142,0.05)] hover:shadow-[0_8px_30px_0_rgba(139,168,142,0.1)] transition-all duration-300 group cursor-pointer h-full relative overflow-hidden">
+                <div className="absolute -bottom-10 -right-10 text-surface-dim/40 material-symbols-outlined pointer-events-none rotate-[-15deg]"
+                  style={{ fontSize: '150px', fontVariationSettings: "'FILL' 1" }}>spa</div>
+                <div className="flex items-center gap-2 text-secondary font-label-md relative z-10" style={{ fontSize: '12px' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>menu_book</span>
+                  <span>{a.readTime}</span>
+                  <span className="text-surface-dim">•</span>
+                  <span>{a.category}</span>
+                </div>
+                <h3 className="font-headline-lg text-on-surface group-hover:text-primary transition-colors mt-2 relative z-10 leading-tight" style={{ fontSize: '28px' }}>{a.title}</h3>
+                <p className="font-body-lg text-on-surface-variant flex-grow leading-relaxed mt-4 relative z-10">{a.body}</p>
+                <div className="flex items-center justify-between mt-6 pt-4 border-t border-outline-variant/30 relative z-10">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full ${a.initBg} flex items-center justify-center font-label-md`} style={{ fontSize: '12px' }}>{a.initials}</div>
+                    <span className="font-label-md text-on-surface">{a.author}</span>
+                  </div>
+                  <button className="text-on-surface-variant hover:text-primary transition-colors">
+                    <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>bookmark_border</span>
+                  </button>
+                </div>
+              </article>
+            ) : (
+              <article key={i} className="bg-surface-container-lowest border border-surface-dim rounded-2xl p-6 flex flex-col gap-4 shadow-[0_4px_20px_0_rgba(139,168,142,0.05)] hover:shadow-[0_8px_30px_0_rgba(139,168,142,0.1)] transition-all duration-300 group cursor-pointer h-full">
+                <div className="w-full aspect-[16/10] rounded-xl overflow-hidden mb-2">
+                  <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={a.title} src={a.img} />
+                </div>
+                <div className="flex items-center gap-2 text-secondary font-label-md" style={{ fontSize: '12px' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>menu_book</span>
+                  <span>{a.readTime}</span>
+                  <span className="text-surface-dim">•</span>
+                  <span>{a.category}</span>
+                </div>
+                <h3 className="font-headline-lg text-on-surface group-hover:text-primary transition-colors leading-snug" style={{ fontSize: '22px' }}>{a.title}</h3>
+                <p className="font-body-md text-on-surface-variant flex-grow line-clamp-3">{a.body}</p>
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-surface-container">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full ${a.initBg} flex items-center justify-center font-label-md`} style={{ fontSize: '12px' }}>{a.initials}</div>
+                    <span className="font-label-md text-on-surface">{a.author}</span>
+                  </div>
+                  <button className="text-on-surface-variant hover:text-primary transition-colors">
+                    <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>bookmark_border</span>
+                  </button>
+                </div>
+              </article>
+            )
+          )}
+        </section>
+
+        {/* Load More */}
+        <div className="mt-16 flex justify-center">
+          <button className="px-8 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-on-primary transition-colors font-label-md text-label-md flex items-center gap-2">
+            Load more articles
+            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>expand_more</span>
+          </button>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="w-full mt-20 bg-surface-container">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 py-20 max-w-container-max mx-auto">
+          <div className="flex flex-col gap-4">
+            <span className="font-headline-lg text-headline-lg font-bold text-primary">A Place to Breathe</span>
+            <p className="font-body-md text-body-md text-tertiary">© 2024 A Place to Breathe. Your safe space for healing.</p>
+          </div>
+          <div className="flex flex-col gap-3">
+            {['Mission', 'Privacy Policy', 'Terms of Service'].map((l) => (
+              <a key={l} href="#" className="font-body-md text-body-md text-on-surface-variant hover:text-primary hover:underline transition-all">{l}</a>
+            ))}
+          </div>
+          <div className="flex flex-col gap-3">
+            <Link to="/crisis" className="font-body-md text-body-md text-primary font-bold hover:underline transition-all">Crisis Support</Link>
           </div>
         </div>
-      )}
+      </footer>
     </div>
   );
 }

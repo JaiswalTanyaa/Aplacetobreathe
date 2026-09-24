@@ -1,162 +1,180 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldAlert, PhoneCall, MessageSquare, HeartHandshake, Wind, ArrowRight, LifeBuoy } from 'lucide-react';
+
+const phrases = ['Breathe in slowly...', 'Hold gently...', 'Breathe out fully...'];
 
 export default function CrisisSupport() {
-  const hotlines = [
-    {
-      name: '988 Suicide & Crisis Lifeline',
-      desc: 'Free, confidential support for people in distress or crisis. Available 24 hours a day, 7 days a week.',
-      contact: 'Call or Text 988',
-      type: 'Phone / Text',
-      urgent: true,
-    },
-    {
-      name: 'Crisis Text Line',
-      desc: 'Connect with a volunteer crisis counselor 24/7 for free emotional support.',
-      contact: 'Text HOME to 741741',
-      type: 'SMS Text',
-      urgent: true,
-    },
-    {
-      name: 'The Trevor Project (LGBTQ+ Youth)',
-      desc: 'Dedicated crisis intervention and suicide prevention services for LGBTQ young people.',
-      contact: 'Call 1-866-488-7386 or Text START to 678-678',
-      type: 'Hotline & Text',
-      urgent: false,
-    },
-    {
-      name: 'Veterans Crisis Line',
-      desc: 'Confidential support for veterans and their loved ones in times of acute need.',
-      contact: 'Dial 988, then Press 1 or Text 838255',
-      type: 'Specialized Hotline',
-      urgent: false,
-    },
-    {
-      name: 'SAMHSA National Helpline',
-      desc: 'Treatment referral and information service for mental health and substance use challenges.',
-      contact: '1-800-662-HELP (4357)',
-      type: 'Referral Line',
-      urgent: false,
-    },
-  ];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setPhraseIndex((i) => (i + 1) % phrases.length);
+        setVisible(true);
+      }, 500);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      {/* Critical Alert Banner */}
-      <div className="bg-coral/15 border-2 border-coral rounded-3xl p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-        <div className="flex items-start gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-coral text-white flex items-center justify-center flex-shrink-0 shadow">
-            <ShieldAlert className="w-8 h-8" />
-          </div>
-          <div>
-            <h1 className="font-headline text-2xl md:text-3xl font-bold text-coral-dark mb-1">
-              You Are Not Alone. We Are Here.
-            </h1>
-            <p className="text-on-surface text-sm max-w-2xl leading-relaxed">
-              If you are in immediate danger, experiencing thoughts of self-harm, or feeling unable to keep yourself safe, please reach out directly to the emergency lifelines below. They are free, confidential, and available every minute of every day.
-            </p>
-          </div>
-        </div>
-
-        <a
-          href="tel:988"
-          className="bg-coral hover:bg-coral-dark text-white font-extrabold px-8 py-4 rounded-full text-base shadow-lg transition-transform hover:scale-105 flex items-center gap-2 flex-shrink-0"
-        >
-          <PhoneCall className="w-5 h-5" />
-          <span>Dial 988 Now</span>
-        </a>
-      </div>
-
-      {/* Grounding First-Aid Box */}
-      <div className="bg-white rounded-3xl p-8 mb-12 border border-surface-container-high shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
-        <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-container/20 text-primary text-xs font-bold uppercase">
-            <Wind className="w-3.5 h-3.5" /> Immediate Grounding
-          </div>
-          <h2 className="font-headline text-2xl font-bold text-on-surface">
-            Feeling overwhelmed right now? Let's take a slow breath together.
-          </h2>
-          <p className="text-sm text-on-surface-variant max-w-xl">
-            Focus solely on the rhythm of your breathing. Gently breathe in for 4 seconds, hold for 7, and exhale completely for 8. It resets your body's survival reflex.
-          </p>
-        </div>
-
+    <div
+      className="relative min-h-screen flex flex-col justify-center overflow-x-hidden"
+      style={{ background: '#fbf9f5' }}
+    >
+      {/* Persistent Exit Button */}
+      <div className="fixed top-6 right-6 z-50">
         <Link
-          to="/explore"
-          className="px-8 py-4 rounded-full bg-primary text-white font-bold text-sm shadow hover:bg-opacity-90 transition-all inline-flex items-center gap-2 flex-shrink-0"
+          to="/"
+          className="flex items-center gap-2 px-6 py-3 bg-surface-container rounded-full border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md shadow-[0_4px_20px_rgba(139,168,142,0.05)]"
         >
-          <span>Open Breathing Pacer</span>
-          <ArrowRight className="w-4 h-4" />
+          <span className="material-symbols-outlined">close</span>
+          Return to Safety
         </Link>
       </div>
 
-      {/* Hotlines Directory */}
-      <h2 className="font-headline text-2xl font-bold text-on-surface mb-6">
-        Free 24/7 Helplines & Direct Support
-      </h2>
+      {/* Background Atmospheric Glow */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '-10%', left: '-10%',
+          width: '120%', height: '120%',
+          background: 'radial-gradient(circle at 50% 50%, rgba(221,143,80,0.08) 0%, rgba(251,249,245,0) 60%)',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-        {hotlines.map((h, idx) => (
-          <div
-            key={idx}
-            className={`p-6 rounded-3xl border flex flex-col justify-between ${
-              h.urgent
-                ? 'bg-white border-coral/40 shadow-sm'
-                : 'bg-surface-container-low border-surface-container-high'
-            }`}
+      <style>{`
+        .breathe-animation {
+          animation: breathe 8s ease-in-out infinite;
+        }
+        @keyframes breathe {
+          0%   { transform: scale(0.8); opacity: 0.4; box-shadow: 0 0 20px rgba(221,143,80,0.2); }
+          50%  { transform: scale(1.2); opacity: 0.8; box-shadow: 0 0 40px rgba(221,143,80,0.4); }
+          100% { transform: scale(0.8); opacity: 0.4; box-shadow: 0 0 20px rgba(221,143,80,0.2); }
+        }
+      `}</style>
+
+      <main className="relative z-10 w-full max-w-container-max mx-auto px-6 py-10 md:py-20 flex flex-col items-center">
+
+        {/* Hero Section */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6"
+            style={{ background: 'rgba(221,143,80,0.2)', color: '#dd8f50' }}>
+            <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>favorite</span>
+          </div>
+          <h1 className="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-on-surface mb-6">
+            You are not alone.<br />We are here for you right now.
+          </h1>
+          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+            If you feel you cannot keep yourself safe, please use the resources below immediately. There is always someone ready to listen.
+          </p>
+        </div>
+
+        {/* Primary Immediate Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl mx-auto mb-24">
+          <button
+            className="flex flex-col items-center justify-center gap-3 p-8 rounded-xl transition-all duration-300 hover:-translate-y-1"
+            style={{
+              background: '#dd8f50',
+              color: '#592c00',
+              boxShadow: '0 8px 30px rgba(221,143,80,0.2)',
+            }}
           >
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant">
-                  {h.type}
-                </span>
-                {h.urgent && (
-                  <span className="text-xs font-extrabold text-coral uppercase tracking-wider">
-                    24/7 Immediate
-                  </span>
-                )}
-              </div>
-              <h3 className="font-headline font-bold text-lg text-on-surface mb-2">
-                {h.name}
-              </h3>
-              <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
-                {h.desc}
-              </p>
-            </div>
+            <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>call</span>
+            <span className="font-headline-md text-headline-md">Call Now</span>
+            <span className="font-label-md text-label-md opacity-80">Connect instantly</span>
+          </button>
+          <button
+            className="flex flex-col items-center justify-center gap-3 p-8 rounded-xl transition-all duration-300 hover:-translate-y-1"
+            style={{
+              background: '#8ba88e',
+              color: '#233d29',
+              boxShadow: '0 8px 30px rgba(139,168,142,0.2)',
+            }}
+          >
+            <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>chat</span>
+            <span className="font-headline-md text-headline-md">Chat Online</span>
+            <span className="font-label-md text-label-md opacity-80">Text with a counselor</span>
+          </button>
+        </div>
 
-            <div className="pt-4 border-t border-surface-container-high flex items-center justify-between">
-              <span className="text-sm font-bold text-on-surface">{h.contact}</span>
-              <a
-                href={h.contact.startsWith('Call 1') ? 'tel:18664887386' : 'tel:988'}
-                className="px-4 py-2 rounded-xl bg-coral/20 hover:bg-coral text-coral-dark hover:text-white transition-colors text-xs font-bold inline-flex items-center gap-1.5"
-              >
-                <PhoneCall className="w-3.5 h-3.5" />
-                <span>Call Hotline</span>
-              </a>
+        {/* Grounding Exercise */}
+        <div className="w-full max-w-4xl mx-auto mb-24 flex flex-col items-center">
+          <h2 className="font-headline-lg text-headline-lg text-on-surface mb-12 text-center">
+            {"Let's take a breath together."}
+          </h2>
+          <div className="relative w-64 h-64 flex items-center justify-center mb-8">
+            {/* Outer pulsing rings */}
+            <div className="breathe-animation absolute inset-0 rounded-full border-2"
+              style={{ borderColor: 'rgba(221,143,80,0.3)', animationDelay: '-2s' }} />
+            <div className="breathe-animation absolute inset-4 rounded-full border-2"
+              style={{ borderColor: 'rgba(221,143,80,0.4)', animationDelay: '-1s' }} />
+            {/* Core circle */}
+            <div className="breathe-animation absolute inset-8 rounded-full flex items-center justify-center backdrop-blur-sm"
+              style={{ background: 'rgba(221,143,80,0.2)' }}>
+              <span className="material-symbols-outlined text-5xl opacity-50"
+                style={{ color: '#dd8f50', fontVariationSettings: "'FILL' 0" }}>air</span>
             </div>
           </div>
-        ))}
-      </div>
+          <p
+            className="font-body-lg text-body-lg text-on-surface-variant text-center h-8 transition-opacity duration-500"
+            style={{ opacity: visible ? 1 : 0 }}
+          >
+            {phrases[phraseIndex]}
+          </p>
+        </div>
 
-      {/* International Helplines */}
-      <div className="bg-surface-container p-8 rounded-3xl border border-outline-variant/30 text-center max-w-3xl mx-auto">
-        <h3 className="font-headline font-bold text-xl text-on-surface mb-2">
-          Outside the US & Canada?
-        </h3>
-        <p className="text-xs text-on-surface-variant leading-relaxed mb-4">
-          Support is available globally. In the UK, call <strong>111</strong> or Samaritans at <strong>116 123</strong>. In Australia, contact Lifeline at <strong>13 11 14</strong>. In India, contact Vandrevala Foundation at <strong>9999 666 555</strong> or NIMHANS at <strong>080-46110007</strong>.
-        </p>
-        <a
-          href="https://findahelpline.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
-        >
-          <span>Find a crisis helpline in your country at FindAHelpline.com</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </a>
-      </div>
+        {/* Helplines List */}
+        <div className="w-full max-w-3xl mx-auto">
+          <h3 className="font-headline-md text-headline-md text-on-surface mb-8 text-center">Important Numbers</h3>
+          <div className="space-y-4">
+            {/* Resource 1 */}
+            <div className="flex items-center justify-between p-6 bg-surface-container-lowest rounded-xl border border-surface-dim shadow-[0_4px_24px_rgba(139,168,142,0.05)] hover:border-outline-variant transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined">flag</span>
+                </div>
+                <div>
+                  <h4 className="font-label-md text-label-md text-on-surface mb-1">National Suicide Prevention Lifeline (USA)</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Available 24/7. Free and confidential.</p>
+                </div>
+              </div>
+              <a className="font-headline-md text-headline-md text-tertiary hover:underline" href="tel:988">988</a>
+            </div>
+            {/* Resource 2 */}
+            <div className="flex items-center justify-between p-6 bg-surface-container-lowest rounded-xl border border-surface-dim shadow-[0_4px_24px_rgba(139,168,142,0.05)] hover:border-outline-variant transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined">public</span>
+                </div>
+                <div>
+                  <h4 className="font-label-md text-label-md text-on-surface mb-1">International Helplines</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Find a crisis center anywhere in the world.</p>
+                </div>
+              </div>
+              <button className="px-6 py-2 rounded-full bg-surface-container border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-variant transition-colors">
+                Find by Country
+              </button>
+            </div>
+            {/* Resource 3 */}
+            <div className="flex items-center justify-between p-6 bg-surface-container-lowest rounded-xl border border-surface-dim shadow-[0_4px_24px_rgba(139,168,142,0.05)] hover:border-outline-variant transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined">sms</span>
+                </div>
+                <div>
+                  <h4 className="font-label-md text-label-md text-on-surface mb-1">Crisis Text Line</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Text HOME to connect with a crisis counselor.</p>
+                </div>
+              </div>
+              <a className="font-headline-md text-headline-md text-tertiary hover:underline" href="sms:741741">741741</a>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

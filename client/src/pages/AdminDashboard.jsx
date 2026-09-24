@@ -1,569 +1,304 @@
-import React, { useState, useEffect } from 'react';
-import { api } from '../services/api';
-import {
-  Database,
-  ShieldCheck,
-  Calendar,
-  Users,
-  MessageSquare,
-  Trash2,
-  Plus,
-  RefreshCw,
-  CheckCircle2,
-  Layers,
-  FileText,
-  ThumbsUp,
-  Inbox,
-  Filter,
-} from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function AdminDashboard() {
-  const [health, setHealth] = useState(null);
-  const [bookings, setBookings] = useState([]);
-  const [therapists, setTherapists] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('bookings');
-  const [notice, setNotice] = useState(null);
-
-  // Content Events tab state (from manage_content_events_admin)
-  const [contentEvents, setContentEvents] = useState([
-    { id: 1, title: 'The Science of Mindful Breathing', type: 'Workshop', status: 'Published', date: 'Oct 24, 2026', signups: 48 },
-    { id: 2, title: 'Finals Without the Freak-out', type: 'Student Workshop', status: 'Published', date: 'Nov 02, 2026', signups: 82 },
-    { id: 3, title: 'Grief & Gentle Healing Circle', type: 'Peer Support', status: 'Draft', date: 'Nov 10, 2026', signups: 14 },
-    { id: 4, title: 'Digital Detox & Somatic Reset', type: 'Webinar', status: 'Published', date: 'Nov 18, 2026', signups: 65 },
-  ]);
-
-  // Submissions tab state (from manage_submissions_admin)
-  const [submissions, setSubmissions] = useState([
-    {
-      id: 1,
-      sender: 'Marcus T. (marcus@example.com)',
-      category: 'Inquiry',
-      text: 'Looking for a somatic practitioner who specializes in neurodivergent adults and sensory overload.',
-      status: 'Pending',
-      date: 'Today at 9:15 AM',
-    },
-    {
-      id: 2,
-      sender: 'Elena K. (Anonymous)',
-      category: 'Soul Food Tip',
-      text: 'Practicing the 5-4-3-2-1 technique while touching cold ceramic tea mug grounded me completely.',
-      status: 'Approved',
-      date: 'Yesterday at 3:40 PM',
-    },
-    {
-      id: 3,
-      sender: 'Jordan W. (jordan@example.com)',
-      category: 'Workshop Suggestion',
-      text: 'Could we organize a workshop on balancing workplace burnout with evening creative writing?',
-      status: 'Reviewed',
-      date: 'Sep 08, 2026',
-    },
-  ]);
-
-  // New therapist form state
-  const [showAddTherapist, setShowAddTherapist] = useState(false);
-  const [newTherapist, setNewTherapist] = useState({
-    name: '',
-    title: '',
-    bio: '',
-    specialties: 'Anxiety, Mindfulness',
-    hourlyRate: 100,
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
-  });
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const [h, b, t] = await Promise.all([
-        api.getHealth().catch(() => null),
-        api.getBookings().catch(() => []),
-        api.getTherapists().catch(() => []),
-      ]);
-      setHealth(h);
-      setBookings(b);
-      setTherapists(t);
-    } catch (err) {
-      console.warn('Admin load error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleCancelBooking = async (id) => {
-    try {
-      await api.cancelBooking(id);
-      setBookings(bookings.filter((b) => b._id !== id));
-      setNotice('Booking removed successfully.');
-      setTimeout(() => setNotice(null), 3000);
-    } catch (err) {
-      console.warn('Booking cancel failed:', err);
-    }
-  };
-
-  const handleAddTherapist = async (e) => {
-    e.preventDefault();
-    try {
-      const created = await api.createTherapist({
-        ...newTherapist,
-        specialties: newTherapist.specialties.split(',').map((s) => s.trim()),
-      });
-      setTherapists([created, ...therapists]);
-      setShowAddTherapist(false);
-      setNewTherapist({
-        name: '',
-        title: '',
-        bio: '',
-        specialties: 'Anxiety, Mindfulness',
-        hourlyRate: 100,
-        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
-      });
-      setNotice('Therapist registered successfully in database.');
-      setTimeout(() => setNotice(null), 3000);
-    } catch (err) {
-      console.warn('Therapist add failed:', err);
-    }
-  };
-
-  const handleApproveSubmission = (id) => {
-    setSubmissions(
-      submissions.map((s) => (s.id === id ? { ...s, status: 'Approved' } : s))
-    );
-    setNotice('Submission approved and published to Sanctuary.');
-    setTimeout(() => setNotice(null), 3000);
-  };
-
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-container/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
-            <ShieldCheck className="w-4 h-4" />
-            Sanctuary Operations Suite
-          </div>
-          <h1 className="font-headline text-3xl font-extrabold text-on-surface">
-            Admin Portal & Operations
-          </h1>
+    <div className="font-body-md text-body-md bg-background min-h-screen relative overflow-x-hidden">
+
+      {/* Organic Blobs */}
+      <div className="organic-blob w-[500px] h-[500px] bg-secondary-container rounded-full absolute"
+        style={{ top: '-12rem', left: '-12rem', filter: 'blur(80px)', opacity: 0.4, zIndex: -1, animation: 'pulse 15s infinite alternate ease-in-out' }} />
+      <div className="organic-blob w-[400px] h-[400px] bg-primary-fixed rounded-full absolute"
+        style={{ top: '50%', right: '-6rem', filter: 'blur(80px)', opacity: 0.4, zIndex: -1, animation: 'pulse 15s infinite alternate ease-in-out' }} />
+
+      <style>{`
+        @keyframes pulse {
+          0%   { transform: scale(1) translate(0, 0); }
+          100% { transform: scale(1.2) translate(5%, 5%); }
+        }
+        .glass-card {
+          background: rgba(255,255,255,0.4);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255,255,255,0.5);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover { transform: translateY(-4px); }
+      `}</style>
+
+      {/* Side Nav */}
+      <aside className="h-screen w-64 fixed left-0 top-0 bg-surface-container-low shadow-[4px_0_24px_rgba(139,168,142,0.05)] flex flex-col py-8 gap-2 z-50">
+        <div className="px-6 mb-10">
+          <h1 className="font-headline-md text-headline-md font-bold text-on-surface">Admin Panel</h1>
+          <p className="text-on-surface-variant/70 text-sm">Management Console</p>
         </div>
-
-        <button
-          onClick={fetchData}
-          className="px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-bold flex items-center gap-2 transition-colors"
-        >
-          <RefreshCw className="w-4 h-4" />
-          <span>Refresh Metrics</span>
-        </button>
-      </div>
-
-      {notice && (
-        <div className="mb-6 p-4 rounded-2xl bg-primary-container/25 text-on-primary-container text-xs flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-          <span>{notice}</span>
-        </div>
-      )}
-
-      {/* Database & Cloud Health Bar */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border border-surface-container-high mb-8">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-primary-container/30 text-primary flex items-center justify-center">
-              <Database className="w-6 h-6" />
-            </div>
+        <nav className="flex-1 space-y-1">
+          <a href="#" className="bg-primary-container text-on-primary-container rounded-xl mx-2 px-4 py-3 flex items-center gap-3">
+            <span className="material-symbols-outlined">dashboard</span>
+            <span className="font-body-md">Dashboard</span>
+          </a>
+          <a href="#" className="text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3">
+            <span className="material-symbols-outlined">group</span>
+            <span className="font-body-md">Users</span>
+          </a>
+          <a href="#" className="text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3">
+            <span className="material-symbols-outlined">edit_note</span>
+            <span className="font-body-md">Content</span>
+          </a>
+          <a href="#" className="text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3">
+            <span className="material-symbols-outlined">analytics</span>
+            <span className="font-body-md">Reports</span>
+          </a>
+          <a href="#" className="text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-variant/50 rounded-xl flex items-center gap-3">
+            <span className="material-symbols-outlined">settings</span>
+            <span className="font-body-md">Settings</span>
+          </a>
+        </nav>
+        <div className="px-4 mt-auto">
+          <Link to="/">
+            <button className="w-full py-3 bg-secondary-container text-on-secondary-container rounded-full font-label-md flex items-center justify-center gap-2 hover:opacity-80 transition-opacity">
+              <span className="material-symbols-outlined text-sm">visibility</span>
+              View Site
+            </button>
+          </Link>
+          <div className="mt-6 flex items-center gap-3 px-2">
+            <img
+              className="w-10 h-10 rounded-full object-cover border-2 border-primary-container"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9YgvfViRbcCO00cKgCHf9dRgLi2HhloyFtu9ATegKJ-ti1myk-gUtLXIMSIgRjjt6vIaIFnsiCYw6mS7VjQx4zzBlUPkRDBB8-lj4NROPygUWnTGTixEm4ZZd00u12O5t2xYwJ3Y3do9aUBDQskKdsmVEcqggfScdYmCpIg_agMT7lExRwByHmrNy9NgEbauZ7rzHlJVEZee6Sa0Lcnc7jq1bEENLDT8gmMwcUg41qbj0n1Y7llNs7g"
+              alt="Admin Profile"
+            />
             <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-headline font-bold text-base text-on-surface">
-                  MongoDB Atlas Cluster
-                </h3>
-                <span
-                  className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                    health?.database?.connected
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-amber-100 text-amber-800'
-                  }`}
-                >
-                  {health?.database?.connected ? 'Atlas Connected (Live)' : 'Resilient Fallback Mode'}
-                </span>
-              </div>
-              <p className="text-xs text-on-surface-variant font-mono">
-                {health?.database?.cluster || 'cluster0.pvsgeha.mongodb.net'} &bull; DB: {health?.database?.dbName || 'breathe_sanctuary'}
-              </p>
+              <p className="text-sm font-semibold text-on-surface">Admin Profile</p>
+              <p className="text-xs text-on-surface-variant">System Manager</p>
             </div>
           </div>
+        </div>
+      </aside>
 
-          <div className="text-xs text-on-surface-variant text-right">
-            <p>API Status: <strong className="text-primary font-mono">/api/health (Healthy)</strong></p>
-            <p>Database Ready State: <strong>{health?.database?.readyStateDescription || 'Operational'}</strong></p>
+      {/* Main Content */}
+      <main className="ml-64 p-6 max-w-container-max mx-auto min-h-screen">
+
+        {/* Header */}
+        <header className="flex justify-between items-end mb-12 pt-8">
+          <div>
+            <h2 className="font-headline-xl text-headline-xl text-primary mb-2">Welcome back, Admin.</h2>
+            <p className="text-body-lg text-on-surface-variant">Here is a snapshot of the sanctuary today.</p>
           </div>
-        </div>
-      </div>
-
-      {/* Navigation Tabs covering all Stitch admin screens */}
-      <div className="flex flex-wrap gap-2 border-b border-surface-container-high pb-4 mb-8">
-        <button
-          onClick={() => setActiveTab('bookings')}
-          className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-            activeTab === 'bookings'
-              ? 'bg-primary text-white shadow-sm'
-              : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
-          }`}
-        >
-          <Calendar className="w-4 h-4" />
-          <span>Therapy Bookings ({bookings.length})</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('therapists')}
-          className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-            activeTab === 'therapists'
-              ? 'bg-primary text-white shadow-sm'
-              : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
-          }`}
-        >
-          <Users className="w-4 h-4" />
-          <span>Therapist Directory ({therapists.length})</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('content')}
-          className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-            activeTab === 'content'
-              ? 'bg-primary text-white shadow-sm'
-              : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
-          }`}
-        >
-          <Layers className="w-4 h-4" />
-          <span>Content & Events ({contentEvents.length})</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('submissions')}
-          className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-            activeTab === 'submissions'
-              ? 'bg-primary text-white shadow-sm'
-              : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
-          }`}
-        >
-          <Inbox className="w-4 h-4" />
-          <span>User Inquiries & Submissions ({submissions.length})</span>
-        </button>
-      </div>
-
-      {/* Tab 1: Bookings Management */}
-      {activeTab === 'bookings' && (
-        <div>
-          {bookings.length === 0 ? (
-            <div className="p-12 text-center bg-white rounded-3xl border border-dashed border-outline-variant">
-              <Calendar className="w-8 h-8 text-outline-variant mx-auto mb-2" />
-              <p className="font-bold text-sm text-on-surface mb-1">No active therapy bookings</p>
-              <p className="text-xs text-on-surface-variant">Sessions booked via the Therapists page will appear here.</p>
-            </div>
-          ) : (
-            <div className="bg-white rounded-3xl shadow-sm border border-surface-container-high overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
-                  <thead className="bg-surface-container border-b border-surface-container-high text-on-surface-variant uppercase font-bold text-[11px]">
-                    <tr>
-                      <th className="p-4">Client Name</th>
-                      <th className="p-4">Assigned Therapist</th>
-                      <th className="p-4">Session Date & Time</th>
-                      <th className="p-4">Format</th>
-                      <th className="p-4">Status</th>
-                      <th className="p-4 text-right">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-surface-container-high">
-                    {bookings.map((b) => (
-                      <tr key={b._id} className="hover:bg-surface-container-low/50">
-                        <td className="p-4">
-                          <p className="font-bold text-on-surface">{b.clientName}</p>
-                          <p className="text-[11px] text-on-surface-variant font-mono">{b.clientEmail}</p>
-                        </td>
-                        <td className="p-4 font-semibold text-primary">{b.therapistName}</td>
-                        <td className="p-4">
-                          <span>{b.date}</span> at <strong>{b.timeSlot}</strong>
-                        </td>
-                        <td className="p-4">
-                          <span className="px-2 py-0.5 rounded-md bg-secondary-container/40 text-secondary font-medium">
-                            {b.sessionType}
-                          </span>
-                        </td>
-                        <td className="p-4">
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-800">
-                            {b.status || 'Confirmed'}
-                          </span>
-                        </td>
-                        <td className="p-4 text-right">
-                          <button
-                            onClick={() => handleCancelBooking(b._id)}
-                            className="p-1.5 rounded-lg text-on-surface-variant hover:text-red-600 hover:bg-rose-50 transition-colors"
-                            title="Cancel Booking"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Tab 2: Therapists Management */}
-      {activeTab === 'therapists' && (
-        <div>
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="font-headline font-bold text-lg text-on-surface">
-              Registered Specialists
-            </h3>
-            <button
-              onClick={() => setShowAddTherapist(!showAddTherapist)}
-              className="px-4 py-2 rounded-full bg-primary text-white font-bold text-xs flex items-center gap-1.5 shadow"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Add New Therapist</span>
+          <div className="flex gap-4">
+            <button className="px-6 py-2 rounded-full border border-outline-variant text-primary font-label-md hover:bg-surface-container transition-colors">
+              Download Report
+            </button>
+            <button className="px-6 py-2 rounded-full bg-primary text-on-primary font-label-md hover:shadow-lg transition-all flex items-center gap-2">
+              <span className="material-symbols-outlined text-sm">add</span>
+              New Event
             </button>
           </div>
+        </header>
 
-          {showAddTherapist && (
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-primary/40 mb-8 animate-in fade-in duration-200">
-              <h4 className="font-bold text-sm text-on-surface mb-3">Register New Therapist</h4>
-              <form onSubmit={handleAddTherapist} className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div>
-                  <label className="block font-bold mb-1">Full Name</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Dr. Maya Angel, PsyD"
-                    value={newTherapist.name}
-                    onChange={(e) => setNewTherapist({ ...newTherapist, name: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/60 bg-[#fbf9f5]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold mb-1">Professional Title</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Licensed Clinical Psychologist"
-                    value={newTherapist.title}
-                    onChange={(e) => setNewTherapist({ ...newTherapist, title: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/60 bg-[#fbf9f5]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold mb-1">Specialties (comma separated)</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Anxiety & Panic, Trauma Recovery"
-                    value={newTherapist.specialties}
-                    onChange={(e) => setNewTherapist({ ...newTherapist, specialties: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/60 bg-[#fbf9f5]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-bold mb-1">Hourly Rate ($)</label>
-                  <input
-                    type="number"
-                    required
-                    value={newTherapist.hourlyRate}
-                    onChange={(e) => setNewTherapist({ ...newTherapist, hourlyRate: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/60 bg-[#fbf9f5]"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="block font-bold mb-1">Biography</label>
-                  <textarea
-                    rows="3"
-                    required
-                    placeholder="Compassionate bio detailing clinical philosophy and patient care..."
-                    value={newTherapist.bio}
-                    onChange={(e) => setNewTherapist({ ...newTherapist, bio: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/60 bg-[#fbf9f5] resize-none"
-                  />
-                </div>
-
-                <div className="md:col-span-2 flex justify-end gap-2 pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setShowAddTherapist(false)}
-                    className="px-4 py-2 rounded-xl bg-surface-container text-xs font-bold"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-6 py-2 rounded-xl bg-primary text-white text-xs font-bold shadow"
-                  >
-                    Save Therapist
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {therapists.map((t) => (
-              <div
-                key={t._id}
-                className="bg-white p-5 rounded-2xl border border-surface-container-high flex items-center gap-4"
-              >
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className="w-14 h-14 rounded-xl object-cover"
-                />
-                <div className="flex-grow text-xs">
-                  <h4 className="font-headline font-bold text-sm text-on-surface">{t.name}</h4>
-                  <p className="text-primary font-medium">{t.title}</p>
-                  <p className="text-on-surface-variant mt-1">${t.hourlyRate}/session &bull; ★ {t.rating}</p>
-                </div>
+        {/* Metrics Bento Grid */}
+        <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          {/* Active Users */}
+          <div className="glass-card p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary">
+                <span className="material-symbols-outlined">group</span>
               </div>
-            ))}
+              <span className="text-primary font-bold text-sm">+12%</span>
+            </div>
+            <p className="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Active Users</p>
+            <h3 className="text-headline-lg font-headline-lg text-on-surface">1,284</h3>
+            <div className="mt-4 w-full bg-outline-variant/30 h-1 rounded-full overflow-hidden">
+              <div className="bg-primary h-full w-3/4 rounded-full" />
+            </div>
           </div>
-        </div>
-      )}
 
-      {/* Tab 3: Content & Events (from manage_content_events_admin) */}
-      {activeTab === 'content' && (
-        <div className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h3 className="font-headline font-bold text-lg text-on-surface">
-              Manage Content, Workshops & Webinars
-            </h3>
-            <button
-              onClick={() => alert('New workshop created and added to library.')}
-              className="px-4 py-2 rounded-full bg-coral text-white font-bold text-xs flex items-center gap-1.5 shadow"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Create Event</span>
+          {/* Bookings */}
+          <div className="glass-card p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center text-secondary">
+                <span className="material-symbols-outlined">calendar_month</span>
+              </div>
+              <span className="text-secondary font-bold text-sm">+5%</span>
+            </div>
+            <p className="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Bookings</p>
+            <h3 className="text-headline-lg font-headline-lg text-on-surface">85</h3>
+            <div className="mt-4 flex gap-1">
+              <div className="h-8 w-full bg-secondary-container/50 rounded-sm" />
+              <div className="h-10 w-full bg-secondary-container/50 rounded-sm" />
+              <div className="h-6 w-full bg-secondary-container/50 rounded-sm" />
+              <div className="h-12 w-full bg-secondary rounded-sm" />
+            </div>
+          </div>
+
+          {/* Upcoming Events */}
+          <div className="glass-card p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+                <span className="material-symbols-outlined">event</span>
+              </div>
+              <span className="text-tertiary font-bold text-sm">3 Today</span>
+            </div>
+            <p className="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Upcoming Events</p>
+            <h3 className="text-headline-lg font-headline-lg text-on-surface">24</h3>
+            <p className="text-xs text-on-surface-variant mt-4 italic">Next: Breathwork Workshop @ 2PM</p>
+          </div>
+
+          {/* Pending Requests */}
+          <div className="glass-card p-8 rounded-[32px] border-2 border-tertiary/20 shadow-sm hover:shadow-md transition-all duration-300 bg-tertiary-fixed/10">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-error-container flex items-center justify-center text-error">
+                <span className="material-symbols-outlined">pending_actions</span>
+              </div>
+              <div className="px-2 py-1 bg-error/10 text-error rounded text-[10px] font-bold">URGENT</div>
+            </div>
+            <p className="text-on-surface-variant font-label-md uppercase tracking-wider mb-1">Pending Requests</p>
+            <h3 className="text-headline-lg font-headline-lg text-on-surface">12</h3>
+            <button className="mt-4 text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+              Review all <span className="material-symbols-outlined text-xs">arrow_forward</span>
             </button>
           </div>
+        </section>
 
-          <div className="bg-white rounded-3xl border border-surface-container-high overflow-hidden shadow-sm">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-surface-container border-b border-surface-container-high text-on-surface-variant uppercase font-bold text-[11px]">
-                <tr>
-                  <th className="p-4">Title</th>
-                  <th className="p-4">Type</th>
-                  <th className="p-4">Scheduled Date</th>
-                  <th className="p-4">Status</th>
-                  <th className="p-4">Registrations</th>
-                  <th className="p-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-surface-container-high">
-                {contentEvents.map((event) => (
-                  <tr key={event.id} className="hover:bg-surface-container-low/50">
-                    <td className="p-4 font-bold text-on-surface">{event.title}</td>
-                    <td className="p-4">
-                      <span className="px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary text-[10px] font-bold">
-                        {event.type}
-                      </span>
-                    </td>
-                    <td className="p-4 text-on-surface-variant">{event.date}</td>
-                    <td className="p-4">
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                          event.status === 'Published'
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-amber-100 text-amber-800'
-                        }`}
-                      >
-                        {event.status}
-                      </span>
-                    </td>
-                    <td className="p-4 font-bold text-primary">{event.signups} seats</td>
-                    <td className="p-4 text-right">
-                      <button
-                        onClick={() =>
-                          setContentEvents(contentEvents.filter((c) => c.id !== event.id))
-                        }
-                        className="p-1.5 rounded-lg text-on-surface-variant hover:text-red-600 hover:bg-rose-50"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+        {/* Main Dashboard Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
-      {/* Tab 4: Submissions & Inquiries (from manage_submissions_admin) */}
-      {activeTab === 'submissions' && (
-        <div className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h3 className="font-headline font-bold text-lg text-on-surface">
-              Pending Inquiries & User Submissions
-            </h3>
-            <span className="text-xs font-semibold text-primary">
-              Average response time: 4.2 hours
-            </span>
-          </div>
+          {/* Community Activity Table */}
+          <section className="lg:col-span-2 glass-card rounded-[32px] overflow-hidden p-8">
+            <div className="flex justify-between items-center mb-8">
+              <h4 className="font-headline-md text-headline-md text-on-surface">Community Pulse</h4>
+              <select className="bg-surface-container-low border-none rounded-full text-sm font-label-md text-on-surface-variant px-4 py-2 ring-1 ring-outline-variant/30">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+              </select>
+            </div>
+            <div className="space-y-6">
+              {/* Row 1 */}
+              <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors">
+                <img className="w-12 h-12 rounded-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAyFLBrDDaXZABL3b2qIFGfJVJAaDjv2-_YCnff41gfb8XHZ0RORO-rooS7qakRM1T-kAzPd43MrQqKCHXsFZV09S-qOaIp7TpEWqUQlXOpoWOF0-nu4xiTzIu_cBiGEH_tIoLL_LXaxnnpgx3NkHh6StgS4tMQrxgq3pIv5l5OBoz5y-pyYyNggUwyHXjKXO4skzAF_o0tzr_xHTYxu4dR4iGrBwrgcDkrOlBMA-tZsZoq7O99mIe2w"
+                  alt="Sarah Jenkins" />
+                <div className="flex-1">
+                  <h5 className="font-semibold text-on-surface">Sarah Jenkins</h5>
+                  <p className="text-sm text-on-surface-variant">Completed "Ocean Breath" Workshop</p>
+                </div>
+                <div className="text-right">
+                  <span className="block text-xs font-label-md text-outline">12 mins ago</span>
+                  <span className="text-[10px] px-2 py-0.5 bg-primary-container/20 text-primary rounded-full">Success</span>
+                </div>
+              </div>
+              {/* Row 2 */}
+              <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors">
+                <div className="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-secondary font-bold">MK</div>
+                <div className="flex-1">
+                  <h5 className="font-semibold text-on-surface">Marcus Kane</h5>
+                  <p className="text-sm text-on-surface-variant">Requested 1-on-1 Crisis Support</p>
+                </div>
+                <div className="text-right">
+                  <span className="block text-xs font-label-md text-outline">45 mins ago</span>
+                  <span className="text-[10px] px-2 py-0.5 bg-error-container text-error rounded-full">High Priority</span>
+                </div>
+              </div>
+              {/* Row 3 */}
+              <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-low transition-colors">
+                <img className="w-12 h-12 rounded-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl8zkUCs2l4wxm5ponArXATlc0vG3MSihprPPsJxdXmLw9iWUGseDS3Dac2EDdUzOhh6LHW8f7IWV0ZSuaQfHgfaelFb0-O9gTiGMgUmrRs0GLmWLm2VTW_uPomokqjSt6Rw3WZ5LjNQpvveZ88jYlxRuCgKP0Ua-UmhqRGyNGPVzoHOrCyAHIBO9GWQyX-NbjVjbcKKcKES2Qn1KeXp6lo2ZNL8kZnl9laKlHvLfHWjju2ByT34JfKw"
+                  alt="Leo Davids" />
+                <div className="flex-1">
+                  <h5 className="font-semibold text-on-surface">Leo Davids</h5>
+                  <p className="text-sm text-on-surface-variant">Posted in "New Beginnings" Circle</p>
+                </div>
+                <div className="text-right">
+                  <span className="block text-xs font-label-md text-outline">2 hours ago</span>
+                  <span className="text-[10px] px-2 py-0.5 bg-outline-variant/40 text-on-surface-variant rounded-full">Engagement</span>
+                </div>
+              </div>
+            </div>
+            <button className="w-full mt-8 py-3 text-primary font-semibold hover:bg-primary/5 rounded-2xl transition-all">
+              View All Activity
+            </button>
+          </section>
 
-          <div className="space-y-4">
-            {submissions.map((sub) => (
-              <div
-                key={sub.id}
-                className="bg-white p-6 rounded-3xl border border-surface-container-high shadow-sm hover:shadow-md transition-all flex flex-col md:flex-row justify-between gap-4 items-start md:items-center"
-              >
-                <div className="space-y-1 text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container/40 text-secondary">
-                      {sub.category}
-                    </span>
-                    <span className="text-on-surface-variant">{sub.date}</span>
-                    <span
-                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                        sub.status === 'Approved'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-amber-100 text-amber-800'
-                      }`}
-                    >
-                      {sub.status}
-                    </span>
+          {/* Right Aside */}
+          <aside className="space-y-6">
+            {/* System Status */}
+            <div className="bg-primary-container p-8 rounded-[32px] text-on-primary-container relative overflow-hidden">
+              <div className="relative z-10">
+                <h4 className="font-headline-md text-headline-md mb-2">System Health</h4>
+                <p className="text-sm opacity-90 mb-6">Everything is breathing smoothly today.</p>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="w-2 h-2 rounded-full bg-on-primary-container animate-pulse" />
+                  <span className="text-xs font-bold uppercase tracking-widest">Servers Operational</span>
+                </div>
+                <button className="w-full py-3 bg-on-primary-container text-primary-container rounded-full font-bold text-sm">
+                  Manage Infrastructure
+                </button>
+              </div>
+              <div className="absolute -bottom-10 -right-10 opacity-10">
+                <span className="material-symbols-outlined" style={{ fontSize: '150px' }}>cloud_done</span>
+              </div>
+            </div>
+
+            {/* Workshop Live Now */}
+            <div className="glass-card p-8 rounded-[32px]">
+              <div className="flex justify-between items-center mb-6">
+                <h4 className="font-semibold text-on-surface">Live Now</h4>
+                <span className="w-2 h-2 rounded-full bg-error animate-ping" />
+              </div>
+              <div className="space-y-4">
+                <div className="p-4 bg-surface-container rounded-2xl">
+                  <p className="text-xs font-bold text-secondary uppercase mb-1">Workshop</p>
+                  <h5 className="font-semibold text-on-surface mb-2">Morning Mindfulness</h5>
+                  <div className="flex justify-between text-xs text-on-surface-variant">
+                    <span>34 Participants</span>
+                    <span>12:30 - 13:30</span>
                   </div>
-                  <p className="font-bold text-sm text-on-surface">{sub.sender}</p>
-                  <p className="text-on-surface-variant italic">"{sub.text}"</p>
                 </div>
-
-                <div className="flex items-center gap-2 shrink-0">
-                  {sub.status !== 'Approved' && (
-                    <button
-                      onClick={() => handleApproveSubmission(sub.id)}
-                      className="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold flex items-center gap-1 shadow"
-                    >
-                      <ThumbsUp className="w-3.5 h-3.5" />
-                      <span>Approve</span>
-                    </button>
-                  )}
-                  <button
-                    onClick={() => setSubmissions(submissions.filter((s) => s.id !== sub.id))}
-                    className="p-2 rounded-xl border border-outline-variant/50 text-on-surface-variant hover:text-red-600 hover:bg-rose-50 text-xs"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                <div className="p-4 border border-outline-variant rounded-2xl border-dashed flex flex-col items-center justify-center py-8">
+                  <span className="material-symbols-outlined text-outline mb-2">add_circle</span>
+                  <p className="text-sm text-outline font-medium">Add Quick Session</p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          </aside>
         </div>
-      )}
+
+        {/* Footer */}
+        <footer className="w-full mt-20 border-t border-outline-variant/10 pt-10 pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="font-headline-lg text-headline-lg font-bold text-primary mb-4">A Place to Breathe</h3>
+              <p className="text-on-surface-variant text-sm max-w-xs">Admin Console for management of the digital sanctuary and emotional refuge platform.</p>
+            </div>
+            <div className="flex gap-12">
+              <div className="space-y-4">
+                <p className="font-bold text-on-surface">Platform</p>
+                <ul className="space-y-2 text-sm text-on-surface-variant">
+                  <li><a className="hover:text-primary transition-colors" href="#">Mission</a></li>
+                  <li><a className="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                  <li><a className="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <p className="font-bold text-on-surface">Support</p>
+                <ul className="space-y-2 text-sm text-on-surface-variant">
+                  <li><a className="hover:text-primary transition-colors text-primary font-bold" href="#">Crisis Support</a></li>
+                  <li><a className="hover:text-primary transition-colors" href="#">Documentation</a></li>
+                </ul>
+              </div>
+            </div>
+            <div className="md:text-right">
+              <p className="text-on-surface-variant text-sm">© 2024 A Place to Breathe.<br />Your safe space for healing.</p>
+            </div>
+          </div>
+        </footer>
+      </main>
+
+      {/* Floating Emergency Button */}
+      <button className="fixed bottom-8 right-8 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform active:scale-95 z-[60]"
+        style={{ background: '#F4A261', color: '#fff' }}>
+        <span className="material-symbols-outlined text-3xl group-hover:animate-pulse">emergency_share</span>
+        <span className="absolute -top-12 right-0 text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"
+          style={{ background: '#F4A261' }}>QUICK ALERT</span>
+      </button>
     </div>
   );
 }

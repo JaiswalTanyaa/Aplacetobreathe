@@ -1,404 +1,232 @@
-import React, { useState, useEffect } from 'react';
-import { api } from '../services/api';
-import {
-  MessageSquareHeart, Heart, Send, Sparkles, ShieldCheck, Plus,
-  CheckCircle2, Users, TrendingUp, Filter, X
-} from 'lucide-react';
-
-const CATEGORIES = [
-  'All',
-  'Stories of Hope',
-  'Anxiety & Grounding',
-  'Gratitude Circle',
-  'Daily Reflections',
-  'Mindful Living',
-];
-
-const CATEGORY_META = {
-  'All':                { emoji: '🌿', desc: 'Browse all shared reflections' },
-  'Stories of Hope':    { emoji: '🌻', desc: 'Moments of light and resilience' },
-  'Anxiety & Grounding':{ emoji: '🌊', desc: 'Techniques and shared calm' },
-  'Gratitude Circle':   { emoji: '💛', desc: 'Tiny things worth celebrating' },
-  'Daily Reflections':  { emoji: '📓', desc: 'End-of-day thoughts and insights' },
-  'Mindful Living':     { emoji: '🍃', desc: 'Slow down & live with intention' },
-};
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Community() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [showPostForm, setShowPostForm] = useState(false);
-  const [newPost, setNewPost] = useState({
-    author: 'Gentle Soul',
-    category: 'Stories of Hope',
-    title: '',
-    content: '',
-  });
-  const [submitting, setSubmitting] = useState(false);
-  const [notice, setNotice] = useState(null);
-
-  const fetchPosts = async (cat = selectedCategory) => {
-    setLoading(true);
-    try {
-      const data = await api.getCommunityPosts(cat);
-      setPosts(data);
-    } catch (err) {
-      console.warn('Could not fetch community posts:', err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts(selectedCategory);
-  }, [selectedCategory]);
-
-  const handleLike = async (postId) => {
-    try {
-      const res = await api.likePost(postId);
-      setPosts(
-        posts.map((p) => (p._id === postId ? { ...p, likes: res.likes || p.likes + 1 } : p))
-      );
-    } catch (err) {
-      console.warn('Like failed:', err.message);
-    }
-  };
-
-  const handleCreatePost = async (e) => {
-    e.preventDefault();
-    if (!newPost.title.trim() || !newPost.content.trim()) return;
-    setSubmitting(true);
-    setNotice(null);
-    try {
-      const created = await api.createCommunityPost(newPost);
-      setPosts([created, ...posts]);
-      setNewPost({ author: 'Gentle Soul', category: 'Stories of Hope', title: '', content: '' });
-      setShowPostForm(false);
-      setNotice('Your supportive thought has been shared with the sanctuary community!');
-      setTimeout(() => setNotice(null), 3500);
-    } catch (err) {
-      setNotice('Could not post to server. Please try again.');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   return (
-    <div style={{ minHeight: '100vh', background: '#fbf9f5' }}>
+    <div className="bg-background text-on-background font-body-md min-h-screen relative overflow-x-hidden"
+      style={{ userSelect: 'none' }}>
 
-      {/* ── Hero Banner ─────────────────────────────────────────────── */}
-      <div style={{
-        background: 'linear-gradient(135deg, #4a654e 0%, #3d5441 60%, #2e4032 100%)',
-        padding: '56px 32px 48px',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'absolute', top: '-60px', right: '-60px',
-          width: 220, height: 220,
-          background: 'rgba(255,255,255,0.05)', borderRadius: '50%',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: '-40px', left: '20%',
-          width: 160, height: 160,
-          background: 'rgba(244,162,97,0.12)', borderRadius: '50%',
-        }} />
-
-        <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative' }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: 'rgba(255,255,255,0.12)', borderRadius: 9999,
-            padding: '6px 16px', marginBottom: 16,
-            backdropFilter: 'blur(8px)',
-          }}>
-            <MessageSquareHeart size={14} color="#F4A261" />
-            <span style={{ color: '#F4A261', fontSize: 11, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Safe Community Spaces
-            </span>
-          </div>
-
-          <h1 style={{
-            fontFamily: 'Nunito Sans, sans-serif',
-            fontSize: 'clamp(28px, 4vw, 48px)',
-            fontWeight: 800, color: '#fff',
-            margin: '0 0 12px', lineHeight: 1.2,
-          }}>
-            Stories of Hope &amp; Community
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 15, maxWidth: 560, margin: 0, lineHeight: 1.6 }}>
-            A kind, moderated gathering space to share your journey, offer gentle encouragement,
-            and remind one another that no one walks alone.
-          </p>
-
-          <div style={{ display: 'flex', gap: 32, marginTop: 28, flexWrap: 'wrap' }}>
-            {[
-              { icon: <Users size={14} />, label: 'Community Members', val: '2.4k+' },
-              { icon: <Heart size={14} />, label: 'Warmth Shared', val: '18k+' },
-              { icon: <TrendingUp size={14} />, label: 'Stories This Month', val: posts.length },
-            ].map(s => (
-              <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ color: '#F4A261' }}>{s.icon}</span>
-                <span style={{ color: '#fff', fontWeight: 800, fontSize: 15 }}>{s.val}</span>
-                <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12 }}>{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Main Content Area ────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 24px', display: 'flex', gap: 28, alignItems: 'flex-start' }}>
-
-        {/* ── LEFT SIDEBAR ── */}
-        <aside className="community-sidebar" style={{
-          width: 260, flexShrink: 0,
-          position: 'sticky', top: 96,
-          display: 'flex', flexDirection: 'column', gap: 16,
-        }}>
-          <button
-            id="share-thought-btn"
-            onClick={() => setShowPostForm(!showPostForm)}
-            style={{
-              width: '100%', padding: '13px 20px',
-              borderRadius: 16, border: 'none', cursor: 'pointer',
-              background: showPostForm
-                ? 'linear-gradient(135deg, #e76f51, #c9593e)'
-                : 'linear-gradient(135deg, #F4A261, #e76f51)',
-              color: '#fff', fontWeight: 800, fontSize: 13,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              boxShadow: '0 4px 18px rgba(244,162,97,0.35)',
-              transition: 'all 0.25s ease',
-            }}
-          >
-            {showPostForm ? <X size={16} /> : <Plus size={16} />}
-            {showPostForm ? 'Close Editor' : 'Share Your Thoughts'}
-          </button>
-
-          <div style={{
-            background: '#fff', borderRadius: 20,
-            padding: '18px 0',
-            boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
-            border: '1px solid #eae8e4',
-          }}>
-            <p style={{
-              fontSize: 11, fontWeight: 800, color: '#737972',
-              letterSpacing: '0.1em', textTransform: 'uppercase',
-              padding: '0 18px 12px', margin: 0,
-              borderBottom: '1px solid #f0eeea',
-              display: 'flex', alignItems: 'center', gap: 6,
-            }}>
-              <Filter size={11} />
-              Filter by Topic
-            </p>
-            {CATEGORIES.map((cat) => {
-              const isActive = selectedCategory === cat;
-              const meta = CATEGORY_META[cat];
-              return (
-                <button
-                  key={cat}
-                  id={`cat-filter-${cat.replace(/\s+/g, '-').toLowerCase()}`}
-                  onClick={() => setSelectedCategory(cat)}
-                  style={{
-                    width: '100%', textAlign: 'left',
-                    padding: '11px 18px',
-                    background: isActive ? '#f0f6f1' : 'transparent',
-                    border: 'none', cursor: 'pointer',
-                    borderLeft: isActive ? '3px solid #4a654e' : '3px solid transparent',
-                    transition: 'all 0.18s ease',
-                    display: 'flex', alignItems: 'center', gap: 10,
-                  }}
-                >
-                  <span style={{ fontSize: 16, lineHeight: 1 }}>{meta.emoji}</span>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: isActive ? 800 : 600, color: isActive ? '#4a654e' : '#1b1c1a', marginBottom: 1 }}>{cat}</div>
-                    <div style={{ fontSize: 11, color: '#737972' }}>{meta.desc}</div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          <div style={{
-            background: 'linear-gradient(135deg, #4a654e08, #8ba88e15)',
-            borderRadius: 16, padding: '16px 18px',
-            border: '1px solid #c2c8c040',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-              <ShieldCheck size={16} color="#4a654e" />
-              <span style={{ fontSize: 12, fontWeight: 800, color: '#4a654e' }}>Zero Judgment Zone</span>
-            </div>
-            <p style={{ fontSize: 11, color: '#424842', lineHeight: 1.55, margin: 0 }}>
-              Community Sanctuary Pledge: Kindness, confidentiality, and respect for every healing pace.
-            </p>
-          </div>
-        </aside>
-
-        {/* ── MAIN FEED ── */}
-        <div style={{ flex: 1, minWidth: 0 }}>
-
-          {notice && (
-            <div style={{
-              marginBottom: 20, padding: '14px 18px', borderRadius: 14,
-              background: '#f0f6f1', color: '#334d38', fontSize: 13,
-              display: 'flex', alignItems: 'center', gap: 10,
-              border: '1px solid #4a654e30',
-            }}>
-              <CheckCircle2 size={16} color="#4a654e" style={{ flexShrink: 0 }} />
-              {notice}
-            </div>
-          )}
-
-          {showPostForm && (
-            <div style={{
-              marginBottom: 24, background: '#fff',
-              borderRadius: 24, padding: '28px 28px 24px',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
-              border: '1px solid #4a654e30',
-              animation: 'slideDown 0.25s ease',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
-                <Sparkles size={16} color="#F4A261" />
-                <h2 style={{ fontFamily: 'Nunito Sans, sans-serif', fontSize: 17, fontWeight: 800, color: '#1b1c1a', margin: 0 }}>
-                  Share a Reflection or Story
-                </h2>
-              </div>
-
-              <form onSubmit={handleCreatePost}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#424842', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Display Nickname</label>
-                    <input type="text" required placeholder="e.g. Kind Soul..." value={newPost.author}
-                      onChange={(e) => setNewPost({ ...newPost, author: e.target.value })}
-                      style={{ width: '100%', padding: '11px 14px', borderRadius: 12, border: '1.5px solid #c2c8c0', outline: 'none', background: '#fbf9f5', fontSize: 13, color: '#1b1c1a', boxSizing: 'border-box' }} />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#424842', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Category</label>
-                    <select value={newPost.category} onChange={(e) => setNewPost({ ...newPost, category: e.target.value })}
-                      style={{ width: '100%', padding: '11px 14px', borderRadius: 12, border: '1.5px solid #c2c8c0', outline: 'none', background: '#fbf9f5', fontSize: 13, color: '#1b1c1a', boxSizing: 'border-box' }}>
-                      {CATEGORIES.filter((c) => c !== 'All').map((cat) => (<option key={cat} value={cat}>{cat}</option>))}
-                    </select>
-                  </div>
-                </div>
-
-                <div style={{ marginBottom: 16 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#424842', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Post Title</label>
-                  <input type="text" required placeholder="e.g. A small milestone with morning meditation..." value={newPost.title}
-                    onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-                    style={{ width: '100%', padding: '11px 14px', borderRadius: 12, border: '1.5px solid #c2c8c0', outline: 'none', background: '#fbf9f5', fontSize: 13, color: '#1b1c1a', boxSizing: 'border-box' }} />
-                </div>
-
-                <div style={{ marginBottom: 20 }}>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#424842', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Reflection &amp; Encouragement</label>
-                  <textarea rows={4} required placeholder="Express what feels real to you. Your words might be the lighthouse someone else needed to see today."
-                    value={newPost.content} onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
-                    style={{ width: '100%', padding: '11px 14px', borderRadius: 12, border: '1.5px solid #c2c8c0', outline: 'none', background: '#fbf9f5', fontSize: 13, color: '#1b1c1a', resize: 'none', boxSizing: 'border-box', lineHeight: 1.6 }} />
-                </div>
-
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12 }}>
-                  <button type="button" onClick={() => setShowPostForm(false)}
-                    style={{ padding: '10px 20px', borderRadius: 12, border: 'none', background: '#efeeea', color: '#424842', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>
-                    Cancel
-                  </button>
-                  <button type="submit" disabled={submitting}
-                    style={{ padding: '10px 24px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg, #4a654e, #3d5441)', color: '#fff', fontSize: 13, fontWeight: 800, cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: 8, opacity: submitting ? 0.7 : 1, boxShadow: '0 3px 12px rgba(74,101,78,0.3)' }}>
-                    <Send size={14} />
-                    {submitting ? 'Sharing...' : 'Publish to Forum'}
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
-
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-            <div>
-              <h2 style={{ fontFamily: 'Nunito Sans, sans-serif', fontSize: 20, fontWeight: 800, color: '#1b1c1a', margin: '0 0 2px' }}>
-                {CATEGORY_META[selectedCategory].emoji} {selectedCategory === 'All' ? 'All Community Posts' : selectedCategory}
-              </h2>
-              <p style={{ fontSize: 12, color: '#737972', margin: 0 }}>{CATEGORY_META[selectedCategory].desc}</p>
-            </div>
-            {!loading && (
-              <span style={{ background: '#4a654e15', color: '#4a654e', fontSize: 12, fontWeight: 700, padding: '4px 12px', borderRadius: 9999 }}>
-                {posts.length} {posts.length === 1 ? 'post' : 'posts'}
-              </span>
-            )}
-          </div>
-
-          {loading ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
-              {[1,2,3,4,5,6].map(i => (
-                <div key={i} style={{ background: '#fff', borderRadius: 20, padding: 24, border: '1px solid #eae8e4' }}>
-                  <div style={{ height: 14, background: '#efeeea', borderRadius: 8, marginBottom: 10, width: '60%' }} />
-                  <div style={{ height: 20, background: '#efeeea', borderRadius: 8, marginBottom: 12 }} />
-                  <div style={{ height: 12, background: '#efeeea', borderRadius: 8, marginBottom: 6 }} />
-                  <div style={{ height: 12, background: '#efeeea', borderRadius: 8, marginBottom: 6, width: '80%' }} />
-                  <div style={{ height: 12, background: '#efeeea', borderRadius: 8, width: '70%' }} />
-                </div>
-              ))}
-            </div>
-          ) : posts.length === 0 ? (
-            <div style={{ padding: '60px 24px', textAlign: 'center', background: '#fff', borderRadius: 24, border: '2px dashed #c2c8c0' }}>
-              <div style={{ fontSize: 40, marginBottom: 12 }}>🌱</div>
-              <p style={{ fontWeight: 800, fontSize: 16, color: '#1b1c1a', marginBottom: 6 }}>No discussions in this category yet</p>
-              <p style={{ fontSize: 13, color: '#737972', margin: 0 }}>Be the first to share an encouraging word above.</p>
-            </div>
-          ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
-              {posts.map((post) => (
-                <article
-                  key={post._id}
-                  style={{ background: '#fff', borderRadius: 20, padding: 22, border: '1px solid #eae8e4', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'transform 0.22s ease, box-shadow 0.22s ease', cursor: 'default' }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.09)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-                >
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-                      <span style={{ padding: '3px 10px', borderRadius: 9999, background: '#ecdcfd50', color: '#655974', fontSize: 11, fontWeight: 700 }}>{post.category}</span>
-                      <span style={{ fontSize: 10, color: '#c2c8c0', fontWeight: 600 }}>{post.badge || 'Member'}</span>
-                    </div>
-
-                    <h3 style={{ fontFamily: 'Nunito Sans, sans-serif', fontSize: 16, fontWeight: 800, color: '#1b1c1a', margin: '0 0 10px', lineHeight: 1.3 }}>{post.title}</h3>
-
-                    <p style={{ fontSize: 13, color: '#424842', lineHeight: 1.65, margin: '0 0 20px', display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                      {post.content}
-                    </p>
-                  </div>
-
-                  <div style={{ paddingTop: 14, borderTop: '1px solid #eae8e4', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ width: 30, height: 30, borderRadius: '50%', background: '#cceace50', color: '#4a654e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800 }}>
-                        {post.author?.[0]?.toUpperCase() || 'K'}
-                      </div>
-                      <span style={{ fontSize: 12, fontWeight: 700, color: '#1b1c1a' }}>{post.author}</span>
-                    </div>
-
-                    <button
-                      id={`like-btn-${post._id}`}
-                      onClick={() => handleLike(post._id)}
-                      title="Send warmth"
-                      style={{ display: 'flex', alignItems: 'center', gap: 5, color: '#F4A261', background: 'transparent', border: 'none', cursor: 'pointer', padding: '5px 10px', borderRadius: 9999, fontSize: 12, fontWeight: 700, transition: 'background 0.18s ease' }}
-                      onMouseEnter={e => e.currentTarget.style.background = '#F4A26115'}
-                      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                    >
-                      <Heart size={15} fill="#F4A26130" />
-                      {post.likes || 0}
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
+      {/* Ambient Background Blobs */}
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          background: '#b0ceb2',
+          width: '500px', height: '500px',
+          top: '-100px', left: '-200px',
+          filter: 'blur(80px)', opacity: 0.4, zIndex: -1,
+          animation: 'float 20s infinite ease-in-out alternate',
+        }}
+      />
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          background: '#ecdcfd',
+          width: '400px', height: '400px',
+          top: '40%', right: '-150px',
+          filter: 'blur(80px)', opacity: 0.4, zIndex: -1,
+          animation: 'float 20s infinite ease-in-out alternate',
+          animationDelay: '-5s',
+        }}
+      />
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          background: '#ffdcc4',
+          width: '600px', height: '600px',
+          bottom: '-200px', left: '10%',
+          filter: 'blur(80px)', opacity: 0.3, zIndex: -1,
+          animation: 'float 20s infinite ease-in-out alternate',
+          animationDelay: '-10s',
+        }}
+      />
 
       <style>{`
-        @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-10px); }
-          to   { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+          0%   { transform: translate(0, 0) scale(1); }
+          100% { transform: translate(30px, -30px) scale(1.1); }
         }
-        @media (max-width: 768px) {
-          .community-sidebar { display: none !important; }
-        }
+        .card-ambient-shadow { box-shadow: 0 20px 20px 0 rgba(139,168,142,0.05); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
+
+      {/* Main Content Canvas */}
+      <main className="pt-[100px] md:pt-[120px] pb-20 px-6 max-w-container-max mx-auto relative z-10">
+
+        {/* Header Section */}
+        <section className="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full mb-4">
+              <span
+                className="material-symbols-outlined text-primary text-sm"
+                style={{ fontVariationSettings: "'FILL' 1" }}
+              >shield</span>
+              <span className="font-label-md text-label-md text-on-surface-variant">Anonymous Moderated Space</span>
+            </div>
+            <h1 className="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-primary mb-4">
+              Your Safe Space for Shared Stories
+            </h1>
+            <p className="font-body-lg text-body-lg text-on-surface-variant">
+              Connect with others who understand. Read, share, and support one another in a protected environment.
+            </p>
+          </div>
+          <button className="bg-primary hover:bg-surface-tint text-on-primary font-label-md text-label-md px-6 py-3 rounded-full transition-all card-ambient-shadow flex items-center justify-center gap-2 shrink-0 self-start md:self-auto w-full md:w-auto">
+            <span className="material-symbols-outlined">edit</span>
+            New Post
+          </button>
+        </section>
+
+        {/* Moderation Notice */}
+        <div className="bg-secondary-fixed/50 border border-secondary-fixed-dim/50 rounded-xl p-6 mb-12 flex items-start gap-4 card-ambient-shadow">
+          <div className="bg-surface rounded-full p-2 text-secondary shrink-0">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>lock</span>
+          </div>
+          <div>
+            <h3 className="font-headline-md text-headline-md text-on-secondary-container mb-2" style={{ fontSize: '18px' }}>
+              Community Guidelines
+            </h3>
+            <p className="font-body-md text-body-md text-on-secondary-fixed-variant">
+              This is a kind, anonymous space. Real names and phone numbers are hidden for your privacy. Treat every story with gentleness and respect.
+            </p>
+          </div>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+
+          {/* Sidebar — Desktop */}
+          <aside className="hidden md:block md:col-span-3 space-y-2 sticky top-[140px]">
+            <h4 className="font-label-md text-label-md text-outline uppercase tracking-wider mb-4 px-4">Topics</h4>
+            <a href="#" className="block bg-primary-container text-on-primary-container px-4 py-3 rounded-xl font-body-md text-body-md font-medium transition-colors">
+              All Stories
+            </a>
+            <a href="#" className="block text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 rounded-xl font-body-md text-body-md transition-colors flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-secondary" /> Anxiety
+            </a>
+            <a href="#" className="block text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 rounded-xl font-body-md text-body-md transition-colors flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-tertiary" /> Life Transitions
+            </a>
+            <a href="#" className="block text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 rounded-xl font-body-md text-body-md transition-colors flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary" /> Student Life
+            </a>
+            <a href="#" className="block text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 rounded-xl font-body-md text-body-md transition-colors flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-outline" /> General Support
+            </a>
+          </aside>
+
+          {/* Categories — Mobile Horizontal Scroll */}
+          <div className="md:hidden col-span-1 flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+            <button className="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-label-md text-label-md whitespace-nowrap shrink-0">
+              All Stories
+            </button>
+            <button className="bg-surface-container text-on-surface-variant px-5 py-2 rounded-full font-label-md text-label-md whitespace-nowrap shrink-0 border border-surface-dim/50">
+              Anxiety
+            </button>
+            <button className="bg-surface-container text-on-surface-variant px-5 py-2 rounded-full font-label-md text-label-md whitespace-nowrap shrink-0 border border-surface-dim/50">
+              Life Transitions
+            </button>
+            <button className="bg-surface-container text-on-surface-variant px-5 py-2 rounded-full font-label-md text-label-md whitespace-nowrap shrink-0 border border-surface-dim/50">
+              Student Life
+            </button>
+          </div>
+
+          {/* Feed */}
+          <div className="col-span-1 md:col-span-9 space-y-6">
+
+            {/* Post 1 */}
+            <article className="bg-surface-container-lowest border border-surface-container-high rounded-xl p-6 card-ambient-shadow hover:shadow-[0_24px_30px_0_rgba(139,168,142,0.08)] transition-all duration-300">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-headline-md font-bold text-lg">
+                    S
+                  </div>
+                  <div>
+                    <h4 className="font-body-md text-body-md font-medium text-on-surface">SilentObserver</h4>
+                    <p className="font-body-md text-body-md text-sm text-outline">Just now • Anxiety</p>
+                  </div>
+                </div>
+                <button aria-label="Report post" className="text-outline-variant hover:text-error transition-colors">
+                  <span className="material-symbols-outlined text-xl">flag</span>
+                </button>
+              </div>
+              <h2 className="font-headline-md font-semibold mb-2" style={{ fontSize: '20px', color: '#8ba88e' }}>
+                Feeling overwhelmed by the quiet
+              </h2>
+              <p className="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                Sometimes when everything stops, the thoughts get louder. I'm trying the 5-4-3-2-1 grounding technique today, but finding it hard to focus. Does anyone else struggle with this when trying to rest?
+              </p>
+              <div className="flex items-center gap-6 border-t border-surface-container-high pt-4">
+                <button className="flex items-center gap-2 text-on-surface-variant hover:text-tertiary transition-colors group">
+                  <span className="material-symbols-outlined group-hover:scale-110 transition-transform">favorite</span>
+                  <span className="font-label-md text-label-md">24 Support</span>
+                </button>
+                <button className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors">
+                  <span className="material-symbols-outlined">chat_bubble</span>
+                  <span className="font-label-md text-label-md">5 Replies</span>
+                </button>
+              </div>
+            </article>
+
+            {/* Post 2 */}
+            <article className="bg-surface-container-lowest border border-surface-container-high rounded-xl p-6 card-ambient-shadow hover:shadow-[0_24px_30px_0_rgba(139,168,142,0.08)] transition-all duration-300">
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-container font-headline-md font-bold text-lg">
+                    W
+                  </div>
+                  <div>
+                    <h4 className="font-body-md text-body-md font-medium text-on-surface">WanderingSoul</h4>
+                    <p className="font-body-md text-body-md text-sm text-outline">2 hours ago • Life Transitions</p>
+                  </div>
+                </div>
+                <button aria-label="Report post" className="text-outline-variant hover:text-error transition-colors">
+                  <span className="material-symbols-outlined text-xl">flag</span>
+                </button>
+              </div>
+              <h2 className="font-headline-md font-semibold mb-2" style={{ fontSize: '20px', color: '#8ba88e' }}>
+                Moving to a new city alone
+              </h2>
+              <p className="font-body-md text-body-md text-on-surface-variant mb-6">
+                I just unpacked my last box. It's beautiful here, but the isolation is hitting harder than expected. Reminding myself that building a home takes time. Small steps today: found a local coffee shop.
+              </p>
+              <div className="flex items-center gap-6 border-t border-surface-container-high pt-4">
+                {/* Post 2 is already "liked" — filled heart, tertiary color */}
+                <button className="flex items-center gap-2 text-tertiary transition-colors group">
+                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>favorite</span>
+                  <span className="font-label-md text-label-md">142 Support</span>
+                </button>
+                <button className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors">
+                  <span className="material-symbols-outlined">chat_bubble</span>
+                  <span className="font-label-md text-label-md">18 Replies</span>
+                </button>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </main>
+
+      {/* Bottom Nav Bar — Mobile Only */}
+      <nav className="md:hidden fixed bottom-0 w-full bg-surface-container-lowest border-t border-surface-container-high z-50 px-6 py-3 flex justify-between items-center">
+        <Link to="/explore" className="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary">
+          <span className="material-symbols-outlined">explore</span>
+          <span className="font-label-md font-medium" style={{ fontSize: '10px' }}>Explore</span>
+        </Link>
+        <Link to="/community" className="flex flex-col items-center gap-1 text-primary">
+          <div className="bg-primary-container/30 px-4 py-1 rounded-full">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>forum</span>
+          </div>
+          <span className="font-label-md font-medium" style={{ fontSize: '10px' }}>Community</span>
+        </Link>
+        <Link to="/workshops" className="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary">
+          <span className="material-symbols-outlined">school</span>
+          <span className="font-label-md font-medium" style={{ fontSize: '10px' }}>Workshops</span>
+        </Link>
+        <Link to="/progress" className="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary">
+          <span className="material-symbols-outlined">trending_up</span>
+          <span className="font-label-md font-medium" style={{ fontSize: '10px' }}>Progress</span>
+        </Link>
+      </nav>
     </div>
   );
 }

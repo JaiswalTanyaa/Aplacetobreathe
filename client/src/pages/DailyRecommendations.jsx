@@ -1,358 +1,271 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Play, ArrowRight, BookOpen, Trees, Heart, Send, CheckCircle2 } from 'lucide-react';
+
+const moods = [
+  { label: 'Calm', icon: 'spa', color: 'text-primary' },
+  { label: 'Anxious', icon: 'waves', color: 'text-secondary' },
+  { label: 'Tired', icon: 'bedtime', color: 'text-on-surface-variant' },
+  { label: 'Inspired', icon: 'lightbulb', color: 'text-tertiary' },
+  { label: 'Heavy', icon: 'cloud', color: 'text-outline' },
+];
 
 export default function DailyRecommendations() {
-  const [selectedMood, setSelectedMood] = useState('Calm');
-  const [tips, setTips] = useState([
-    {
-      author: 'Sarah J.',
-      text: 'I listen to the sound of rain whenever I feel overwhelmed. It helps me focus on the present moment.',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
-    },
-    {
-      author: 'David M.',
-      text: 'A five-minute slow shoulder stretch at noon changed my entire afternoon anxiety level.',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
-    },
-  ]);
-  const [newTip, setNewTip] = useState({ author: '', text: '' });
-  const [notice, setNotice] = useState(null);
-
-  const moodButtons = [
-    { name: 'Calm', icon: '🌿', color: 'border-primary text-primary bg-primary-container/20' },
-    { name: 'Anxious', icon: '🌊', color: 'border-secondary text-secondary bg-secondary-container/30' },
-    { name: 'Tired', icon: '🌙', color: 'border-outline-variant text-on-surface-variant bg-surface-container' },
-    { name: 'Inspired', icon: '💡', color: 'border-tertiary text-tertiary bg-tertiary-fixed/30' },
-    { name: 'Heavy', icon: '☁️', color: 'border-outline text-outline bg-surface-container-high' },
-  ];
-
-  const recommendationsByMood = {
-    Calm: {
-      featured: {
-        tag: 'Guided Meditation',
-        duration: '15 Min',
-        title: 'Morning Breath & Grounding',
-        desc: 'A gentle session designed to anchor your thoughts and prepare you for the day ahead with clarity.',
-        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
-        route: '/explore',
-      },
-      cards: [
-        {
-          title: 'Gratitude Reflection',
-          desc: 'Write down three things you are thankful for today in your encrypted journal.',
-          linkText: 'Write now',
-          route: '/journal',
-        },
-        {
-          title: 'Visual Forest Escape',
-          desc: 'Immerse your senses in ambient forest rain soundscapes.',
-          linkText: 'Listen',
-          route: '/explore',
-        },
-      ],
-    },
-    Anxious: {
-      featured: {
-        tag: 'Acute De-escalation',
-        duration: '5 Min',
-        title: '4-7-8 Parasympathetic Reset',
-        desc: 'Inhale for 4s, hold for 7s, exhale for 8s to signal immediate safety to your vagus nerve.',
-        image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&auto=format&fit=crop&q=80',
-        route: '/explore',
-      },
-      cards: [
-        {
-          title: '5-4-3-2-1 Sensory Grounding',
-          desc: 'Acknowledge 5 things you see, 4 you touch, 3 you hear, 2 you smell, 1 you taste.',
-          linkText: 'Practice',
-          route: '/explore',
-        },
-        {
-          title: 'Talk with a Therapist',
-          desc: 'Connect with a certified anxiety specialist for support.',
-          linkText: 'Find Guide',
-          route: '/therapists',
-        },
-      ],
-    },
-    Tired: {
-      featured: {
-        tag: 'Restorative Care',
-        duration: '20 Min',
-        title: 'Yoga Nidra Deep Rest',
-        desc: 'Lying down passively to replenish neuro-chemical reserves without the pressure of sleep.',
-        image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&auto=format&fit=crop&q=80',
-        route: '/explore',
-      },
-      cards: [
-        {
-          title: 'The Architecture of Rest',
-          desc: 'Read Dr. Vance’s essay on why doing nothing is clinically necessary.',
-          linkText: 'Read essay',
-          route: '/blog',
-        },
-        {
-          title: 'Sleep Routine Pacing',
-          desc: 'Dim your room, disconnect blue screens, and breathe deeply.',
-          linkText: 'Learn more',
-          route: '/workshops',
-        },
-      ],
-    },
-    Inspired: {
-      featured: {
-        tag: 'Creative Flow',
-        duration: '10 Min',
-        title: 'Intentional Living & Purpose',
-        desc: 'Harness positive mental clarity to outline mindful intentions for your week.',
-        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80',
-        route: '/progress',
-      },
-      cards: [
-        {
-          title: 'Share with Community',
-          desc: 'Inspire a fellow sanctuary traveler by sharing your victory story.',
-          linkText: 'Post story',
-          route: '/community',
-        },
-        {
-          title: 'Weekly Mindfulness Review',
-          desc: 'Check your calm streaks and review completed milestones.',
-          linkText: 'View Progress',
-          route: '/progress',
-        },
-      ],
-    },
-    Heavy: {
-      featured: {
-        tag: 'Somatic Compassion',
-        duration: '12 Min',
-        title: 'Holding Space for Sorrow',
-        desc: 'Place a gentle hand on your heart and let emotions pass without resisting or judging them.',
-        image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&auto=format&fit=crop&q=80',
-        route: '/explore',
-      },
-      cards: [
-        {
-          title: 'Private Journaling',
-          desc: 'Write freely into an encrypted safe haven with zero judgment.',
-          linkText: 'Open journal',
-          route: '/journal',
-        },
-        {
-          title: 'Grief Support Circle',
-          desc: 'Join our free upcoming webinar on gentle healing after sorrow.',
-          linkText: 'Reserve seat',
-          route: '/workshops',
-        },
-      ],
-    },
-  };
-
-  const currentRec = recommendationsByMood[selectedMood];
-
-  const handleAddTip = (e) => {
-    e.preventDefault();
-    if (!newTip.text.trim()) return;
-    setTips([
-      {
-        author: newTip.author || 'Kind Soul',
-        text: newTip.text,
-        avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&auto=format&fit=crop&q=80',
-      },
-      ...tips,
-    ]);
-    setNewTip({ author: '', text: '' });
-    setNotice('Thank you! Your soul food tip was shared with the community.');
-    setTimeout(() => setNotice(null), 3500);
-  };
+  const [selectedMood, setSelectedMood] = useState(null);
+  const [tipCategory, setTipCategory] = useState('Mindfulness');
+  const [tipText, setTipText] = useState('');
+  const [tipSubmitted, setTipSubmitted] = useState(false);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="relative pb-20 px-6 max-w-container-max mx-auto overflow-hidden">
+      {/* Background Organic Shapes */}
+      <div
+        className="pointer-events-none"
+        style={{
+          position: 'absolute',
+          top: '-160px',
+          right: '-160px',
+          width: '600px',
+          height: '600px',
+          background: '#ecdcfd',
+          borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+          zIndex: 0,
+          filter: 'blur(72px)',
+          opacity: 0.2,
+        }}
+      />
+      <div
+        className="pointer-events-none"
+        style={{
+          position: 'absolute',
+          top: '60%',
+          left: '-160px',
+          width: '400px',
+          height: '400px',
+          background: '#8ba88e',
+          borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+          zIndex: 0,
+          filter: 'blur(72px)',
+          opacity: 0.1,
+        }}
+      />
+
       {/* Hero & Mood Tracker */}
-      <section className="mb-16 text-center max-w-3xl mx-auto">
-        <span className="inline-block text-primary font-bold text-xs uppercase tracking-widest bg-primary-container/20 px-4 py-1.5 rounded-full mb-3">
-          Daily Personalization
-        </span>
-        <h1 className="font-headline text-3xl sm:text-5xl font-extrabold text-on-surface mb-4">
-          How are you feeling right now?
-        </h1>
-        <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed mb-8">
-          Let’s find the perfect space for your current state of mind. Select your mood to see personalized activities curated just for you.
+      <section className="mb-20 text-center relative z-10 pt-6">
+        <h1 className="font-headline-xl text-headline-xl mb-6">How are you feeling right now?</h1>
+        <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
+          Let's find the perfect space for your current state of mind. Select a mood to see personalized recommendations just for you.
         </p>
 
-        {/* Mood Widget Buttons */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-2xl mx-auto">
-          {moodButtons.map((btn) => (
+        {/* Mood Widget */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto">
+          {moods.map((m) => (
             <button
-              key={btn.name}
-              onClick={() => setSelectedMood(btn.name)}
-              className={`flex flex-col items-center justify-center gap-2 p-5 rounded-3xl border-2 transition-all duration-300 ${
-                selectedMood === btn.name
-                  ? `${btn.color} shadow-md scale-105 font-bold`
-                  : 'bg-white border-transparent hover:border-outline-variant/50 text-on-surface-variant'
-              }`}
+              key={m.label}
+              onClick={() => setSelectedMood(m.label)}
+              className="flex flex-col items-center gap-3 p-6 rounded-2xl border-2 transition-all duration-300 hover:border-primary/30"
+              style={{
+                background: selectedMood === m.label ? '#ecdcfd' : '#f5f3ef',
+                borderColor: selectedMood === m.label ? '#8ba88e' : 'transparent',
+                transform: selectedMood === m.label ? 'scale(1.1)' : 'scale(1)',
+              }}
             >
-              <span className="text-3xl">{btn.icon}</span>
-              <span className="text-xs font-semibold">{btn.name}</span>
+              <span className={`material-symbols-outlined text-4xl ${m.color}`}>{m.icon}</span>
+              <span className="font-label-md text-label-md">{m.label}</span>
             </button>
           ))}
         </div>
       </section>
 
-      {/* Recommendations Bento */}
-      <section className="mb-16">
-        <div className="flex justify-between items-end mb-6">
+      {/* Bento Grid Recommendations */}
+      <section className="mb-20 relative z-10" id="recommendations">
+        <div className="flex justify-between items-end mb-8">
           <div>
-            <h2 className="font-headline font-bold text-2xl text-on-surface">
-              Suggested for you ({selectedMood})
-            </h2>
-            <p className="text-xs text-on-surface-variant">Activities tailored to your current rhythm</p>
+            <h2 className="font-headline-lg text-headline-lg">Suggested for you</h2>
+            <p className="text-on-surface-variant">Activities tailored to your current rhythm.</p>
           </div>
-          <Link to="/explore" className="text-primary font-bold text-xs flex items-center gap-1 hover:underline">
-            <span>Explore all</span> <ArrowRight className="w-3.5 h-3.5" />
+          <Link to="/explore" className="text-primary font-bold flex items-center gap-2 hover:underline">
+            View all <span className="material-symbols-outlined">arrow_forward</span>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Main Featured Card */}
-          <div className="lg:col-span-8 rounded-3xl overflow-hidden relative shadow-sm border border-surface-container-high group min-h-[380px] flex flex-col justify-end p-8 bg-surface-variant">
-            <img
-              src={currentRec.featured.image}
-              alt={currentRec.featured.title}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
-
-            <div className="relative z-10 text-white space-y-3">
-              <div className="flex gap-2">
-                <span className="px-3 py-1 bg-primary text-white text-[10px] rounded-full uppercase tracking-widest font-bold">
-                  {currentRec.featured.tag}
-                </span>
-                <span className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-[10px] rounded-full font-bold">
-                  {currentRec.featured.duration}
-                </span>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6" style={{ gridAutoRows: '280px' }}>
+          {/* Featured Card — spans 8 cols, 2 rows */}
+          <div
+            className="md:col-span-8 group relative overflow-hidden rounded-3xl border border-surface-variant/50 transition-transform hover:scale-[1.01]"
+            style={{
+              gridRow: 'span 2',
+              background: '#eae8e4',
+              boxShadow: '0 20px 40px rgba(139,168,142,0.08)',
+            }}
+          >
+            <div className="absolute inset-0 z-0">
+              <img
+                className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
+                alt="A serene landscape featuring a misty mountain lake at sunrise with soft sage green and muted coral tones"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgSVPnZENXGG1QvsAG3iq4Tf0uDbfN-qwQTJ38tt67vB4wRfSeT1Xl9GKl5qshh7X2rRN-Wak3EfMU4TV3sc_3djYxrAWZE6x--tNBFMyfBuMz7sFQyTmepl8EaR22L17axi9Xmg-Tdx3c5RxFakXA1_vrj-fHJz-RVs2qY5xgazhxeYmD9REQAwAAln8apNb8phRcOISltt-95cS7FxLcjZsvmzo268LIpGIK3T8pjE8tpikGyHca4w"
+              />
+            </div>
+            <div
+              className="relative z-10 h-full flex flex-col justify-end p-8"
+              style={{ background: 'linear-gradient(to top, rgba(251,249,245,0.9), rgba(251,249,245,0.4), transparent)' }}
+            >
+              <div className="flex gap-2 mb-4">
+                <span className="px-3 py-1 bg-primary text-white text-xs rounded-full uppercase tracking-widest font-bold">Guided Meditation</span>
+                <span className="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs rounded-full font-bold">15 Min</span>
               </div>
-
-              <h3 className="font-headline font-bold text-2xl sm:text-3xl">
-                {currentRec.featured.title}
-              </h3>
-
-              <p className="text-xs sm:text-sm text-gray-200 max-w-lg leading-relaxed">
-                {currentRec.featured.desc}
-              </p>
-
+              <h3 className="font-headline-lg text-headline-lg mb-2">Morning Breath &amp; Grounding</h3>
+              <p className="text-on-surface-variant max-w-md mb-6">A gentle session designed to anchor your thoughts and prepare you for the day ahead with clarity.</p>
               <Link
-                to={currentRec.featured.route}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-coral text-white font-bold text-xs shadow-lg hover:bg-coral-dark transition-all"
+                to="/guided-support"
+                className="w-fit bg-primary text-white px-8 py-3 rounded-full font-bold hover:shadow-lg transition-all flex items-center gap-2"
               >
-                <span>Begin Session</span>
-                <Play className="w-3.5 h-3.5 fill-current" />
+                Begin Session <span className="material-symbols-outlined">play_arrow</span>
               </Link>
             </div>
           </div>
 
-          {/* Secondary Stack Cards */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            {currentRec.cards.map((card, idx) => (
-              <div
-                key={idx}
-                className="flex-1 bg-white p-6 rounded-3xl border border-surface-container-high shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
-              >
-                <div>
-                  <h4 className="font-headline font-bold text-base text-on-surface mb-2">
-                    {card.title}
-                  </h4>
-                  <p className="text-xs text-on-surface-variant leading-relaxed mb-4">
-                    {card.desc}
-                  </p>
-                </div>
-                <Link
-                  to={card.route}
-                  className="text-primary font-bold text-xs inline-flex items-center gap-1 hover:underline"
-                >
-                  <span>{card.linkText}</span>
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-              </div>
-            ))}
+          {/* Secondary Card 1 */}
+          <div
+            className="md:col-span-4 group rounded-3xl p-8 border border-surface-variant/50 flex flex-col justify-between transition-all hover:bg-surface-bright"
+            style={{ background: '#f5f3ef', boxShadow: '0 20px 40px rgba(139,168,142,0.08)' }}
+          >
+            <div className="w-12 h-12 bg-secondary-container/50 rounded-xl flex items-center justify-center text-secondary mb-4">
+              <span className="material-symbols-outlined">edit_note</span>
+            </div>
+            <div>
+              <h4 className="font-headline-md text-headline-md mb-2">Gratitude Log</h4>
+              <p className="text-on-surface-variant text-sm">Write down three things you're thankful for today.</p>
+            </div>
+            <Link to="/journal" className="mt-4 text-primary font-bold text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+              Write now <span className="material-symbols-outlined text-sm">chevron_right</span>
+            </Link>
+          </div>
+
+          {/* Secondary Card 2 */}
+          <div
+            className="md:col-span-4 group rounded-3xl p-8 border border-surface-variant/50 flex flex-col justify-between transition-all hover:bg-surface-bright"
+            style={{ background: '#f5f3ef', boxShadow: '0 20px 40px rgba(139,168,142,0.08)' }}
+          >
+            <div className="w-12 h-12 bg-primary-container/30 rounded-xl flex items-center justify-center text-primary mb-4">
+              <span className="material-symbols-outlined">forest</span>
+            </div>
+            <div>
+              <h4 className="font-headline-md text-headline-md mb-2">Visual Escape</h4>
+              <p className="text-on-surface-variant text-sm">Explore an immersive 3D forest environment.</p>
+            </div>
+            <Link to="/explore" className="mt-4 text-primary font-bold text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+              Explore <span className="material-symbols-outlined text-sm">chevron_right</span>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Community Soul Food Section */}
-      <section className="bg-secondary-container/20 rounded-[36px] p-8 md:p-12 border border-secondary-container/40 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      {/* Community Soul Food */}
+      <section
+        className="grid md:grid-cols-2 gap-12 items-center rounded-[40px] p-8 md:p-16 border border-secondary-container/20 relative z-10"
+        style={{ background: 'rgba(236,220,253,0.1)' }}
+      >
         <div>
-          <span className="inline-block text-secondary font-bold text-xs uppercase tracking-widest mb-2">
-            Shared Wisdom
-          </span>
-          <h2 className="font-headline font-bold text-2xl md:text-3xl text-on-surface mb-4">
-            Community Soul Food
-          </h2>
-          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed mb-6">
-            Our healing space grows through shared human wisdom. Have an activity or a gentle ritual that helped you find your breath? Share it with the sanctuary.
+          <h2 className="font-headline-lg text-headline-lg mb-6">Community Soul Food</h2>
+          <p className="text-body-lg text-on-surface-variant mb-8">
+            Our healing space grows through shared wisdom. Have an activity or a tip that helped you find your breath? Share it with the community.
           </p>
-
-          <div className="space-y-4">
-            {tips.map((tip, idx) => (
-              <div key={idx} className="flex items-start gap-3 bg-white p-4 rounded-2xl shadow-sm border border-surface-container-high">
-                <img src={tip.avatar} alt={tip.author} className="w-10 h-10 rounded-full object-cover shrink-0" />
-                <div>
-                  <p className="text-xs text-on-surface italic">"{tip.text}"</p>
-                  <span className="text-[11px] font-bold text-primary block mt-1">— {tip.author}</span>
-                </div>
+          <div className="space-y-6">
+            {/* Testimonial 1 */}
+            <div className="flex gap-4 items-start">
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-outline-variant flex-shrink-0">
+                <img
+                  className="w-full h-full object-cover"
+                  alt="Sarah J."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4ZBCkCzep-79sukIJGrkjh5M2s0MH5FmM2gO3VAsQ6ygldSlGJxabYBqecD-vwmjrZqBuxl_VCG_1ozCgUf_FK03n1Cw3JxKqUSYEBlva4um_QqjMDNFNrV46-5WRRkKLWJVWS8su1OIzoN7tNQwbPSSWsjceR6gDOMqVyApOs8PI7vBBBiki0XpLWijxcdsG0nI9EbLIpnH9p_5aaZrAY2cW0ZNDFZYe0-6kBlBVaUfAYWE9soG_DQ"
+                />
               </div>
-            ))}
+              <div
+                className="rounded-2xl p-4 border border-surface-variant/30"
+                style={{ background: '#fbf9f5', boxShadow: '0 20px 40px rgba(139,168,142,0.08)' }}
+              >
+                <p className="italic text-sm text-on-surface-variant">
+                  "I listen to the sound of rain whenever I feel overwhelmed. It helps me focus on the present moment."
+                </p>
+                <span className="text-xs font-bold text-primary mt-2 block">— Sarah J.</span>
+              </div>
+            </div>
+            {/* Testimonial 2 */}
+            <div className="flex gap-4 items-start translate-x-4">
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-outline-variant flex-shrink-0">
+                <img
+                  className="w-full h-full object-cover"
+                  alt="David M."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxAwKFFrSG1viNEhLXq9q5h1iPVUuScaAMJ-V6ZcuKpxSd4KulB497ItJvvj54x0EZxvVqEC1-jvjk_8VnEZUSx75DxKKGCz7RoyipOxZObUYMxoFk6h-K1vWLoMt5L_Y-DWAZDXiT9NtCPEH8mST0KahtBoXYj1CWAQmL3C6hoM3Wol_MF0j2lAlTxNnu1diTH1KhV681itI45HglLgk71C-rDXR2SqDR49wgpPIWbWvtxwL42Zt97w"
+                />
+              </div>
+              <div
+                className="rounded-2xl p-4 border border-surface-variant/30"
+                style={{ background: '#fbf9f5', boxShadow: '0 20px 40px rgba(139,168,142,0.08)' }}
+              >
+                <p className="italic text-sm text-on-surface-variant">
+                  "A five-minute stretch session at noon changed my entire productivity levels."
+                </p>
+                <span className="text-xs font-bold text-primary mt-2 block">— David M.</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Submit Tip Form */}
-        <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-surface-container-high">
-          <h3 className="font-headline font-bold text-base text-on-surface mb-2">
-            Share a Gentle Tip
-          </h3>
-          <p className="text-xs text-on-surface-variant mb-4">
-            Offer a small grain of comfort to someone experiencing the same emotional weather today.
-          </p>
-
-          {notice && (
-            <div className="mb-3 p-3 rounded-xl bg-green-100 text-green-800 text-xs flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-green-600" />
-              <span>{notice}</span>
+        {/* Add Your Tip Form */}
+        <div
+          className="p-8 rounded-3xl border border-surface-variant/50"
+          style={{ background: '#fbf9f5', boxShadow: '0 20px 40px rgba(139,168,142,0.08)' }}
+        >
+          {tipSubmitted ? (
+            <div className="text-center py-8 space-y-4">
+              <span className="material-symbols-outlined text-primary text-5xl">check_circle</span>
+              <h3 className="font-headline-md text-headline-md text-primary">Thank you!</h3>
+              <p className="text-on-surface-variant text-sm">Your tip has been submitted for review.</p>
+              <button className="text-xs font-bold text-primary underline" onClick={() => { setTipSubmitted(false); setTipText(''); }}>
+                Submit another
+              </button>
             </div>
+          ) : (
+            <>
+              <h3 className="font-headline-md text-headline-md mb-2">Add Your Tip</h3>
+              <p className="text-on-surface-variant text-sm mb-6">Your voice might be exactly what someone needs to hear today.</p>
+              <div className="space-y-4">
+                <div>
+                  <label className="block font-label-md text-label-md text-on-surface-variant mb-2">Category</label>
+                  <select
+                    value={tipCategory}
+                    onChange={(e) => setTipCategory(e.target.value)}
+                    className="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/50 text-on-surface outline-none"
+                  >
+                    <option>Mindfulness</option>
+                    <option>Physical Activity</option>
+                    <option>Creative Expression</option>
+                    <option>Rest</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block font-label-md text-label-md text-on-surface-variant mb-2">Your Suggestion</label>
+                  <textarea
+                    rows={3}
+                    placeholder="Take your time..."
+                    value={tipText}
+                    onChange={(e) => setTipText(e.target.value)}
+                    className="w-full bg-surface-container-low border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/50 text-on-surface placeholder:text-outline-variant outline-none resize-none"
+                  />
+                </div>
+                <button
+                  onClick={() => { if (tipText.trim()) setTipSubmitted(true); }}
+                  className="w-full bg-primary text-white font-bold py-4 rounded-full hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-95"
+                >
+                  Submit for Review
+                </button>
+                <p className="text-center italic text-outline" style={{ fontSize: '10px' }}>
+                  Every tip is reviewed by our community facilitators to ensure a safe space.
+                </p>
+              </div>
+            </>
           )}
-
-          <form onSubmit={handleAddTip} className="space-y-3 text-xs">
-            <div>
-              <label className="block font-bold text-on-surface-variant mb-1">Your Name or Alias</label>
-              <input
-                type="text"
-                placeholder="e.g. Maya S."
-                value={newTip.author}
-                onChange={(e) => setNewTip({ ...newTip, author: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-outline-variant/60 bg-[#fbf9f5]"
-              />
-            </div>
-            <div>
-              <label className="block font-bold text-on-surface-variant mb-1">Your Wisdom or Grounding Ritual</label>
-              <textarea
-                rows="3"
-                required
-                placeholder="e.g. Taking 3 deep exhales while placing both feet flat on the wooden floor..."
-                value={newTip.text}
-                onChange={(e) => setNewTip({ ...newTip, text: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-outline-variant/60 bg-[#fbf9f5] resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full py-2.5 rounded-xl bg-primary text-white font-bold shadow hover:bg-opacity-90 transition-all flex items-center justify-center gap-2"
-            >
-              <Send className="w-3.5 h-3.5" />
-              <span>Share Soul Food</span>
-            </button>
-          </form>
         </div>
       </section>
     </div>
