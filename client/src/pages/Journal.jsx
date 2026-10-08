@@ -1,25 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const pastEntries = [
-  {
-    date: 'Oct 24, 2023',
-    mood: '🌱 Calm',
-    moodBg: 'bg-secondary-container/50 text-on-secondary-container',
-    preview: 'Started the day with a short walk. Feeling a bit more grounded than yesterday...',
-  },
-  {
-    date: 'Oct 22, 2023',
-    mood: '🌧️ Heavy',
-    moodBg: 'bg-surface-dim/50 text-on-surface',
-    preview: 'Things felt overwhelming at work. Tried to use the breathing exercises but struggled to focus.',
-  },
-  {
-    date: 'Oct 19, 2023',
-    mood: '✨ Clear',
-    moodBg: 'bg-primary-container/30 text-on-primary-container',
-    preview: 'Had a really good session today. Realized that I\'ve been holding onto...',
-  },
-];
+
 
 export default function Journal() {
   const [journalText, setJournalText] = useState('');
@@ -102,32 +83,12 @@ export default function Journal() {
             Past Entries
           </h2>
 
-          <div className="flex-grow overflow-y-auto pr-2 space-y-4">
-            {pastEntries.map((entry, i) => (
-              <button
-                key={i}
-                className="w-full text-left bg-surface-container-low hover:bg-surface-container-high transition-colors p-4 rounded-xl border border-outline-variant/20 group"
-                style={{ boxShadow: '4px 4px 20px rgba(139,168,142,0.03)' }}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <span className="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">
-                    {entry.date}
-                  </span>
-                  <span className={`${entry.moodBg} text-[12px] px-2 py-0.5 rounded-full flex items-center gap-1`}>
-                    {entry.mood}
-                  </span>
-                </div>
-                <p className="font-body-md text-body-md text-on-surface opacity-80 line-clamp-2">
-                  {entry.preview}
-                </p>
-              </button>
-            ))}
+          <div className="flex-grow flex flex-col items-center justify-center text-center px-2">
+            <span className="material-symbols-outlined text-4xl text-outline-variant mb-3">edit_note</span>
+            <p className="font-body-md text-body-md text-on-surface-variant text-sm">
+              Your saved journal entries will appear here.
+            </p>
           </div>
-
-          <button className="mt-4 w-full py-3 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-variant/30 hover:text-on-surface transition-colors font-label-md text-label-md flex justify-center items-center gap-2">
-            View all history
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-          </button>
         </aside>
 
         {/* Main Writing Canvas */}
