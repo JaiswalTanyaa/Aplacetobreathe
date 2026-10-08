@@ -1,35 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const therapists = [
-  {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCFc_ZTcw1H-WYNaxwkJv3bjMRl_LUMarM0i4vJTZA6K2MkotZWmmURMQxWi8B6vqtrrhkJiChRE_oGwlRm3yOKncjgbHZ5qqKk2yzT3Lg8yWP4pneJIXQXnfOm_nVXxGopRSspOyL_RY729_DkujJBCAbSHEhhVX1pIpyfFSKLkxEWq2xPnHwBnKx7bRj_Y-oDEj0JHP1R90zOazq8Pp08OLFmsas2dH1Nn136uYbep-EFOaSzTVBF-Q',
-    rating: '4.9',
-    name: 'Dr. Elena Thorne',
-    role: 'CLINICAL PSYCHOLOGIST',
-    price: '$120/hr',
-    tags: ['Trauma', 'EMDR'],
-    bio: 'Helping individuals find their path through transformative EMDR therapy and compassionate cognitive behavioral strategies.',
-  },
-  {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCDzQT5-YfWN2pRjlmAqYSjlgeCHGmO7lQLxN7FbuTnaO8DqW_aNjUA4aLCnXhhAOe_LZE3puczicG3aLqy1n854w-ViqaxrnmzZcjs5ShV0EPFojS9Zc8QaUMM2GZ1L5uzrCg3NENXqdZxgUY9STSx3oxYFFdE_mmO_8wQwGzyP4O54ruqjfTaAj-FoOsbdLZuO7gg5zsLOncHEoYTy0bt7DmFozErkxh0RBEpzriq0S7g_6wlQ5X9jA',
-    rating: '4.8',
-    name: 'Marcus Chen',
-    role: 'LCSW • MINDFULNESS',
-    price: '$95/hr',
-    tags: ['Anxiety', 'Meditation'],
-    bio: 'Blending modern science with mindfulness practices to help manage life\'s daily stresses and find inner quiet.',
-  },
-  {
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDxcaLEiTgcFqPGYeA0NdGI-5ZeISMpNFhUqGbPm67-Xv8Pwn3bHadCNhc3tgo5qAYO6eTq0BLAsE2DGXSUjWFO27WD93zuX8r0prsW6EuAyDSmup6-Mt1g8O-_OVIBIN1Ac2u7Gy585czf_IK1vZVq16jqt0wPdHgQkEhXamGUe84L4u5i6QPrFwEcQLBeQu-AtAwVQKfT-TxPndvqNSqLBkTHuRxxX3847vr258yX1vCyt_C2mwC-4A',
-    rating: '5.0',
-    name: 'Dr. Sarah Varma',
-    role: 'MD • PSYCHIATRIST',
-    price: '$150/hr',
-    tags: ['Depression', 'Medication'],
-    bio: 'Specialized in integrative psychiatry, helping you navigate complex mental health challenges with holistic care.',
-  },
-];
+
 
 export default function Therapists() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -149,46 +121,24 @@ export default function Therapists() {
         </div>
       </section>
 
-      {/* Directory Grid */}
+      {/* Directory — empty state until real therapists are added */}
       <section className="py-16 bg-background">
         <div className="max-w-container-max mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {therapists.map((t) => (
-              <div key={t.name} className="group bg-surface-container-lowest rounded-3xl p-6 shadow-sm border border-outline-variant/20 hover:shadow-xl transition-all duration-500 flex flex-col h-full">
-                <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-6">
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    alt={t.name}
-                    src={t.img}
-                  />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
-                    <span className="material-symbols-outlined text-tertiary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                    <span className="text-sm font-bold text-on-surface">{t.rating}</span>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-headline-md text-headline-md text-on-background">{t.name}</h3>
-                      <p className="text-primary font-label-md tracking-wider">{t.role}</p>
-                    </div>
-                    <span className="text-on-surface-variant font-label-md">{t.price}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-2 my-4">
-                    {t.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold uppercase tracking-wider">{tag}</span>
-                    ))}
-                  </div>
-                  <p className="text-on-surface-variant text-sm line-clamp-2 mb-6">{t.bio}</p>
-                </div>
-                <button
-                  onClick={() => openModal(t.name)}
-                  className="w-full bg-primary text-on-primary py-4 rounded-xl font-label-md hover:bg-on-primary-fixed-variant transition-colors shadow-md active:scale-95"
-                >
-                  Book Session
-                </button>
-              </div>
-            ))}
+          <div className="flex flex-col items-center justify-center py-24 text-center">
+            <div className="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-6">
+              <span className="material-symbols-outlined text-5xl">person_search</span>
+            </div>
+            <h2 className="font-headline-lg text-headline-lg text-on-surface mb-3">Therapists Coming Soon</h2>
+            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-md mb-8">
+              Our verified therapist directory is being set up. Check back soon or reach out via the consultation page to get matched with a professional.
+            </p>
+            <Link
+              to="/consultation"
+              className="bg-primary text-on-primary font-label-md text-label-md px-10 py-4 rounded-full hover:bg-primary/90 transition-all shadow-sm flex items-center gap-2"
+            >
+              <span className="material-symbols-outlined">calendar_month</span>
+              Request a Consultation
+            </Link>
           </div>
         </div>
       </section>
@@ -298,15 +248,15 @@ export default function Therapists() {
                 </div>
               )}
 
-              {/* Step 3 */}
+              {/* Step 3 — Confirmed */}
               {step === 3 && (
                 <div className="text-center space-y-6 py-8 animate-fade-in">
                   <div className="w-20 h-20 bg-primary-container/20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="material-symbols-outlined text-primary text-5xl">task_alt</span>
                   </div>
-                  <h3 className="font-headline-md text-headline-md text-on-background">Booking Confirmed!</h3>
+                  <h3 className="font-headline-md text-headline-md text-on-background">Request Sent!</h3>
                   <p className="text-on-surface-variant max-w-sm mx-auto">
-                    Your session is scheduled for Oct 14th at 2:00 PM. We've sent a calendar invite to your email.
+                    Your session request with {selectedTherapist} has been submitted. We'll confirm the time and send details to your email shortly.
                   </p>
                   <button onClick={closeModal} className="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-md hover:opacity-90 transition-all shadow-md">
                     Done
