@@ -13,11 +13,18 @@ export default function JoinSanctuary() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!contact.trim()) return;
-    // Set auth state immediately so Navbar updates to logged-in view
-    login({
-      name: name.trim() || 'Friend',
-      email: contact.includes('@') ? contact.trim() : '',
-    });
+    const email = contact.includes('@') ? contact.trim() : '';
+
+    // Registration (Join Us): use the name the user explicitly typed.
+    // Login: no name field shown — auto-derive from email prefix
+    //   e.g. tanya@gmail.com → "Tanya"
+    let resolvedName = name.trim();
+    if (!resolvedName && email) {
+      const prefix = email.split('@')[0];
+      resolvedName = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+    }
+
+    login({ name: resolvedName, email });
     setSubmitted(true);
     setTimeout(() => {
       navigate('/explore');
@@ -102,7 +109,7 @@ export default function JoinSanctuary() {
                 type="button"
                 role="tab"
                 aria-selected={activeTab === 'login'}
-                onClick={() => setActiveTab('login')}
+                onClick={() => { setActiveTab('login'); setName(''); setContact(''); }}
                 className={`flex-1 py-3 px-6 rounded-full font-label-md text-label-md transition-all duration-300 ease-in-out ${
                   activeTab === 'login'
                     ? 'bg-white text-primary'
@@ -116,7 +123,7 @@ export default function JoinSanctuary() {
                 type="button"
                 role="tab"
                 aria-selected={activeTab === 'join'}
-                onClick={() => setActiveTab('join')}
+                onClick={() => { setActiveTab('join'); setName(''); setContact(''); }}
                 className={`flex-1 py-3 px-6 rounded-full font-label-md text-label-md transition-all duration-300 ease-in-out ${
                   activeTab === 'join'
                     ? 'bg-white text-primary'
@@ -130,7 +137,8 @@ export default function JoinSanctuary() {
 
             {/* Auth Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Field — shown only for Join Us */}
+              {/* Name Field — shown only on Join Us (registration) tab.
+                  On Login, name is auto-derived from the email prefix. */}
               {activeTab === 'join' && (
                 <div>
                   <label className="block font-label-md text-label-md text-on-surface-variant mb-2 ml-4" htmlFor="name">

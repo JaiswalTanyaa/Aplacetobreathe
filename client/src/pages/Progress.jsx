@@ -6,14 +6,9 @@ export default function Progress() {
   const [activeChart, setActiveChart] = useState('Weekly');
   const { user } = useAuth();
 
-  // Derive display name: full name → email prefix → 'Friend'
-  const displayName = user?.name
-    ? user.name
-    : user?.email
-      ? user.email.split('@')[0]
-      : 'Friend';
-
-  // Avatar initial for the sidebar
+  // AuthContext always resolves a real name (from name field or email prefix).
+  // Fallback to 'User' only if somehow no user object exists yet.
+  const displayName = user?.name || user?.email?.split('@')[0] || 'User';
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
   return (

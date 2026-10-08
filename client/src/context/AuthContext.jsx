@@ -27,10 +27,21 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(readSession);
 
   const login = useCallback((userData) => {
+    const email = (userData.email || '').trim();
+
+    // Resolve name: use provided name if non-empty,
+    // else derive from email prefix ("tanya@gmail.com" → "Tanya"),
+    // else fall back to email itself.
+    const rawName = (userData.name || '').trim();
+    const emailPrefix = email.split('@')[0];
+    const resolvedName = rawName
+      || (emailPrefix ? emailPrefix.charAt(0).toUpperCase() + emailPrefix.slice(1) : email)
+      || 'User';
+
     const u = {
-      name:     userData.name     || 'Guest',
-      email:    userData.email    || '',
-      initials: (userData.name || 'G').charAt(0).toUpperCase(),
+      name:     resolvedName,
+      email,
+      initials: resolvedName.charAt(0).toUpperCase(),
     };
     sessionStorage.setItem('auth_user', JSON.stringify(u));
     setUser(u);
