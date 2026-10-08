@@ -24,6 +24,7 @@ app.use('/api/therapists', require('./routes/therapists'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/journal', require('./routes/journal'));
 app.use('/api/community', require('./routes/community'));
+app.use('/api/auth', require('./routes/auth'));
 
 // Root API Welcome
 app.get('/api', (req, res) => {

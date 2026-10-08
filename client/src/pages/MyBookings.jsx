@@ -1,7 +1,57 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function MyBookings() {
+  const { user } = useAuth();
+
+  /* ── Auth Gate: not logged in ─────────────────────────────────────────── */
+  if (!user) {
+    return (
+      <div className="relative min-h-screen bg-background text-on-background antialiased overflow-x-hidden flex items-center justify-center px-6">
+        {/* Ambient blobs */}
+        <div className="absolute rounded-full pointer-events-none"
+          style={{ background: '#cceace', width: '600px', height: '600px', top: '-100px', left: '-150px', filter: 'blur(100px)', opacity: 0.4, zIndex: -1 }} />
+        <div className="absolute rounded-full pointer-events-none"
+          style={{ background: '#ecdcfd', width: '500px', height: '500px', bottom: '20%', right: '-100px', filter: 'blur(100px)', opacity: 0.4, zIndex: -1 }} />
+
+        <div className="text-center max-w-md">
+          {/* Icon */}
+          <div className="w-20 h-20 rounded-full bg-primary/10 text-primary mx-auto flex items-center justify-center mb-6">
+            <span className="material-symbols-outlined text-5xl">calendar_month</span>
+          </div>
+
+          <h1 className="font-headline-xl text-headline-xl text-on-surface mb-3">Your Bookings Await</h1>
+          <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">
+            Sign in to see your upcoming sessions, manage your schedule, and pick up right where you left off.
+          </p>
+
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/login"
+              className="bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded-full hover:bg-primary/90 transition-all shadow-sm flex items-center justify-center gap-2"
+            >
+              <span className="material-symbols-outlined text-sm">login</span>
+              Sign In to View Bookings
+            </Link>
+            <Link
+              to="/login?tab=join"
+              className="border border-primary text-primary font-label-md text-label-md px-8 py-4 rounded-full hover:bg-primary/5 transition-all flex items-center justify-center gap-2"
+            >
+              <span className="material-symbols-outlined text-sm">person_add</span>
+              Create an Account
+            </Link>
+          </div>
+
+          <p className="text-on-surface-variant text-sm mt-8 opacity-70">
+            No account yet? It's free and takes less than a minute.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative min-h-screen bg-background text-on-background antialiased overflow-x-hidden">
       {/* Ambient Background Blobs */}

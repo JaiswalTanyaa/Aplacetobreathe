@@ -166,14 +166,13 @@ export default function Navbar() {
 
   const activitiesPaths = ['/workshops', '/community'];
   const resourcesPaths  = ['/journal', '/blog', '/about'];
-  // Dashboard dropdown only shown when logged OUT (logged in → those links live in profile dropdown)
   const dashboardPaths  = ['/my-bookings', '/progress'];
 
   const isActivitiesActive = activitiesPaths.includes(location.pathname);
   const isResourcesActive  = resourcesPaths.includes(location.pathname);
   const isDashboardActive  = dashboardPaths.includes(location.pathname);
 
-  // Mobile drawer links — auth-aware
+  // Mobile drawer links — always includes dashboard items
   const mobileLinks = [
     { name: 'Explore',     path: '/explore' },
     { name: 'Therapists',  path: '/therapists' },
@@ -182,16 +181,9 @@ export default function Navbar() {
     { name: 'Journal',     path: '/journal' },
     { name: 'Blog',        path: '/blog' },
     { name: 'About',       path: '/about' },
-    ...(user
-      ? [
-          { name: 'Progress',    path: '/progress' },
-          { name: 'My Bookings', path: '/my-bookings' },
-        ]
-      : [
-          { name: 'My Bookings', path: '/my-bookings' },
-          { name: 'Progress',    path: '/progress' },
-          { name: 'Login / Sign Up', path: '/login' },
-        ]),
+    { name: 'My Bookings', path: '/my-bookings' },
+    { name: 'Progress',    path: '/progress' },
+    ...(!user ? [{ name: 'Login / Sign Up', path: '/login' }] : []),
   ];
 
   const handleMobileSignOut = () => {
@@ -269,19 +261,17 @@ export default function Navbar() {
             ]}
           />
 
-          {/* Dashboard dropdown — only when logged OUT (logged in: these live in profile dropdown) */}
-          {!user && (
-            <DropdownMenu
-              label="Dashboard"
-              isActive={isDashboardActive}
-              items={[
-                { name: 'My Bookings', path: '/my-bookings' },
-                { name: 'Progress',    path: '/progress' },
-              ]}
-            />
-          )}
+          {/* Dashboard dropdown — always visible; items are auth-aware */}
+          <DropdownMenu
+            label="Dashboard"
+            isActive={isDashboardActive}
+            items={[
+              { name: 'My Bookings', path: '/my-bookings' },
+              { name: 'Progress',    path: '/progress' },
+            ]}
+          />
 
-          {/* Auth: Login link (logged out) — hidden when logged in */}
+          {/* Auth: Login link — only shown when logged out */}
           {!user && (
             <Link
               to="/login"

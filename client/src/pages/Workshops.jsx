@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const filterOptions = ['All Sessions', 'Student Workshops', 'Peer Support', 'Expert Webinars'];
 
@@ -48,10 +49,155 @@ const workshopCards = [
   },
 ];
 
+/* ── Registration Modal ──────────────────────────────────────────────────────── */
+function RegistrationModal({ card, onClose, defaultName }) {
+  const [regName, setRegName]         = useState(defaultName);
+  const [reminderSet, setReminderSet] = useState(false);
+  const [registered, setRegistered]   = useState(false);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    if (!regName.trim()) return;
+    setRegistered(true);
+  };
+
+  return (
+    /* Backdrop */
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      style={{ background: 'rgba(27,28,26,0.5)', backdropFilter: 'blur(4px)' }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div
+        className="relative w-full max-w-md rounded-[32px] p-8 animate-in fade-in zoom-in-95 duration-200"
+        style={{ background: '#ffffff', border: '1px solid #e4e2de', boxShadow: '0 24px 48px rgba(139,168,142,0.15)' }}
+      >
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high flex items-center justify-center transition-colors"
+          aria-label="Close"
+        >
+          <span className="material-symbols-outlined text-lg">close</span>
+        </button>
+
+        {registered ? (
+          /* Success state */
+          <div className="text-center py-4 space-y-4">
+            <div className="w-16 h-16 rounded-full bg-primary/10 text-primary mx-auto flex items-center justify-center">
+              <span className="material-symbols-outlined text-4xl">check_circle</span>
+            </div>
+            <h3 className="font-headline-md text-headline-md text-primary">You're In!</h3>
+            <p className="font-body-md text-body-md text-on-surface-variant">
+              <strong>{regName}</strong>, your spot for <strong>{card.title}</strong> is saved.
+              {reminderSet && ' We\'ll remind you before it starts.'}
+            </p>
+            <button
+              onClick={onClose}
+              className="mt-2 bg-primary text-on-primary font-label-md text-label-md px-8 py-3 rounded-full hover:bg-primary/90 transition-colors"
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Modal header */}
+            <div className="mb-6">
+              <span className={`inline-block ${card.badgeBg} px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3`}>
+                {card.badge}
+              </span>
+              <h3 className="font-headline-md text-headline-md text-on-surface mb-1">{card.title}</h3>
+              <p className="text-sm text-on-surface-variant">{card.date} · with {card.speaker}</p>
+            </div>
+
+            <form onSubmit={handleRegister} className="space-y-5">
+              {/* Name field — pre-filled, editable */}
+              <div>
+                <label className="block font-label-md text-label-md text-on-surface-variant mb-2 ml-1" htmlFor="reg-name">
+                  Your Name
+                </label>
+                <input
+                  id="reg-name"
+                  type="text"
+                  required
+                  value={regName}
+                  onChange={(e) => setRegName(e.target.value)}
+                  className="w-full rounded-full px-5 py-3 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-shadow"
+                  style={{ backgroundColor: '#fbf9f5', border: '1px solid #e4e2de' }}
+                />
+                {defaultName && (
+                  <p className="text-xs text-on-surface-variant mt-1.5 ml-1 opacity-70">
+                    Pre-filled from your account — feel free to edit.
+                  </p>
+                )}
+              </div>
+
+              {/* Set a Reminder toggle */}
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <button
+                  type="button"
+                  onClick={() => setReminderSet(!reminderSet)}
+                  className={`relative w-12 h-6 rounded-full transition-colors duration-200 flex-shrink-0 ${
+                    reminderSet ? 'bg-primary' : 'bg-surface-container-high'
+                  }`}
+                  aria-pressed={reminderSet}
+                >
+                  <span
+                    className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform duration-200 ${
+                      reminderSet ? 'translate-x-7' : 'translate-x-1'
+                    }`}
+                  />
+                </button>
+                <span className="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">
+                  Set a reminder
+                </span>
+                {reminderSet && (
+                  <span className="material-symbols-outlined text-primary text-sm">notifications_active</span>
+                )}
+              </label>
+
+              {/* Actions */}
+              <div className="flex gap-3 pt-1">
+                <button
+                  type="submit"
+                  className="flex-1 bg-primary text-on-primary font-label-md text-label-md py-3.5 rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-sm">event_available</span>
+                  {card.cta === 'Save Seat' ? 'Save My Seat' : card.cta === 'Register' ? 'Register Now' : 'Join Now'}
+                </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="px-5 py-3.5 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ── Main Workshops Page ──────────────────────────────────────────────────────── */
 export default function Workshops() {
-  const [activeFilter, setActiveFilter] = useState('All Sessions');
-  const [searchValue, setSearchValue] = useState('');
+  const [activeFilter, setActiveFilter]   = useState('All Sessions');
+  const [searchValue, setSearchValue]     = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
+  const [modalCard, setModalCard]         = useState(null);   // card data or null
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleCta = (card) => {
+    if (!user) {
+      // Redirect to login if not logged in
+      navigate('/login');
+      return;
+    }
+    setModalCard(card);
+  };
 
   return (
     <div className="relative overflow-x-hidden">
@@ -161,7 +307,10 @@ export default function Workshops() {
                     <div className={`w-8 h-8 rounded-full ${card.avatarBg}`} />
                     <span className="text-xs font-medium">{card.speaker}</span>
                   </div>
-                  <button className="text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <button
+                    onClick={() => handleCta(card)}
+                    className="text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all"
+                  >
                     {card.cta} <span className="material-symbols-outlined text-sm">arrow_forward</span>
                   </button>
                 </div>
@@ -260,7 +409,14 @@ export default function Workshops() {
                 <p className="opacity-80 text-sm mb-8">Quick 10-minute sessions at noon to help you refocus and regain your center.</p>
               </div>
               <div className="relative z-10">
-                <button className="w-full py-4 bg-white text-primary rounded-full font-bold hover:bg-opacity-90 transition-all">
+                <button
+                  onClick={() => user
+                    ? alert(`Reminder set for ${user.name}! You'll be notified before each session.`)
+                    : navigate('/login')
+                  }
+                  className="w-full py-4 bg-white text-primary rounded-full font-bold hover:bg-opacity-90 transition-all flex items-center justify-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-sm">notifications_active</span>
                   Set Reminder
                 </button>
               </div>
@@ -291,6 +447,15 @@ export default function Workshops() {
           </div>
         </section>
       </main>
+
+      {/* Registration Modal */}
+      {modalCard && (
+        <RegistrationModal
+          card={modalCard}
+          defaultName={user?.name || ''}
+          onClose={() => setModalCard(null)}
+        />
+      )}
     </div>
   );
 }

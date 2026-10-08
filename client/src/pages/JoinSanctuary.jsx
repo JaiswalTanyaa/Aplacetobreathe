@@ -3,32 +3,80 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function JoinSanctuary() {
-  const [activeTab, setActiveTab] = useState('login');
-  const [name, setName] = useState('');
-  const [contact, setContact] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [activeTab, setActiveTab]   = useState('login');
+  const [name, setName]             = useState('');
+  const [contact, setContact]       = useState('');
+  const [step, setStep]             = useState('form');   // 'form' | 'otp' | 'done'
+  const [otp, setOtp]               = useState('');
+  const [generatedOtp, setGeneratedOtp] = useState('');
+  const [otpError, setOtpError]     = useState('');
+  const [sending, setSending]       = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleSubmit = (e) => {
+  /* ── Resolve display name ───────────────────────────────────────────────── */
+  const getResolvedName = () => {
+    let resolved = name.trim();
+    if (!resolved && contact.includes('@')) {
+      const prefix = contact.split('@')[0];
+      resolved = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+    }
+    return resolved || 'Friend';
+  };
+
+  /* ── Step 1: Submit form → send OTP via Brevo API ───────────────────────── */
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!contact.trim()) return;
-    const email = contact.includes('@') ? contact.trim() : '';
 
-    // Registration (Join Us): use the name the user explicitly typed.
-    // Login: no name field shown — auto-derive from email prefix
-    //   e.g. tanya@gmail.com → "Tanya"
-    let resolvedName = name.trim();
-    if (!resolvedName && email) {
-      const prefix = email.split('@')[0];
-      resolvedName = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+    // Generate a 6-digit OTP (stored locally for demo; server sends it via Brevo)
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(code);
+
+    if (contact.includes('@')) {
+      // Real email — call server to send via Brevo
+      setSending(true);
+      try {
+        await fetch('http://localhost:5000/api/auth/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: contact.trim(), otp: code, name: getResolvedName() }),
+        });
+      } catch {
+        // Server might be offline in dev — fall through to local OTP check
+      } finally {
+        setSending(false);
+      }
     }
 
-    login({ name: resolvedName, email });
-    setSubmitted(true);
-    setTimeout(() => {
-      navigate('/explore');
-    }, 2000);
+    setStep('otp');
+  };
+
+  /* ── Step 2: Verify OTP ─────────────────────────────────────────────────── */
+  const handleVerifyOtp = (e) => {
+    e.preventDefault();
+    if (otp.trim() === generatedOtp) {
+      login({ name: getResolvedName(), email: contact.includes('@') ? contact.trim() : '' });
+      setStep('done');
+      setTimeout(() => navigate('/explore'), 2000);
+    } else {
+      setOtpError('That code doesn\'t match. Please try again.');
+    }
+  };
+
+  /* ── Resend OTP ─────────────────────────────────────────────────────────── */
+  const handleResend = () => {
+    setOtp('');
+    setOtpError('');
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(code);
+    if (contact.includes('@')) {
+      fetch('http://localhost:5000/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: contact.trim(), otp: code, name: getResolvedName() }),
+      }).catch(() => {});
+    }
   };
 
   return (
@@ -37,29 +85,19 @@ export default function JoinSanctuary() {
       <div
         className="pointer-events-none"
         style={{
-          position: 'absolute',
-          top: '-10%',
-          left: '-10%',
-          width: '50vw',
-          height: '50vw',
+          position: 'absolute', top: '-10%', left: '-10%',
+          width: '50vw', height: '50vw',
           background: 'radial-gradient(circle, rgba(139,168,142,0.15) 0%, rgba(139,168,142,0) 70%)',
-          borderRadius: '50%',
-          zIndex: 0,
-          filter: 'blur(40px)',
+          borderRadius: '50%', zIndex: 0, filter: 'blur(40px)',
         }}
       />
       <div
         className="pointer-events-none"
         style={{
-          position: 'absolute',
-          bottom: '-20%',
-          right: '-10%',
-          width: '60vw',
-          height: '60vw',
+          position: 'absolute', bottom: '-20%', right: '-10%',
+          width: '60vw', height: '60vw',
           background: 'radial-gradient(circle, rgba(167,153,183,0.1) 0%, rgba(167,153,183,0) 70%)',
-          borderRadius: '50%',
-          zIndex: 0,
-          filter: 'blur(60px)',
+          borderRadius: '50%', zIndex: 0, filter: 'blur(60px)',
         }}
       />
 
@@ -76,13 +114,7 @@ export default function JoinSanctuary() {
         {/* Gentle Illustration */}
         <div
           className="mx-auto mb-8 overflow-hidden"
-          style={{
-            width: '128px',
-            height: '128px',
-            borderRadius: '50%',
-            boxShadow: '0 20px 40px rgba(139, 168, 142, 0.05)',
-            border: '1px solid #efeeea',
-          }}
+          style={{ width: '128px', height: '128px', borderRadius: '50%', boxShadow: '0 20px 40px rgba(139, 168, 142, 0.05)', border: '1px solid #efeeea' }}
         >
           <img
             className="w-full h-full object-cover"
@@ -91,17 +123,88 @@ export default function JoinSanctuary() {
           />
         </div>
 
-        {submitted ? (
+        {/* ── STEP: DONE ──────────────────────────────────────────────────── */}
+        {step === 'done' && (
           <div className="py-8 text-center space-y-4">
             <div className="w-14 h-14 bg-primary/10 text-primary rounded-full mx-auto flex items-center justify-center">
               <span className="material-symbols-outlined text-4xl">check_circle</span>
             </div>
             <h3 className="font-headline-md text-headline-md text-primary">Welcome to the Sanctuary</h3>
             <p className="font-body-md text-body-md text-on-surface-variant">
-              Verification sent to <strong>{contact}</strong>. Transporting you to your private sanctuary...
+              Identity verified. Taking you to your private sanctuary…
             </p>
           </div>
-        ) : (
+        )}
+
+        {/* ── STEP: OTP VERIFICATION ──────────────────────────────────────── */}
+        {step === 'otp' && (
+          <div className="space-y-6">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-primary/10 text-primary rounded-full mx-auto flex items-center justify-center mb-4">
+                <span className="material-symbols-outlined text-2xl">mark_email_read</span>
+              </div>
+              <h3 className="font-headline-md text-headline-md text-on-surface mb-2">Check your inbox</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant text-sm">
+                We sent a 6-digit verification code to <strong className="text-on-surface">{contact}</strong>
+              </p>
+              {/* Dev helper — remove in production */}
+              <p className="text-xs text-primary/60 mt-2 font-mono bg-primary/5 rounded-xl px-3 py-1 inline-block">
+                Dev mode: <strong>{generatedOtp}</strong>
+              </p>
+            </div>
+
+            <form onSubmit={handleVerifyOtp} className="space-y-4">
+              <div>
+                <label className="block font-label-md text-label-md text-on-surface-variant mb-2 ml-4" htmlFor="otp">
+                  Verification Code
+                </label>
+                <input
+                  id="otp"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  required
+                  placeholder="Enter 6-digit code"
+                  value={otp}
+                  onChange={(e) => { setOtp(e.target.value.replace(/\D/g, '')); setOtpError(''); }}
+                  className="w-full bg-surface-bright border-none rounded-full px-6 py-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-shadow text-center text-xl tracking-[0.4em]"
+                  style={{ backgroundColor: '#fbf9f5' }}
+                />
+                {otpError && (
+                  <p className="text-error text-sm mt-2 ml-4">{otpError}</p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 group"
+                style={{ boxShadow: '0 20px 40px rgba(139, 168, 142, 0.05)' }}
+              >
+                <span>Verify & Enter Sanctuary</span>
+                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </button>
+            </form>
+
+            <div className="text-center space-y-2">
+              <button
+                onClick={handleResend}
+                className="text-primary font-body-md text-body-md hover:underline transition-colors text-sm"
+              >
+                Resend code
+              </button>
+              <span className="text-on-surface-variant mx-2 text-sm">·</span>
+              <button
+                onClick={() => { setStep('form'); setOtp(''); setOtpError(''); }}
+                className="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors text-sm"
+              >
+                Change email
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ── STEP: FORM ──────────────────────────────────────────────────── */}
+        {step === 'form' && (
           <>
             {/* Toggle Login / Join Us */}
             <div className="flex bg-surface-container rounded-full p-1 mb-8" role="tablist">
@@ -111,9 +214,7 @@ export default function JoinSanctuary() {
                 aria-selected={activeTab === 'login'}
                 onClick={() => { setActiveTab('login'); setName(''); setContact(''); }}
                 className={`flex-1 py-3 px-6 rounded-full font-label-md text-label-md transition-all duration-300 ease-in-out ${
-                  activeTab === 'login'
-                    ? 'bg-white text-primary'
-                    : 'text-on-surface-variant hover:text-primary'
+                  activeTab === 'login' ? 'bg-white text-primary' : 'text-on-surface-variant hover:text-primary'
                 }`}
                 style={activeTab === 'login' ? { boxShadow: '0 20px 40px rgba(139, 168, 142, 0.05)' } : {}}
               >
@@ -125,9 +226,7 @@ export default function JoinSanctuary() {
                 aria-selected={activeTab === 'join'}
                 onClick={() => { setActiveTab('join'); setName(''); setContact(''); }}
                 className={`flex-1 py-3 px-6 rounded-full font-label-md text-label-md transition-all duration-300 ease-in-out ${
-                  activeTab === 'join'
-                    ? 'bg-white text-primary'
-                    : 'text-on-surface-variant hover:text-primary'
+                  activeTab === 'join' ? 'bg-white text-primary' : 'text-on-surface-variant hover:text-primary'
                 }`}
                 style={activeTab === 'join' ? { boxShadow: '0 20px 40px rgba(139, 168, 142, 0.05)' } : {}}
               >
@@ -137,8 +236,7 @@ export default function JoinSanctuary() {
 
             {/* Auth Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Field — shown only on Join Us (registration) tab.
-                  On Login, name is auto-derived from the email prefix. */}
+              {/* Name Field — registration only */}
               {activeTab === 'join' && (
                 <div>
                   <label className="block font-label-md text-label-md text-on-surface-variant mb-2 ml-4" htmlFor="name">
@@ -157,34 +255,37 @@ export default function JoinSanctuary() {
                 </div>
               )}
 
-              {/* Email/Phone Field */}
+              {/* Email Field */}
               <div>
                 <label className="block font-label-md text-label-md text-on-surface-variant mb-2 ml-4" htmlFor="contact">
-                  Email or Phone Number
+                  Email Address
                 </label>
                 <input
                   id="contact"
-                  type="text"
+                  type="email"
                   required
-                  placeholder="Enter your details"
+                  placeholder="Enter your email"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   className="w-full bg-surface-bright border-none rounded-full px-6 py-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-shadow"
                   style={{ backgroundColor: '#fbf9f5' }}
                 />
                 <p className="font-body-md text-on-surface-variant mt-2 ml-4 opacity-70" style={{ fontSize: '13px' }}>
-                  Take your time. This is a safe space.
+                  We'll send a verification code to this email.
                 </p>
               </div>
 
-              {/* Submit Button */}
+              {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-full hover:bg-primary-container transition-colors flex items-center justify-center gap-2 group"
+                disabled={sending}
+                className="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 group disabled:opacity-60"
                 style={{ boxShadow: '0 20px 40px rgba(139, 168, 142, 0.05)' }}
               >
-                <span>Send Verification Code</span>
-                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                {sending
+                  ? <><span className="material-symbols-outlined animate-spin text-sm">progress_activity</span> Sending code…</>
+                  : <><span>Send Verification Code</span><span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span></>
+                }
               </button>
             </form>
 
