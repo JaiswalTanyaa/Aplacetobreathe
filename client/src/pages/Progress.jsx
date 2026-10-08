@@ -93,14 +93,8 @@ export default function Progress() {
                 Welcome back, {displayName}.
               </h1>
               <p className="font-body-lg text-body-lg text-on-surface-variant">
-                You've taken 4 steps toward your peace this week. Take a deep breath.
+                This is your personal space. Your journey, at your own pace.
               </p>
-            </div>
-            <div className="flex gap-3">
-              <div className="bg-surface-container-high px-4 py-2 rounded-xl flex items-center gap-3 border border-outline-variant/20 shadow-sm">
-                <span className="material-symbols-outlined text-primary">calendar_today</span>
-                <span className="font-label-md text-label-md">Session in 2 days</span>
-              </div>
             </div>
           </header>
 
@@ -207,26 +201,17 @@ export default function Progress() {
             >
               <div className="flex items-center justify-between mb-6">
                 <h3 className="font-headline-md text-headline-md">Upcoming</h3>
-                <span className="material-symbols-outlined text-outline-variant">more_horiz</span>
               </div>
-              <div className="space-y-4">
-                <div className="p-6 bg-primary-container/10 rounded-2xl border-l-4 border-primary">
-                  <p className="text-primary font-label-md text-label-md mb-1">Wednesday, Oct 12 • 4:00 PM</p>
-                  <h4 className="font-headline-md text-headline-md mb-2">Weekly Check-in</h4>
-                  <div className="flex items-center gap-2">
-                    <img
-                      className="w-6 h-6 rounded-full"
-                      alt="Dr. Aris Thorne"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-R_0nNSjw0iNnop1gpIDkprlyVpE0QP_A3dMlpAFbs4y9ZrVLZTHBLo-WAoXdiQ50ta0Ao31Ly8ZnMxUx1piLsh5D1YFxFGSjN4ppJyoO4heURdA9OeNKcULXsG00ygcENHMJKGi8t9CEiUDXezK-XGrCVqHWXSdFsuU_-4PjBmX_OIVVchea4ASTKrf7f12w0S53Az5891MyrSxCzbJIlVUlbt2A7E0XyY7kmYN1nVTQgQmxc2UsjA"
-                    />
-                    <span className="text-sm font-medium">Dr. Aris Thorne</span>
-                  </div>
-                </div>
-                <div className="p-6 bg-surface-container-low rounded-2xl border-l-4 border-outline-variant">
-                  <p className="text-on-surface-variant font-label-md text-label-md mb-1">Saturday, Oct 15 • 11:00 AM</p>
-                  <h4 className="font-headline-md text-headline-md mb-2">Workshop: Grounding</h4>
-                  <span className="text-sm text-on-surface-variant">Group Session (Virtual)</span>
-                </div>
+              <div className="flex flex-col items-center justify-center py-10 text-center">
+                <span className="material-symbols-outlined text-4xl text-outline-variant mb-3">event_upcoming</span>
+                <p className="font-body-md text-body-md text-on-surface-variant mb-4">No upcoming sessions yet.</p>
+                <Link
+                  to="/consultation"
+                  className="text-primary font-label-md text-label-md hover:underline flex items-center gap-1"
+                >
+                  Book a session
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </Link>
               </div>
             </section>
 
@@ -239,30 +224,18 @@ export default function Progress() {
                 <span className="material-symbols-outlined text-primary">description</span>
                 <h3 className="font-headline-md text-headline-md">Therapist Notes &amp; Homework</h3>
               </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-surface-container px-6 py-5 rounded-2xl">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="material-symbols-outlined text-primary" style={{ fontSize: '18px' }}>lock</span>
-                    <span className="font-label-md text-label-md text-primary">Private Note</span>
-                  </div>
-                  <p className="italic text-on-surface-variant font-body-md line-clamp-3 mb-4">
-                    "Focus this week on acknowledging your feelings without labeling them as 'good' or 'bad'. You're doing the work..."
-                  </p>
-                  <button className="text-primary font-label-md text-label-md hover:underline">Read Full Note</button>
-                </div>
-                <div className="bg-secondary-container/30 px-6 py-5 rounded-2xl flex flex-col justify-between">
-                  <div>
-                    <span className="font-label-md text-label-md text-secondary block mb-2 uppercase tracking-wide">Exercise</span>
-                    <h4 className="font-headline-md mb-2" style={{ fontSize: '18px' }}>The 5-4-3-2-1 Technique</h4>
-                    <p className="text-sm text-on-surface-variant mb-4">Practice once daily during morning tea.</p>
-                  </div>
-                  <Link
-                    to="/explore"
-                    className="block w-full text-center bg-secondary text-on-secondary py-2 rounded-xl font-label-md text-label-md transition-all hover:bg-secondary/90"
-                  >
-                    Start Session
-                  </Link>
-                </div>
+              <div className="flex flex-col items-center justify-center py-10 text-center">
+                <span className="material-symbols-outlined text-4xl text-outline-variant mb-3">edit_note</span>
+                <p className="font-body-md text-body-md text-on-surface-variant mb-4">
+                  Notes and exercises from your therapist will appear here after your first session.
+                </p>
+                <Link
+                  to="/consultation"
+                  className="text-primary font-label-md text-label-md hover:underline flex items-center gap-1"
+                >
+                  Book a session
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </Link>
               </div>
             </section>
           </div>

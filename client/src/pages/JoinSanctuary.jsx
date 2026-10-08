@@ -147,10 +147,6 @@ export default function JoinSanctuary() {
               <p className="font-body-md text-body-md text-on-surface-variant text-sm">
                 We sent a 6-digit verification code to <strong className="text-on-surface">{contact}</strong>
               </p>
-              {/* Dev helper — remove in production */}
-              <p className="text-xs text-primary/60 mt-2 font-mono bg-primary/5 rounded-xl px-3 py-1 inline-block">
-                Dev mode: <strong>{generatedOtp}</strong>
-              </p>
             </div>
 
             <form onSubmit={handleVerifyOtp} className="space-y-4">
